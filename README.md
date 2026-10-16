@@ -18,6 +18,9 @@ La première version est une interface web statique, utilisable sur téléphone 
 
 - [Inventaire des dictionnaires, corpus et licences](docs/LEXICAL-RESOURCES.md)
 - [Petit échantillon Soninké–français avec attribution](data/soninke-samples.jsonl)
+- [Ouvrir la page de recherche et validation du corpus](corpus.html)
+
+La page du corpus permet de rechercher les exemples par soninké ou français, filtrer les validations, enregistrer le résultat et exporter les annotations JSON. Les validations restent locales au navigateur. La page charge le fichier JSONL via HTTP(S) : elle doit être consultée depuis GitHub Pages ou un serveur web, pas nécessairement par ouverture directe du fichier HTML.
 
 L’échantillon provient de `snk_engine`, données sous CC BY 4.0, attribuées à noah-medra. Les phrases sont sourcées mais **n’ont pas encore été revérifiées indépendamment par l’équipe de ce dépôt**. Elles ne sont pas des audios et ne valident pas un moteur TTS. La variété décrite par la source est celle de son locuteur de référence ; elle ne représente pas nécessairement toutes les variétés du soninké. Voir le document de ressources avant toute extension du corpus.
 
