@@ -14,6 +14,7 @@ const readme = read("README.md");
 const corpusHtml = read("corpus.html");
 const corpusJs = read("corpus.js");
 const plan = read("docs/PLAN-STT-TTS.md");
+const checklist = read("docs/TESTING-CHECKLIST.md");
 const lines = read("data/soninke-samples.jsonl").split(/\r?\n/).filter((line) => line.trim());
 
 for (const phrase of requiredPhrases) {
@@ -51,6 +52,7 @@ for (const [label, ok] of [
   ["lien vers le corpus depuis l'accueil", index.includes('href="corpus.html"')],
   ["recherche et export présents dans l'interface corpus", /corpus-search/.test(corpusHtml) && /export/.test(corpusJs)],
   ["plan STT/TTS référencé depuis le README", readme.includes("docs/PLAN-STT-TTS.md")],
+  ["checklist mobile référencée depuis le README", readme.includes("docs/TESTING-CHECKLIST.md") && checklist.includes("Page de recherche du corpus")],
   ["limites du TTS documentées dans le plan", plan.includes("Aucun TTS") && plan.includes("audio vérifié")],
 ]) {
   if (ok) pass(label);
