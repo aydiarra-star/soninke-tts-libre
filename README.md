@@ -16,10 +16,12 @@ La première version est une interface web statique, utilisable sur téléphone 
 
 ## Accès au site
 
-Le code source est prêt à être publié, mais l’URL publique ne fonctionne qu’après activation de GitHub Pages. Suivre le [guide de publication et de dépannage](docs/DEPLOYMENT-GITHUB-PAGES.md).
+Le workflow GitHub Actions de publication a terminé avec succès sur le commit `21ae5642e3e1b98b1e5ce26d65716608fae2c426`. Cela confirme le déploiement, mais pas encore un test visuel et fonctionnel complet dans Safari sur téléphone.
 
-- Accueil attendu : https://aydiarra-star.github.io/soninke-tts-libre/
-- Corpus attendu : https://aydiarra-star.github.io/soninke-tts-libre/corpus.html
+- Accueil : https://aydiarra-star.github.io/soninke-tts-libre/
+- Corpus : https://aydiarra-star.github.io/soninke-tts-libre/corpus.html
+- [État du déploiement GitHub Actions](https://github.com/aydiarra-star/soninke-tts-libre/actions/runs/38982991503)
+- [Guide de publication et de dépannage](docs/DEPLOYMENT-GITHUB-PAGES.md)
 
 ## Ressources de langue
 
@@ -33,7 +35,7 @@ L’échantillon provient de `snk_engine`, données sous CC BY 4.0, attribuées 
 
 ## Utilisation
 
-1. Ouvrir `index.html` dans un navigateur, ou activer GitHub Pages pour publier cette interface statique.
+1. Ouvrir la page du laboratoire via le lien HTTPS ci-dessus.
 2. Pour chaque phrase, importer un échantillon audio réellement disponible.
 3. Écouter l’échantillon et demander une validation à une personne compétente en soninké.
 4. Enregistrer le statut et les remarques, puis exporter JSON ou CSV pour sauvegarder les annotations.
