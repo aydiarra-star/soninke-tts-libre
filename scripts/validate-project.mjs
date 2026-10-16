@@ -17,6 +17,8 @@ const plan = read("docs/PLAN-STT-TTS.md");
 const checklist = read("docs/TESTING-CHECKLIST.md");
 const candidates = read("docs/MODEL-CANDIDATES.md");
 const recordingGuide = read("docs/RECORDING-GUIDE.md");
+const sttQuickstart = read("docs/STT-QUICKSTART.md");
+const sttScript = read("experiments/stt_transcribe.py");
 const lines = read("data/soninke-samples.jsonl").split(/\r?\n/).filter((line) => line.trim());
 
 for (const phrase of requiredPhrases) {
@@ -57,6 +59,7 @@ for (const [label, ok] of [
   ["checklist mobile référencée depuis le README", readme.includes("docs/TESTING-CHECKLIST.md") && checklist.includes("Page de recherche du corpus")],
   ["inventaire des candidats référencé et prudent sur les modèles", readme.includes("docs/MODEL-CANDIDATES.md") && candidates.includes("pas encore validé") && candidates.includes("wav2vec2-bloom-speech-snk")],
   ["guide d’enregistrement référencé avec consentement séparé", readme.includes("docs/RECORDING-GUIDE.md") && recordingGuide.includes("Utilisation de mes enregistrements pour entraîner") && recordingGuide.includes("Ne jamais enregistrer une conversation privée")],
+  ["guide STT lié et script explicitement expérimental", readme.includes("docs/STT-QUICKSTART.md") && sttQuickstart.includes("n'a pas encore été exécuté") && sttScript.includes('DEFAULT_MODEL = "sil-ai/wav2vec2-bloom-speech-snk"')],
   ["limites du TTS documentées dans le plan", plan.includes("Aucun TTS") && plan.includes("audio vérifié")],
 ]) {
   if (ok) pass(label);
