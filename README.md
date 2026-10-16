@@ -14,6 +14,13 @@ La première version est une interface web statique, utilisable sur téléphone 
 
 **La synthèse TTS n’est pas encore intégrée.** Le prototype n’invente ni audio ni traduction. Les fichiers audio importés restent sur l’appareil et ne sont pas inclus dans les exports.
 
+## Accès au site
+
+Le code source est prêt à être publié, mais l’URL publique ne fonctionne qu’après activation de GitHub Pages. Suivre le [guide de publication et de dépannage](docs/DEPLOYMENT-GITHUB-PAGES.md).
+
+- Accueil attendu : https://aydiarra-star.github.io/soninke-tts-libre/
+- Corpus attendu : https://aydiarra-star.github.io/soninke-tts-libre/corpus.html
+
 ## Ressources de langue
 
 - [Inventaire des dictionnaires, corpus et licences](docs/LEXICAL-RESOURCES.md)
@@ -45,6 +52,7 @@ Lire :
 - [Guide du premier essai STT local](docs/STT-QUICKSTART.md)
 - [Évaluer le STT avec WER/CER](docs/STT-EVALUATION.md)
 - [Inventaire des ressources linguistiques](docs/LEXICAL-RESOURCES.md)
+- [Guide de publication GitHub Pages](docs/DEPLOYMENT-GITHUB-PAGES.md)
 
 OmniVoice a été essayé avec la langue Soninke, mais la démo a échoué sur une limite de quota avant de générer un audio. Le moteur n’est donc pas validé. Son code et ses poids ont des conditions de licence différentes ; les poids signalés non commerciaux ne conviennent pas automatiquement à un produit redistribuable ou commercial.
 
