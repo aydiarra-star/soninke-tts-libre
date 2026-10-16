@@ -24,5 +24,7 @@ jobs:
         run: |
           node --check app.js
           node --check corpus.js
+      - name: Vérifier la syntaxe Python du script STT expérimental
+        run: python -m py_compile experiments/stt_transcribe.py
       - name: Vérifier le corpus, les phrases initiales et les liens documentaires
         run: node scripts/validate-project.mjs
