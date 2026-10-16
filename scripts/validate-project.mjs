@@ -16,6 +16,7 @@ const corpusJs = read("corpus.js");
 const plan = read("docs/PLAN-STT-TTS.md");
 const checklist = read("docs/TESTING-CHECKLIST.md");
 const candidates = read("docs/MODEL-CANDIDATES.md");
+const recordingGuide = read("docs/RECORDING-GUIDE.md");
 const lines = read("data/soninke-samples.jsonl").split(/\r?\n/).filter((line) => line.trim());
 
 for (const phrase of requiredPhrases) {
@@ -55,6 +56,7 @@ for (const [label, ok] of [
   ["plan STT/TTS référencé depuis le README", readme.includes("docs/PLAN-STT-TTS.md")],
   ["checklist mobile référencée depuis le README", readme.includes("docs/TESTING-CHECKLIST.md") && checklist.includes("Page de recherche du corpus")],
   ["inventaire des candidats référencé et prudent sur les modèles", readme.includes("docs/MODEL-CANDIDATES.md") && candidates.includes("pas encore validé") && candidates.includes("wav2vec2-bloom-speech-snk")],
+  ["guide d’enregistrement référencé avec consentement séparé", readme.includes("docs/RECORDING-GUIDE.md") && recordingGuide.includes("Utilisation de mes enregistrements pour entraîner") && recordingGuide.includes("Ne jamais enregistrer une conversation privée")],
   ["limites du TTS documentées dans le plan", plan.includes("Aucun TTS") && plan.includes("audio vérifié")],
 ]) {
   if (ok) pass(label);
