@@ -30,7 +30,7 @@ Le code du projet OmniVoice est annoncé sous Apache-2.0, tandis que les poids p
 - https://github.com/oscarmedra/snk_engine — examiner code, données, qualité et licences.
 - https://www.asawan.org/fr/lexique_soninke — ressource lexicale, pas un moteur TTS.
 - https://lgidf.cnrs.fr/soninke — ressource linguistique, pas une preuve de modèle TTS disponible.
-- https://huggingface.co/sil-ai/wav2vec2-bloom-speech-snk — modèle de reconnaissance/transcription (ASR), **pas** un moteur de synthèse (TTS).
+- [SIL AI — wav2vec2-bloom-speech-snk](https://huggingface.co/sil-ai/wav2vec2-bloom-speech-snk) — candidat prioritaire pour un premier essai STT, pas un moteur TTS. La fiche annonce un WER de 28,88 % et un CER de 5,76 % sur son évaluation Bloom Speech Soninke ; ce sont des résultats déclarés par le modèle sur son propre jeu d'évaluation, pas une garantie sur nos enregistrements. Le dépôt est soumis à une licence SIL International AI & NLP RAIL-M non commerciale et exige l'acceptation de conditions qui partagent le nom d'utilisateur et l'adresse e-mail avec les auteurs. Aucun fournisseur d'inférence n'est actuellement indiqué comme disponible sur sa fiche. Il faut donc vérifier l'accès, la licence et le coût de calcul avant l'essai ; ne pas l'intégrer automatiquement dans une offre commerciale.
 
 ## Critères avant intégration
 
