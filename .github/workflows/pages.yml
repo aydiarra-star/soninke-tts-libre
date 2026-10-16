@@ -1,0 +1,51 @@
+name: Publier le prototype sur GitHub Pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Préparer le site statique
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+      - name: Vérifier les fichiers nécessaires
+        run: |
+          test -f index.html
+          test -f corpus.html
+          test -f styles.css
+          test -f app.js
+          test -f corpus.css
+          test -f corpus.js
+          test -f data/soninke-samples.jsonl
+      - name: Préparer l’artefact Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    name: Déployer le site
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Déployer vers GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
