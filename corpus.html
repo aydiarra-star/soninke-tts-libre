@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#087f5b">
+  <meta name="description" content="Recherche et validation humaine de phrases soninké sourcées.">
+  <title>Corpus soninké — Soninké TTS Libre</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="corpus.css">
+  <script src="corpus.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="Retour au laboratoire">
+      <span class="brand-mark" aria-hidden="true">S</span>
+      <span><strong>Soninké TTS Libre</strong><small>Corpus et validation linguistique</small></span>
+    </a>
+    <a class="button button-secondary" href="./">Retour aux tests audio</a>
+  </header>
+  <main>
+    <section class="hero corpus-hero">
+      <p class="eyebrow">CORPUS SOURCÉ · VALIDATION HUMAINE</p>
+      <h1>Rechercher des phrases <span>soninké.</span></h1>
+      <p class="intro">Recherchez dans les exemples documentés, comparez la traduction source et consignez une vérification linguistique. Une phrase issue d’un corpus n’est pas automatiquement validée pour toutes les variétés du soninké.</p>
+      <div class="notice" role="note"><strong>Statut transparent</strong><span>Les traductions affichées proviennent de la source citée. « Non vérifiée ici » signifie qu’un locuteur compétent doit encore confirmer la forme, le sens et la variété.</span></div>
+    </section>
+    <section class="corpus-tools" aria-label="Recherche dans le corpus">
+      <label for="corpus-search">Rechercher un mot ou une phrase</label>
+      <input id="corpus-search" type="search" placeholder="Ex. daga, riz, marché…" autocomplete="off">
+      <div class="corpus-filter-row">
+        <label for="review-filter">Validation</label>
+        <select id="review-filter">
+          <option value="all">Toutes les phrases</option>
+          <option value="not_reviewed">À vérifier</option>
+          <option value="confirmed">Confirmée par un locuteur</option>
+          <option value="correction">À corriger</option>
+        </select>
+        <span id="result-count" aria-live="polite">Chargement…</span>
+      </div>
+    </section>
+    <p id="corpus-message" class="global-message" role="status" aria-live="polite"></p>
+    <section id="corpus-results" class="corpus-results" aria-label="Résultats du corpus"></section>
+    <section class="guide">
+      <h2>Comment valider une phrase</h2>
+      <ol>
+        <li>Demandez à un locuteur compétent de vérifier le sens, la grammaire, l’orthographe et la variété linguistique.</li>
+        <li>Choisissez « Confirmée » uniquement après cette vérification ; sinon, laissez « À vérifier » ou indiquez « À corriger ».</li>
+        <li>Ajoutez le nom ou le rôle du validateur uniquement avec son accord. Évitez les données personnelles inutiles.</li>
+        <li>Exportez les validations. Elles sont enregistrées localement sur cet appareil et ne sont pas envoyées au dépôt.</li>
+      </ol>
+      <p class="privacy-note">La validation linguistique ne valide pas la qualité d’un audio TTS. Aucun audio n’est créé sur cette page. Les trois phrases de test d’origine restent sur la page principale et ne sont pas traduites ici.</p>
+      <div class="corpus-actions"><button class="button button-primary" id="export-reviews" type="button">Exporter les validations JSON</button><button class="button button-secondary" id="clear-reviews" type="button">Effacer les validations locales</button></div>
+      <p class="helper">Source des exemples : <a href="https://github.com/oscarmedra/snk_engine/tree/main/corpus/valide">snk_engine, corpus/valide</a> · Données CC BY 4.0, attribution dans chaque fiche.</p>
+    </section>
+  </main>
+  <footer><span>Soninké TTS Libre</span><span>Corpus expérimental · validation humaine requise</span></footer>
+</body>
+</html>
