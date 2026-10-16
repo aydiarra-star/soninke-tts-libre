@@ -14,6 +14,13 @@ La première version est une interface web statique, utilisable sur téléphone 
 
 **La synthèse TTS n’est pas encore intégrée.** Le prototype n’invente ni audio ni traduction. Les fichiers audio importés restent sur l’appareil et ne sont pas inclus dans les exports.
 
+## Ressources de langue
+
+- [Inventaire des dictionnaires, corpus et licences](docs/LEXICAL-RESOURCES.md)
+- [Petit échantillon Soninké–français avec attribution](data/soninke-samples.jsonl)
+
+L’échantillon provient de `snk_engine`, données sous CC BY 4.0, attribuées à noah-medra. Les phrases sont sourcées mais **n’ont pas encore été revérifiées indépendamment par l’équipe de ce dépôt**. Elles ne sont pas des audios et ne valident pas un moteur TTS. La variété décrite par la source est celle de son locuteur de référence ; elle ne représente pas nécessairement toutes les variétés du soninké. Voir le document de ressources avant toute extension du corpus.
+
 ## Utilisation
 
 1. Ouvrir `index.html` dans un navigateur, ou activer GitHub Pages pour publier cette interface statique.
@@ -28,15 +35,16 @@ Les annotations sont locales au navigateur et ne se synchronisent pas entre appa
 Lire :
 - [État des moteurs et preuves disponibles](docs/ENGINE-STATUS.md)
 - [Données et validation humaine](docs/DATA-AND-VALIDATION.md)
+- [Inventaire des ressources linguistiques](docs/LEXICAL-RESOURCES.md)
 
 OmniVoice a été essayé avec la langue Soninke, mais la démo a échoué sur une limite de quota avant de générer un audio. Le moteur n’est donc pas validé. Son code et ses poids ont des conditions de licence différentes ; les poids signalés non commerciaux ne conviennent pas automatiquement à un produit redistribuable ou commercial.
 
-Le code original de ce dépôt est sous MIT. Cette licence **ne couvre pas** les données vocales, les enregistrements de locuteurs, les modèles externes ni leurs poids.
+Le code original de ce dépôt est sous MIT. Cette licence **ne couvre pas** les données vocales, les enregistrements de locuteurs, les modèles externes ni leurs poids. Les données réutilisées gardent leurs licences et attributions propres.
 
 ## Suite prévue
 
-1. Valider l’interface et le format des annotations.
-2. Auditer les ressources Soninké TTS et leurs licences.
+1. Vérifier l’interface et le format des annotations.
+2. Faire relire les exemples de corpus par le référent linguistique, notamment la variété et l’orthographe.
 3. Tester un moteur candidat en produisant un vrai audio pour les trois phrases.
 4. Faire valider les échantillons par des locuteurs compétents.
 5. N’intégrer un moteur qu’après vérification de la qualité, des droits et de la reproductibilité.
