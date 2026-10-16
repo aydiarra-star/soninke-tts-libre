@@ -39,6 +39,7 @@ Lire :
 - [État des moteurs et preuves disponibles](docs/ENGINE-STATUS.md)
 - [Données et validation humaine](docs/DATA-AND-VALIDATION.md)
 - [Plan technique STT/TTS et critères d’acceptation](docs/PLAN-STT-TTS.md)
+- [Checklist de test manuel sur téléphone](docs/TESTING-CHECKLIST.md)
 - [Inventaire des ressources linguistiques](docs/LEXICAL-RESOURCES.md)
 
 OmniVoice a été essayé avec la langue Soninke, mais la démo a échoué sur une limite de quota avant de générer un audio. Le moteur n’est donc pas validé. Son code et ses poids ont des conditions de licence différentes ; les poids signalés non commerciaux ne conviennent pas automatiquement à un produit redistribuable ou commercial.
