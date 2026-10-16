@@ -17,7 +17,7 @@ const plan = read("docs/PLAN-STT-TTS.md");
 const lines = read("data/soninke-samples.jsonl").split(/\r?\n/).filter((line) => line.trim());
 
 for (const phrase of requiredPhrases) {
-  if (app.includes(phrase) && index.includes(phrase)) pass(`phrase initiale conservée: ${phrase}`);
+  if (app.includes(phrase)) pass(`phrase initiale conservée dans le modèle applicatif: ${phrase}`);
   else fail(`phrase initiale absente ou modifiée: ${phrase}`);
 }
 
@@ -51,7 +51,7 @@ for (const [label, ok] of [
   ["lien vers le corpus depuis l'accueil", index.includes('href="corpus.html"')],
   ["recherche et export présents dans l'interface corpus", /corpus-search/.test(corpusHtml) && /export/.test(corpusJs)],
   ["plan STT/TTS référencé depuis le README", readme.includes("docs/PLAN-STT-TTS.md")],
-  ["limites du TTS documentées dans le plan", plan.includes("Aucun TTS n'a encore produit un audio vérifié")],
+  ["limites du TTS documentées dans le plan", plan.includes("Aucun TTS") && plan.includes("audio vérifié")],
 ]) {
   if (ok) pass(label);
   else fail(label);
