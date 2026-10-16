@@ -55,6 +55,15 @@ Ne jamais marquer un consentement ou une licence comme acquis sans preuve réell
 
 ## Phase 2 — Évaluer le STT (audio vers texte)
 
+### Candidat déjà repéré : SIL AI wav2vec2-bloom-speech-snk
+
+- Fiche : https://huggingface.co/sil-ai/wav2vec2-bloom-speech-snk
+- Modèle ASR basé sur wav2vec2-XLS-R, affiné sur des données Bloom Speech en soninké.
+- Résultats auto-déclarés sur son évaluation : WER 28,88 % et CER 5,76 %. Ils ne sont pas une mesure de notre propre corpus et ne garantissent pas la performance sur notre variété ou nos conditions d'enregistrement.
+- Accès conditionné à l'acceptation d'une licence SIL International AI & NLP RAIL-M non commerciale ; la fiche indique que l'identifiant et l'adresse e-mail du compte peuvent être partagés avec les auteurs. Ne pas accepter ces conditions sans examiner la licence et les implications de confidentialité.
+- La fiche ne propose pas actuellement de fournisseur d'inférence hébergé. Un essai peut nécessiter un environnement Python/Transformers et une capacité de calcul suffisante. Ne pas présumer que cela fonctionnera sur téléphone ni que l'exécution est gratuite.
+- Décision : candidat d'évaluation uniquement, pas de dépendance intégrée, pas de promesse de qualité et pas d'usage commercial sans autorisation explicite compatible.
+
 1. Constituer un jeu de test de phrases inédites, transcrites et relues par un locuteur compétent.
 2. Établir d'abord une référence manuelle et un protocole d'orthographe.
 3. Tester un modèle multilingue existant sur ces audios sans réentraînement, si un environnement gratuit et autorisé est disponible.
