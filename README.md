@@ -42,6 +42,7 @@ Lire :
 - [Checklist de test manuel sur téléphone](docs/TESTING-CHECKLIST.md)
 - [Inventaire des candidats STT/TTS](docs/MODEL-CANDIDATES.md)
 - [Guide d'enregistrement vocal et consentement](docs/RECORDING-GUIDE.md)
+- [Guide du premier essai STT local](docs/STT-QUICKSTART.md)
 - [Inventaire des ressources linguistiques](docs/LEXICAL-RESOURCES.md)
 
 OmniVoice a été essayé avec la langue Soninke, mais la démo a échoué sur une limite de quota avant de générer un audio. Le moteur n’est donc pas validé. Son code et ses poids ont des conditions de licence différentes ; les poids signalés non commerciaux ne conviennent pas automatiquement à un produit redistribuable ou commercial.
