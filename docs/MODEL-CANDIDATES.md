@@ -18,21 +18,28 @@ Dernière revue documentaire : 2026-10-17. Les fiches de modèles évoluent ; v�
 
 ## Soninké — TTS (synthèse vocale)
 
-Aucun modèle TTS soninké n'a été confirmé comme fonctionnel par les essais de ce projet à la date de la revue. OmniVoice n'a pas produit d'audio lors du précédent essai en raison d'une limite de quota. Ne pas assimiler un modèle STT soninké à un modèle TTS.
+### Candidat prioritaire à tester — k2-fsa/OmniVoice
 
-### Résultat de la recherche documentaire du 17 octobre 2026
+- Dépôt du modèle : https://huggingface.co/k2-fsa/OmniVoice
+- Code source et liste des langues : https://github.com/k2-fsa/OmniVoice/blob/master/docs/languages.md
+- Type : synthèse vocale multilingue (TTS).
+- La liste officielle indique explicitement **Soninke**, code ISO 639-3 `snk`, avec 10,04 heures de données d'entraînement répertoriées. Cela en fait un candidat réellement pertinent, contrairement à une simple supposition à partir d'un modèle multilingue.
+- Licence du code/projet indiquée dans `pyproject.toml` : Apache-2.0. Vérifier les licences des poids, des données et des dépendances avant toute redistribution ou utilisation commerciale.
+- Taille annoncée du dépôt de modèle : environ 3,27 Go ; l'inférence peut dépasser les ressources d'un téléphone et nécessiter un ordinateur ou GPU.
+- Le mainteneur a signalé que les clips courts peuvent être instables sans audio de référence ; une voix de référence peut être nécessaire pour obtenir un résultat exploitable. Toute voix de référence doit être utilisée avec consentement explicite.
+- L'essai précédent effectué pour ce projet n'a pas produit d'audio à cause d'une limite de quota. La prise en charge déclarée de `snk` est prometteuse, mais la prononciation, l'intelligibilité et le coût réel d'exécution restent **non validés** ici.
 
-- Le panorama linguistique de l'UNICEF WCARO répertorie plusieurs modèles dans sa catégorie TTS pour le code de langue `snk`, dont OmniVoice, mais cette liste agrégée ne prouve ni que ces modèles acceptent réellement du texte soninké, ni qu'une voix soninké est disponible, ni qu'un audio correct peut être généré. Source : https://unicef-ventures.github.io/wca-nlp-landscape/lang/snk.html
-- JollofLab décrit ses travaux vocaux/TTS comme « forthcoming » (à venir) dans son état public consulté. Ce n'est donc pas actuellement une intégration TTS prête à l'emploi pour ce dépôt. Source : https://www.jolloflab.org/
-- L'essai OmniVoice déjà tenté dans ce projet n'a produit aucun fichier audio à cause de la limite de quota. Aucun résultat audio ni aucune qualité de prononciation n'ont donc été validés.
+**Décision :** OmniVoice devient le premier candidat TTS soninké à retester. Ne pas annoncer que le TTS fonctionne avant d'avoir généré un fichier audio, vérifié le fichier, puis obtenu l'avis d'un locuteur compétent. L'absence de quota gratuit disponible reste un blocage opérationnel possible.
 
-**Décision actuelle :** aucun candidat TTS soninké n'est encore qualifié pour intégration. Ne pas installer ou intégrer un modèle sur la seule base d'une liste de modèles multilingues. Le prochain essai doit confirmer explicitement la prise en charge du soninké, fonctionner avec les ressources disponibles sans achat, produire un fichier audio et être évalué par un locuteur compétent.
+### Autre piste
+
+- JollofLab décrit ses travaux vocaux/TTS comme « forthcoming » (à venir) dans son état public consulté ; ce n'est pas actuellement une intégration prête à l'emploi pour ce dépôt. Source : https://www.jolloflab.org/
 
 Prochaine démarche :
-1. Rechercher les modèles et corpus TTS soninké avec leurs licences exactes.
-2. Prioriser un essai d'inférence reproductible si un modèle approprié existe.
-3. Si aucun modèle utilisable n'existe, établir d'abord le corpus et les droits, puis étudier un fine-tuning.
-4. Garder les trois phrases historiques intactes ; ne pas leur inventer de traduction.
+1. Retenter OmniVoice dans un environnement gratuit disponible, en sélectionnant explicitement la langue `snk`.
+2. Utiliser une phrase soninké validée et, si nécessaire, un audio de référence autorisé ; ne pas inventer de traduction pour les trois phrases historiques.
+3. Enregistrer le résultat uniquement si un véritable fichier audio est généré ; noter le modèle, les paramètres et les limites.
+4. Faire écouter l'audio à un locuteur compétent avant de considérer le candidat acceptable.
 
 ## Wolof — TTS (piste séparée, ne pas confondre avec le soninké)
 
@@ -69,6 +76,9 @@ Pour chaque candidat :
 ## Sources
 
 - UNICEF WCARO, panorama des ressources NLP soninké : https://unicef-ventures.github.io/wca-nlp-landscape/lang/snk.html
+- OmniVoice — liste officielle des langues : https://github.com/k2-fsa/OmniVoice/blob/master/docs/languages.md
+- OmniVoice — modèle : https://huggingface.co/k2-fsa/OmniVoice
+- OmniVoice — problème de génération de clips courts : https://github.com/k2-fsa/OmniVoice/issues/118
 - JollofLab : https://www.jolloflab.org/
 - SIL AI Soninke ASR : https://huggingface.co/sil-ai/wav2vec2-bloom-speech-snk
 - CONCREE Adia TTS : https://huggingface.co/CONCREE/Adia_TTS
