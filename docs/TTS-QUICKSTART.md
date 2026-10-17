@@ -8,26 +8,38 @@ Ce guide contourne le blocage rencontré sur le Space Hugging Face : on utilise 
 - [Dépôt OmniVoice et installation officielle](https://github.com/k2-fsa/OmniVoice)
 - [Fiche du modèle et licences](https://huggingface.co/k2-fsa/OmniVoice)
 - [Liste officielle des langues](https://github.com/k2-fsa/OmniVoice/blob/master/docs/languages.md)
+- [Code officiel de l'API de génération](https://github.com/k2-fsa/OmniVoice/blob/master/omnivoice/models/omnivoice.py)
 
-La liste des langues indique Soninke (`snk`). Cela justifie un essai, mais ne prouve pas que la prononciation soninké soit bonne. La fiche indique une licence non commerciale pour les poids pré-entraînés : ne pas employer ces poids dans une offre commerciale ni les redistribuer sans autorisation compatible.
+La liste des langues et le code officiel confirment que le nom `soninke` est accepté et associé au code `snk`. Cela justifie un essai, mais ne prouve pas que la prononciation soninké soit bonne. La fiche indique une licence non commerciale pour les poids pré-entraînés : ne pas employer ces poids dans une offre commerciale ni les redistribuer sans autorisation compatible.
 
 ## Procédure depuis un téléphone
 
 1. Ouvrir le notebook Colab dans Safari ou Chrome et se connecter à Google si demandé.
 2. Dans le menu **Environnement d'exécution**, choisir **Modifier le type d'exécution**, puis GPU si l'option gratuite est proposée. Si aucun GPU n'est disponible, arrêter là et noter le message ; ne souscrire à aucun forfait.
 3. Exécuter les cellules d'installation puis de chargement du modèle du notebook officiel. Le téléchargement est volumineux et peut prendre du temps.
-4. Dans la section de génération automatique (« Auto Voice »), remplacer uniquement le texte de démonstration par **une phrase soninké dont la formulation a été validée**. Pour notre première vérification, utiliser `Daga goli.`. Ne lui ajouter aucune traduction.
-5. Si l'interface propose explicitement un choix de langue, sélectionner **Soninke / Soninké (`snk`)**. Si aucun choix de langue n'est visible et que le notebook n'expose pas ce paramètre, ne pas supposer que le modèle a bien utilisé le soninké : consigner cette limite.
-6. Exécuter la cellule de génération. Le notebook officiel enregistre normalement l'audio sous forme de fichier WAV et l'affiche pour écoute. Télécharger le fichier WAV réel avec l'outil de téléchargement de Colab si la génération réussit.
-7. Écouter l'audio et noter séparément : clarté, exactitude de la prononciation, naturel de la voix. La validation déjà donnée par le référent pour la phrase `Daga goli.` valide la phrase/prononciation selon son appréciation ; elle ne prouve pas à elle seule que cet éventuel nouvel audio est correct.
-8. Conserver le fichier audio et noter la date, le nom/version du modèle, les réglages, le message de résultat et la source. Ne pas déposer un enregistrement privé dans le dépôt public sans consentement explicite.
+4. Aller à la section **Python API** du notebook, après la cellule qui charge `model`, `soundfile as sf` et `display` depuis `IPython.display`. Ajouter une nouvelle cellule de code avec exactement ceci :
+
+   ```python
+   audio = model.generate(
+       text="Daga goli.",
+       language="soninke",
+   )
+   sf.write("soninke_daga_goli.wav", audio[0], model.sampling_rate)
+   display(Audio(audio[0], rate=model.sampling_rate))
+   ```
+
+   Cette cellule transmet explicitement la langue `soninke` au moteur et enregistre un vrai fichier WAV. Ne pas ajouter de traduction ni modifier la phrase.
+
+5. Exécuter la cellule. Si elle réussit, écouter le résultat dans le notebook et télécharger `soninke_daga_goli.wav` depuis l'espace de fichiers de Colab.
+6. Évaluer séparément la clarté, l'exactitude de la prononciation et le naturel de la voix. La validation déjà donnée par le référent pour la phrase `Daga goli.` ne prouve pas à elle seule que ce nouvel audio est correct.
+7. Conserver le fichier audio et noter la date, le nom/version du modèle, les réglages, le message de résultat et la source. Ne pas déposer un enregistrement privé dans le dépôt public sans consentement explicite.
 
 ## Si la génération échoue
 
 - **GPU indisponible / quota épuisé** : arrêter sans payer ; noter l'erreur exacte et réessayer ultérieurement ou sur un ordinateur déjà disponible.
 - **Mémoire insuffisante ou téléchargement interrompu** : ne pas déclarer le test réussi. Noter la cellule qui échoue.
-- **Pas de sélecteur Soninke ou `snk`** : ne pas interpréter un audio produit comme une validation du soninké avant d'avoir confirmé le paramètre de langue.
-- **Audio créé mais prononciation douteuse** : garder l'échantillon comme échec/essai, pas comme voix validée.
+- **Erreur indiquant que la langue est inconnue** : ne pas retirer le paramètre de langue en silence ; relever l'erreur et vérifier la version du modèle et sa liste de langues.
+- **Audio créé mais prononciation douteuse** : garder l'échantillon comme essai non validé, pas comme voix validée.
 
 ## Ce que ce guide ne promet pas
 
