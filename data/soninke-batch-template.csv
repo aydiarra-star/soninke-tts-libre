@@ -1,7 +1,7 @@
 id,text,source,license
-phrase-001,Daga goli,user-provided test phrase; linguistic review pending for spelling reuse,not separately licensed; use for private project testing only
-phrase-002,Li taxu,user-provided test phrase; linguistic review pending for spelling reuse,not separately licensed; use for private project testing only
-phrase-003,Daga iige,user-provided test phrase; linguistic review pending for spelling reuse,not separately licensed; use for private project testing only
-phrase-004,Daga sohu,user-provided test phrase; linguistic review pending for spelling reuse,not separately licensed; use for private project testing only
-phrase-005,Mpai reni,user-provided test phrase; linguistic review pending for spelling reuse,not separately licensed; use for private project testing only
-phrase-006,Mpai telle,user-provided test phrase; linguistic review pending for spelling reuse,not separately licensed; use for private project testing only
+phrase-001,"Daga goli","user-provided test phrase","private project testing only; redistribution permission not established"
+phrase-002,"Li taxu","user-provided test phrase","private project testing only; redistribution permission not established"
+phrase-003,"Daga iige","user-provided test phrase","private project testing only; redistribution permission not established"
+phrase-004,"Daga sohu","user-provided test phrase","private project testing only; redistribution permission not established"
+phrase-005,"Mpai reni","user-provided test phrase","private project testing only; redistribution permission not established"
+phrase-006,"Mpai telle","user-provided test phrase","private project testing only; redistribution permission not established"
