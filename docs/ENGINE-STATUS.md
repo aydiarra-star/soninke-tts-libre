@@ -48,11 +48,11 @@ Ce journal distingue la qualité sonore perçue de l’exactitude linguistique. 
 |---|---|---|---|---|---|
 | 001 | `Daga yigé` (forme saisie lors de l’évaluation) | **Validée par le référent : « claire et limpide »** | À confirmer séparément | À évaluer | Non documentée dans le journal ; ne pas attribuer l’audio à OmniVoice sans preuve |
 | 002 | `Li tao.` | En attente d’écoute | En attente de validation | En attente d’écoute | À renseigner après génération/import |
-| 003 | `Daga goli.` | Audio non fourni ici | À confirmer sur un audio | À évaluer sur un audio | Le référent confirme la phrase ; génération/partage bloqué par les limites de l’accès gratuit |
+| 003 | `Daga goli.` | Non évaluée sur un fichier joint ici | **Prononciation soninké validée explicitement par le référent le 2026-10-17** | Non évalué sur un fichier joint ici | Aucun fichier audio joint à cette conversation ; moteur/source non documentés |
 
 ### Protocole pour les prochains échantillons
 
-1. Le référent confirme `Daga goli.` comme phrase de test, mais l’audio n’a pas pu être joint ici en raison des limites rencontrées avec l’accès gratuit. Ne pas confondre validation de la phrase et validation de sa réalisation vocale.
+1. Le 2026-10-17, le référent linguistique a explicitement confirmé qu’il valide la prononciation soninké de `Daga goli.`, même sans pouvoir joindre le fichier audio ici. Consigner cette validation humaine ; ne pas prétendre que le fichier, sa clarté sonore ou le naturel de la voix ont été vérifiés indépendamment dans cette conversation.
 2. Obtenir et écouter un fichier audio réel pour `Li tao.`, puis pour `Daga goli.`.
 3. Noter séparément clarté, prononciation et naturel ; inscrire la source ou le moteur uniquement si elle est connue.
 4. Demander au référent linguistique de confirmer la prononciation. Ne pas déduire le sens des phrases ni modifier leur orthographe sans sa validation.
