@@ -24,9 +24,10 @@ Dernière revue documentaire : 2026-10-17. Les fiches de modèles évoluent ; v�
 - Code source et liste des langues : https://github.com/k2-fsa/OmniVoice/blob/master/docs/languages.md
 - Type : synthèse vocale multilingue (TTS).
 - La liste officielle indique explicitement **Soninke**, code ISO 639-3 `snk`, avec 10,04 heures de données d'entraînement répertoriées. Cela en fait un candidat réellement pertinent, contrairement à une simple supposition à partir d'un modèle multilingue.
-- Licence du code/projet indiquée dans `pyproject.toml` : Apache-2.0. Vérifier les licences des poids, des données et des dépendances avant toute redistribution ou utilisation commerciale.
-- Taille annoncée du dépôt de modèle : environ 3,27 Go ; l'inférence peut dépasser les ressources d'un téléphone et nécessiter un ordinateur ou GPU.
-- Le mainteneur a signalé que les clips courts peuvent être instables sans audio de référence ; une voix de référence peut être nécessaire pour obtenir un résultat exploitable. Toute voix de référence doit être utilisée avec consentement explicite.
+- Licence du code : Apache-2.0. **Licence des poids pré-entraînés : CC-BY-NC (non commerciale)** selon la fiche officielle du modèle ; ne pas intégrer dans un service commercial sans autorisation/licence compatible. La licence des poids ne doit pas être confondue avec celle du code.
+- Taille du dépôt de modèle : environ 3,27 Go (poids `model.safetensors` : environ 2,45 Go). L'inférence peut dépasser les ressources d'un téléphone et nécessiter un ordinateur ou GPU.
+- Démo officielle : https://huggingface.co/spaces/k2-fsa/OmniVoice . La page du modèle indique qu'aucun fournisseur d'inférence hébergé n'est actuellement configuré pour appeler le modèle directement via l'API d'Inference Providers ; la démo Space est donc la piste à tester séparément et peut être soumise à une limite de quota.
+- Le modèle prend en charge une génération avec voix automatique ou avec audio de référence. Toute voix de référence doit être utilisée avec consentement explicite. La qualité sur des clips soninké courts reste à vérifier.
 - L'essai précédent effectué pour ce projet n'a pas produit d'audio à cause d'une limite de quota. La prise en charge déclarée de `snk` est prometteuse, mais la prononciation, l'intelligibilité et le coût réel d'exécution restent **non validés** ici.
 
 **Décision :** OmniVoice devient le premier candidat TTS soninké à retester. Ne pas annoncer que le TTS fonctionne avant d'avoir généré un fichier audio, vérifié le fichier, puis obtenu l'avis d'un locuteur compétent. L'absence de quota gratuit disponible reste un blocage opérationnel possible.
@@ -36,10 +37,10 @@ Dernière revue documentaire : 2026-10-17. Les fiches de modèles évoluent ; v�
 - JollofLab décrit ses travaux vocaux/TTS comme « forthcoming » (à venir) dans son état public consulté ; ce n'est pas actuellement une intégration prête à l'emploi pour ce dépôt. Source : https://www.jolloflab.org/
 
 Prochaine démarche :
-1. Retenter OmniVoice dans un environnement gratuit disponible, en sélectionnant explicitement la langue `snk`.
-2. Utiliser une phrase soninké validée et, si nécessaire, un audio de référence autorisé ; ne pas inventer de traduction pour les trois phrases historiques.
-3. Enregistrer le résultat uniquement si un véritable fichier audio est généré ; noter le modèle, les paramètres et les limites.
-4. Faire écouter l'audio à un locuteur compétent avant de considérer le candidat acceptable.
+1. Ouvrir la démo officielle https://huggingface.co/spaces/k2-fsa/OmniVoice et vérifier si elle est réveillée et si le sélecteur de langue propose Soninke/Sonké.
+2. Utiliser uniquement une phrase soninké validée par un locuteur. Les trois phrases historiques restent intactes ; ne pas leur inventer de traduction.
+3. Si l'interface est disponible, lancer une génération courte en sélectionnant explicitement Soninke, puis sauvegarder le fichier audio réel. Noter les paramètres et toute erreur/limite de quota.
+4. Faire écouter l'audio à un locuteur compétent avant de considérer le candidat acceptable. Si la démo est indisponible ou en quota nul, noter le blocage plutôt que de prétendre que le test a réussi.
 
 ## Wolof — TTS (piste séparée, ne pas confondre avec le soninké)
 
