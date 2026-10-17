@@ -1,6 +1,6 @@
 # Inventaire des candidats STT/TTS
 
-Dernière revue documentaire : 2026-10-16. Les fiches de modèles évoluent ; vérifier les conditions et fichiers de licence avant chaque essai. Un modèle listé ici est un candidat, pas un moteur validé par ce dépôt.
+Dernière revue documentaire : 2026-10-17. Les fiches de modèles évoluent ; vérifier les conditions et fichiers de licence avant chaque essai. Un modèle listé ici est un candidat, pas un moteur validé par ce dépôt.
 
 ## Soninké — STT (reconnaissance vocale)
 
@@ -19,6 +19,14 @@ Dernière revue documentaire : 2026-10-16. Les fiches de modèles évoluent ; v�
 ## Soninké — TTS (synthèse vocale)
 
 Aucun modèle TTS soninké n'a été confirmé comme fonctionnel par les essais de ce projet à la date de la revue. OmniVoice n'a pas produit d'audio lors du précédent essai en raison d'une limite de quota. Ne pas assimiler un modèle STT soninké à un modèle TTS.
+
+### Résultat de la recherche documentaire du 17 octobre 2026
+
+- Le panorama linguistique de l'UNICEF WCARO répertorie plusieurs modèles dans sa catégorie TTS pour le code de langue `snk`, dont OmniVoice, mais cette liste agrégée ne prouve ni que ces modèles acceptent réellement du texte soninké, ni qu'une voix soninké est disponible, ni qu'un audio correct peut être généré. Source : https://unicef-ventures.github.io/wca-nlp-landscape/lang/snk.html
+- JollofLab décrit ses travaux vocaux/TTS comme « forthcoming » (à venir) dans son état public consulté. Ce n'est donc pas actuellement une intégration TTS prête à l'emploi pour ce dépôt. Source : https://www.jolloflab.org/
+- L'essai OmniVoice déjà tenté dans ce projet n'a produit aucun fichier audio à cause de la limite de quota. Aucun résultat audio ni aucune qualité de prononciation n'ont donc été validés.
+
+**Décision actuelle :** aucun candidat TTS soninké n'est encore qualifié pour intégration. Ne pas installer ou intégrer un modèle sur la seule base d'une liste de modèles multilingues. Le prochain essai doit confirmer explicitement la prise en charge du soninké, fonctionner avec les ressources disponibles sans achat, produire un fichier audio et être évalué par un locuteur compétent.
 
 Prochaine démarche :
 1. Rechercher les modèles et corpus TTS soninké avec leurs licences exactes.
@@ -60,6 +68,8 @@ Pour chaque candidat :
 
 ## Sources
 
+- UNICEF WCARO, panorama des ressources NLP soninké : https://unicef-ventures.github.io/wca-nlp-landscape/lang/snk.html
+- JollofLab : https://www.jolloflab.org/
 - SIL AI Soninke ASR : https://huggingface.co/sil-ai/wav2vec2-bloom-speech-snk
 - CONCREE Adia TTS : https://huggingface.co/CONCREE/Adia_TTS
 - SpeechT5 Wolof : https://huggingface.co/HullJi/speecht5_tts-wolof
