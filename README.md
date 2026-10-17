@@ -50,6 +50,7 @@ Lire :
 - [Plan technique STT/TTS et critères d’acceptation](docs/PLAN-STT-TTS.md)
 - [Checklist de test manuel sur téléphone](docs/TESTING-CHECKLIST.md)
 - [Inventaire des candidats STT/TTS](docs/MODEL-CANDIDATES.md)
+- [Notebook OmniVoice personnalisé — génération des trois phrases soninké](notebooks/OmniVoice-Soninke-TTS.ipynb) (ouvrir dans [Google Colab](https://colab.research.google.com/github/aydiarra-star/soninke-tts-libre/blob/feat/soninke-tts-lab-prototype/notebooks/OmniVoice-Soninke-TTS.ipynb))
 - [Guide du premier essai TTS soninké sur Colab](docs/TTS-QUICKSTART.md)
 - [Guide d'enregistrement vocal et consentement](docs/RECORDING-GUIDE.md)
 - [Guide du premier essai STT local](docs/STT-QUICKSTART.md)
