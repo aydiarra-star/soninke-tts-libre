@@ -32,7 +32,7 @@ Le notebook récupère automatiquement le lexique grammatical, les objets/compl�
 
 ## Ce que l'automatisation ne peut pas déclarer
 
-La réussite technique ne prouve pas qu'un mot est orthographié correctement ni que l'audio est correctement prononcé. Il n'existe pas encore, dans ce dépôt, de vérificateur indépendant et suffisamment validé pour certifier automatiquement la prononciation soninké de chaque mot. Le référent linguistique doit écouter les audios, éventuellement en séries, et inscrire la décision dans `manifest.csv`. Un éventuel moteur STT ne peut fournir qu'un indice tant que sa précision en soninké n'a pas été évaluée.
+La réussite technique ne prouve pas qu'un mot est orthographié correctement ni que l'audio est correctement prononcé. Il n'existe pas encore, dans ce dépôt, de vérificateur indépendant et suffisamment validé pour certifier automatiquement la prononciation soninké de chaque mot. Le référent linguistique peut écouter le fichier `review_playlist.wav` en une seule lecture, en suivant l'ordre du manifeste, et inscrire les décisions/corrections dans `manifest.csv`. Un éventuel moteur STT ne peut fournir qu'un indice tant que sa précision en soninké n'a pas été évaluée.
 
 ## Confidentialité et licence
 
