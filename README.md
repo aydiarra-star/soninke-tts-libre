@@ -50,6 +50,7 @@ Lire :
 - [Plan technique STT/TTS et critères d’acceptation](docs/PLAN-STT-TTS.md)
 - [Checklist de test manuel sur téléphone](docs/TESTING-CHECKLIST.md)
 - [Inventaire des candidats STT/TTS](docs/MODEL-CANDIDATES.md)
+- [Guide du premier essai TTS soninké sur Colab](docs/TTS-QUICKSTART.md)
 - [Guide d'enregistrement vocal et consentement](docs/RECORDING-GUIDE.md)
 - [Guide du premier essai STT local](docs/STT-QUICKSTART.md)
 - [Évaluer le STT avec WER/CER](docs/STT-EVALUATION.md)
