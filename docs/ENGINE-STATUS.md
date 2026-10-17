@@ -48,11 +48,12 @@ Ce journal distingue la qualité sonore perçue de l’exactitude linguistique. 
 |---|---|---|---|---|---|
 | 001 | `Daga yigé` (forme saisie lors de l’évaluation) | **Validée par le référent : « claire et limpide »** | À confirmer séparément | À évaluer | Non documentée dans le journal ; ne pas attribuer l’audio à OmniVoice sans preuve |
 | 002 | `Li tao.` | En attente d’écoute | En attente de validation | En attente d’écoute | À renseigner après génération/import |
-| 003 | `Daga goli.` | En attente d’écoute | En attente de validation | En attente d’écoute | À renseigner après génération/import |
+| 003 | `Daga goli.` | Audio non fourni ici | À confirmer sur un audio | À évaluer sur un audio | Le référent confirme la phrase ; génération/partage bloqué par les limites de l’accès gratuit |
 
 ### Protocole pour les prochains échantillons
 
-1. Obtenir et écouter un fichier audio réel pour `Li tao.`, puis pour `Daga goli.`.
-2. Noter séparément clarté, prononciation et naturel ; inscrire la source ou le moteur uniquement si elle est connue.
-3. Demander au référent linguistique de confirmer la prononciation. Ne pas déduire le sens des phrases ni modifier leur orthographe sans sa validation.
-4. Conserver l’audio original et ses métadonnées ensemble. Le présent journal ne contient pas les fichiers audio et ne prétend pas qu’ils sont archivés dans GitHub.
+1. Le référent confirme `Daga goli.` comme phrase de test, mais l’audio n’a pas pu être joint ici en raison des limites rencontrées avec l’accès gratuit. Ne pas confondre validation de la phrase et validation de sa réalisation vocale.
+2. Obtenir et écouter un fichier audio réel pour `Li tao.`, puis pour `Daga goli.`.
+3. Noter séparément clarté, prononciation et naturel ; inscrire la source ou le moteur uniquement si elle est connue.
+4. Demander au référent linguistique de confirmer la prononciation. Ne pas déduire le sens des phrases ni modifier leur orthographe sans sa validation.
+5. Conserver l’audio original et ses métadonnées ensemble. Le présent journal ne contient pas les fichiers audio et ne prétend pas qu’ils sont archivés dans GitHub.
