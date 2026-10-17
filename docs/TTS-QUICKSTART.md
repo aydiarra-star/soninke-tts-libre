@@ -17,9 +17,11 @@ La liste des langues et le code officiel confirment que le nom `soninke` est acc
 1. Ouvrir le notebook Colab dans Safari ou Chrome et se connecter à Google si demandé.
 2. Dans le menu **Environnement d'exécution**, choisir **Modifier le type d'exécution**, puis GPU si l'option gratuite est proposée. Si aucun GPU n'est disponible, arrêter là et noter le message ; ne souscrire à aucun forfait.
 3. Exécuter les cellules d'installation puis de chargement du modèle du notebook officiel. Le téléchargement est volumineux et peut prendre du temps.
-4. Aller à la section **Python API** du notebook, après la cellule qui charge `model`, `soundfile as sf` et `display` depuis `IPython.display`. Ajouter une nouvelle cellule de code avec exactement ceci :
+4. Aller à la section **Python API** du notebook, après la cellule qui charge `model` et `soundfile as sf`. Ajouter une nouvelle cellule de code avec exactement ceci :
 
    ```python
+   from IPython.display import Audio, display
+
    audio = model.generate(
        text="Daga goli.",
        language="soninke",
