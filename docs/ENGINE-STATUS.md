@@ -38,3 +38,21 @@ Le code du projet OmniVoice est annoncé sous Apache-2.0, tandis que les poids p
 - Écoute et validation par un locuteur compétent en soninké.
 - Licence compatible documentée pour le code, les poids, les données et chaque dépendance.
 - Pas de traduction ou de sens attribué aux phrases de test sans validation.
+
+
+## Journal d’évaluation audio — 2026-10-17
+
+Ce journal distingue la qualité sonore perçue de l’exactitude linguistique. Un échantillon ne valide pas à lui seul le moteur qui l’a produit.
+
+| Référence | Phrase test | Clarté sonore | Prononciation soninké | Naturel de la voix | Source/moteur |
+|---|---|---|---|---|---|
+| 001 | `Daga yigé` (forme saisie lors de l’évaluation) | **Validée par le référent : « claire et limpide »** | À confirmer séparément | À évaluer | Non documentée dans le journal ; ne pas attribuer l’audio à OmniVoice sans preuve |
+| 002 | `Li tao.` | En attente d’écoute | En attente de validation | En attente d’écoute | À renseigner après génération/import |
+| 003 | `Daga goli.` | En attente d’écoute | En attente de validation | En attente d’écoute | À renseigner après génération/import |
+
+### Protocole pour les prochains échantillons
+
+1. Obtenir et écouter un fichier audio réel pour `Li tao.`, puis pour `Daga goli.`.
+2. Noter séparément clarté, prononciation et naturel ; inscrire la source ou le moteur uniquement si elle est connue.
+3. Demander au référent linguistique de confirmer la prononciation. Ne pas déduire le sens des phrases ni modifier leur orthographe sans sa validation.
+4. Conserver l’audio original et ses métadonnées ensemble. Le présent journal ne contient pas les fichiers audio et ne prétend pas qu’ils sont archivés dans GitHub.
