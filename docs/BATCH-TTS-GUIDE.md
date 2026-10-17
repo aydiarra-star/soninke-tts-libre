@@ -28,7 +28,7 @@ Notebook source : [OmniVoice-Soninke-Batch-TTS.ipynb](../notebooks/OmniVoice-Son
 
 ## Dictionnaire : règle impérative
 
-Le dépôt ne contient pas encore un dictionnaire complet dont les droits de copie et de redistribution sont confirmés. La source Asawan est recensée dans `docs/LEXICAL-RESOURCES.md`, mais son contenu n'est pas copié car les droits ne sont pas établis. Ne pas aspirer ni recopier un dictionnaire avant d'avoir vérifié sa licence, sa variété linguistique et les règles d'attribution. Ajouter chaque source et sa licence au CSV.
+Le notebook récupère automatiquement le lexique grammatical, les objets/compléments et les mots présents dans les corpus de `snk_engine`, à la révision épinglée dans le notebook. Le fichier `LICENSE-DATA` confirme la licence CC BY 4.0 pour `data/` et `corpus/`, avec attribution à noah-medra (ORCID 0009-0003-6018-9802). La liste obtenue est une base lexicale sourcée, **pas un dictionnaire exhaustif de tout le soninké**. Les tokens extraits de phrases perdent leur contexte ; ils doivent être vérifiés. La variété de référence ne représente pas nécessairement toutes les variétés. La source Asawan reste recensée dans `docs/LEXICAL-RESOURCES.md`, mais son contenu n'est pas copié tant que ses droits ne sont pas établis.
 
 ## Ce que l'automatisation ne peut pas déclarer
 
