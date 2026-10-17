@@ -12,6 +12,16 @@ Ce guide contourne le blocage rencontré sur le Space Hugging Face : on utilise 
 
 La liste des langues et le code officiel confirment que le nom `soninke` est accepté et associé au code `snk`. Cela justifie un essai, mais ne prouve pas que la prononciation soninké soit bonne. La fiche indique une licence non commerciale pour les poids pré-entraînés : ne pas employer ces poids dans une offre commerciale ni les redistribuer sans autorisation compatible.
 
+
+## Notebook personnalisé prêt à lancer
+
+Le dépôt contient maintenant un notebook dédié qui installe OmniVoice, vérifie la présence d’un GPU, charge le modèle officiel, génère les trois phrases historiques (`Daga yige`, `Li tao`, `Daga goli`), enregistre les WAV et prépare une archive ZIP à télécharger :
+
+- [Voir le notebook dans GitHub](../notebooks/OmniVoice-Soninke-TTS.ipynb)
+- [Ouvrir directement dans Google Colab](https://colab.research.google.com/github/aydiarra-star/soninke-tts-libre/blob/feat/soninke-tts-lab-prototype/notebooks/OmniVoice-Soninke-TTS.ipynb)
+
+Le notebook s’arrête volontairement si aucun GPU n’est disponible, afin d’éviter un calcul CPU potentiellement très long. Il ne souscrit à aucun forfait, ne publie pas les audios sur GitHub et marque chaque nouvelle génération comme « validation humaine en attente ».
+
 ## Procédure depuis un téléphone
 
 1. Ouvrir le notebook Colab dans Safari ou Chrome et se connecter à Google si demandé.
