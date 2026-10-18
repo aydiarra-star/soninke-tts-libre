@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#087f5b">
+  <meta name="description" content="Parcourir et rechercher les 577 entrées du lexique soninké de Soninké TTS Libre.">
+  <title>Lexique soninké — Soninké TTS Libre</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="corpus.css">
+  <script src="lexique.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="Retour au laboratoire">
+      <span class="brand-mark" aria-hidden="true">S</span>
+      <span><strong>Soninké TTS Libre</strong><small>Lexique et prononciation</small></span>
+    </a>
+    <a class="button button-secondary" href="./corpus.html">Corpus de phrases</a>
+  </header>
+  <main>
+    <section class="hero corpus-hero">
+      <p class="eyebrow">LEXIQUE SONINKÉ · MANIFESTE DU PROJET</p>
+      <h1>Les mots <span>soninké.</span></h1>
+      <p class="intro">Cette page affiche les entrées du manifeste de travail qui n’étaient pas raccordées à l’application. Recherchez un mot ou son identifiant et consultez sa source ainsi que le statut de validation enregistré.</p>
+      <div class="notice" role="note"><strong>577 entrées chargées depuis le manifeste</strong><span>Le manifeste consigne 576 prononciations validées par le référent et une entrée en attente. Les traductions françaises ne figurent pas dans ce manifeste. Les fichiers audio ne sont pas hébergés sur cette page : leur présence dans le manifeste ne signifie pas qu’ils sont lisibles depuis le site.</span></div>
+    </section>
+    <section class="corpus-tools" aria-label="Recherche dans le lexique">
+      <label for="lexicon-search">Rechercher un mot ou un identifiant</label>
+      <input id="lexicon-search" type="search" placeholder="Ex. bagu, snk-00008…" autocomplete="off">
+      <div class="corpus-filter-row">
+        <label for="lexicon-filter">Statut de prononciation</label>
+        <select id="lexicon-filter">
+          <option value="all">Toutes les entrées</option>
+          <option value="validated">Prononciation validée</option>
+          <option value="pending">En attente / erreur technique</option>
+        </select>
+        <span id="lexicon-count" aria-live="polite">Chargement…</span>
+      </div>
+    </section>
+    <p id="lexicon-message" class="global-message" role="status" aria-live="polite"></p>
+    <section id="lexicon-results" class="corpus-results" aria-label="Mots du lexique"></section>
+    <nav class="corpus-actions" aria-label="Pagination du lexique">
+      <button class="button button-secondary" id="previous-page" type="button" disabled>Précédent</button>
+      <span id="page-indicator" aria-live="polite">Page 1</span>
+      <button class="button button-primary" id="next-page" type="button" disabled>Suivant</button>
+    </nav>
+    <section class="guide">
+      <h2>À propos des données</h2>
+      <p>Les statuts affichés reprennent les champs de validation du manifeste de travail. La source d’origine est indiquée pour chaque entrée. Cette page ne crée pas d’audio, n’invente aucune traduction et ne modifie pas les validations.</p>
+      <p class="helper">Source des entrées : <a href="https://github.com/oscarmedra/snk_engine/tree/49f50a939ded51c5ffe7db404c45f40fc75a3c88">snk_engine (révision épinglée)</a> · Licence déclarée : CC BY 4.0.</p>
+    </section>
+  </main>
+  <footer><span>Soninké TTS Libre</span><span>Lexique expérimental · source et statut visibles</span></footer>
+</body>
+</html>
