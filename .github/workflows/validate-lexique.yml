@@ -1,0 +1,31 @@
+name: Validate Soninke lexical data
+
+on:
+  pull_request:
+    paths:
+      - "data/lexique-soninke-fr-base.csv"
+      - "scripts/validate_lexique.py"
+      - ".github/workflows/validate-lexique.yml"
+  push:
+    branches:
+      - "data/lexique-soninke-fr-v1"
+    paths:
+      - "data/lexique-soninke-fr-base.csv"
+      - "scripts/validate_lexique.py"
+      - ".github/workflows/validate-lexique.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Validate lexical CSV
+        run: python scripts/validate_lexique.py data/lexique-soninke-fr-base.csv
