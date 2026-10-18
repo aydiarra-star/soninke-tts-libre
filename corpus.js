@@ -66,7 +66,12 @@
       sourceLink.rel = "noopener noreferrer";
       source.append(sourceLink, document.createTextNode(" · Licence CC BY 4.0 · Attribution : " + entry.attribution));
       card.append(source);
-      card.append(el("p", "corpus-caveat", "Non revérifiée indépendamment dans ce projet. Vérifier la variété, le sens et la prononciation avec un locuteur."));
+      const caveatText = review.status === "confirmed"
+        ? "Validation humaine consignée dans ce lecteur. La source et la traduction restent consultables ci-dessus."
+        : review.status === "correction"
+          ? "Une correction a été signalée dans ce lecteur. Consultez la remarque enregistrée avant réutilisation."
+          : "Pas encore confirmée dans ce lecteur. Vérifier la variété, le sens et la prononciation avec un locuteur compétent.";
+      card.append(el("p", "corpus-caveat", caveatText));
       const form = el("div", "corpus-review-form");
       const statusLabel = el("label", "field-label", "Résultat de la vérification");
       const status = el("select", "status-select");
