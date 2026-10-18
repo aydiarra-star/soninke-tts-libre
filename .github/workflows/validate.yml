@@ -26,7 +26,7 @@ jobs:
           node --check corpus.js
           node --check lexique.js
       - name: Vérifier la syntaxe Python du script STT expérimental
-        run: python -m py_compile experiments/stt_transcribe.py experiments/evaluate_stt.py experiments/stt_metrics.py
+        run: python -m py_compile experiments/stt_transcribe.py experiments/evaluate_stt.py experiments/stt_metrics.py scripts/publish_audio_bundle_colab.py
       - name: Tester les métriques WER/CER
         run: python -m unittest discover -s tests -v
       - name: Vérifier le corpus, les phrases initiales et les liens documentaires
