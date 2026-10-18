@@ -12,16 +12,15 @@ def run(args, **kwargs):
     return subprocess.run(args, check=True, **kwargs)
 
 def main():
-    # Le montage Drive est facultatif : si l'utilisateur n'a pas de Drive accessible,
-    # l'archive existante peut être sélectionnée directement dans Colab.
-    drive_root = Path("/content/drive/MyDrive")
-    try:
-        from google.colab import drive
-        drive.mount("/content/drive")
-    except Exception as exc:
-        print("Montage Google Drive indisponible; passage au sélecteur de fichier:", type(exc).__name__)
+    # Ne demande pas l'accès à Google Drive si l'archive est déjà disponible.
     archive = ARCHIVE_DEFAULT
+    drive_root = Path("/content/drive/MyDrive")
     if not archive.is_file():
+        try:
+            from google.colab import drive
+            drive.mount("/content/drive")
+        except Exception as exc:
+            print("Montage Google Drive indisponible; passage au sélecteur de fichier:", type(exc).__name__)
         candidates = list(drive_root.rglob("soninke_audio_export.zip")) if drive_root.is_dir() else []
         if candidates:
             archive = candidates[0]
