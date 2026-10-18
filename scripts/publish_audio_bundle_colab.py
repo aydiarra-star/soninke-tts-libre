@@ -17,9 +17,16 @@ def main():
     archive = ARCHIVE_DEFAULT
     if not archive.exists():
         candidates = list(Path("/content/drive/MyDrive").rglob("soninke_audio_export.zip"))
-        if not candidates:
-            raise FileNotFoundError("Archive existante soninke_audio_export.zip introuvable dans Google Drive.")
-        archive = candidates[0]
+        if candidates:
+            archive = candidates[0]
+        else:
+            print("Archive absente de Google Drive. Sélectionne l'archive ZIP existante depuis l'appareil.")
+            from google.colab import files
+            uploaded = files.upload()
+            matches = [name for name in uploaded if name.lower().endswith(".zip") and "soninke" in name.lower()]
+            if len(matches) != 1:
+                raise FileNotFoundError("Téléverse un seul ZIP contenant l'export audio Soninké.")
+            archive = Path("/content") / matches[0]
     print("Archive:", archive, "bytes:", archive.stat().st_size)
 
     with zipfile.ZipFile(archive) as zf:
