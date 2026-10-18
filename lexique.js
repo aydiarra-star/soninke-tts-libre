@@ -55,11 +55,16 @@
       card.append(el("p", "corpus-field-label", details));
       if (entry.validationNote) card.append(el("p", "corpus-caveat", entry.validationNote));
       const source = el("p", "corpus-source");
-      const link = el("a", "", "Consulter la source");
-      link.href = entry.source;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      source.append(link, document.createTextNode(" · Licence " + entry.license + " · " + entry.attribution));
+      if (/^https:\/\//.test(entry.source)) {
+        const link = el("a", "", "Consulter la source");
+        link.href = entry.source;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        source.append(link);
+      } else {
+        source.append(document.createTextNode("Provenance : " + entry.source));
+      }
+      source.append(document.createTextNode(" · Licence " + entry.license + " · " + entry.attribution));
       card.append(source);
       results.append(card);
     });
