@@ -24,7 +24,7 @@
     const wanted = filter.value;
     const filtered = entries.filter(entry => {
       const matchesTerm = !term || [entry.word, entry.id].join(" ").toLocaleLowerCase().includes(term);
-      const matchesStatus = wanted === "all" || (wanted === "validated" ? entry.pronunciationValidated : !entry.pronunciationValidated);
+      const matchesStatus = wanted === "all" || (wanted === "validated" ? entry.pronunciationValidated === true : entry.pronunciationValidated !== true);
       return matchesTerm && matchesStatus;
     });
     const pageCount = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
@@ -44,7 +44,7 @@
       const top = el("div", "corpus-card-top");
       top.append(el("span", "phrase-index", entry.id));
       top.append(el("span", "eval-badge " + (entry.pronunciationValidated ? "correct" : "needs_correction"),
-        entry.pronunciationValidated ? "Prononciation validée" : "En attente — erreur technique"));
+        entry.pronunciationValidated === true ? "Prononciation validée" : (entry.technicalStatus === "generation_error" || entry.audioStatus === "generation_error" ? "Erreur technique — validation en attente" : "En attente de validation linguistique")));
       card.append(top);
       card.append(el("h2", "corpus-soninke", entry.word));
       const details = entry.audioStatus === "audio_present_reused"
