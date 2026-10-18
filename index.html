@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#087f5b">
+  <meta name="description" content="Laboratoire communautaire pour tester et valider la prononciation de phrases soninké.">
+  <title>Soninké TTS Libre — laboratoire de validation</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="Soninké TTS Libre, accueil">
+      <span class="brand-mark" aria-hidden="true">S</span>
+      <span><strong>Soninké TTS Libre</strong><small>Laboratoire de prononciation</small></span>
+    </a>
+    <span class="status-pill"><span class="status-dot"></span> Prototype de validation</span>
+    <a class="button button-secondary" href="corpus.html">Rechercher dans le corpus</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">PROJET COMMUNAUTAIRE · OPEN SOURCE</p>
+      <h1>Construire une voix soninké, <span>avec des validations humaines.</span></h1>
+      <p class="intro">Écoutez un échantillon audio, vérifiez la prononciation avec une personne compétente en soninké, puis notez le résultat. Les phrases de test sont conservées exactement telles qu’elles ont été fournies.</p>
+      <div class="notice" role="status">
+        <strong>Important : la synthèse vocale n’est pas encore intégrée.</strong>
+        <span>Cette première version permet d’importer un audio existant, de l’écouter et de consigner une validation. Elle ne prétend pas générer une voix soninké.</span>
+      </div>
+    </section>
+
+    <section class="toolbar" aria-label="Actions sur les validations">
+      <div><strong id="progress-count">0 / 3 évaluées</strong><p>Vos annotations sont enregistrées dans ce navigateur.</p></div>
+      <div class="toolbar-actions">
+        <button class="button button-secondary" id="export-json" type="button">Exporter JSON</button>
+        <button class="button button-primary" id="export-csv" type="button">Exporter CSV</button>
+      </div>
+    </section>
+
+    <section id="phrase-list" class="phrase-list" aria-label="Phrases de test">
+      <article class="phrase-card" data-phrase-id="p1">
+        <div class="phrase-top"><span class="phrase-index">TEST 01</span><span class="eval-badge" data-badge>Non évaluée</span></div>
+        <h2 class="phrase-text">Daga yige</h2>
+        <p class="helper">Ne modifiez pas l’orthographe de cette phrase.</p>
+        <label class="field-label" for="audio-p1">Importer un échantillon audio</label>
+        <input class="audio-input" id="audio-p1" type="file" accept="audio/*" aria-describedby="audio-help-p1">
+        <p class="helper" id="audio-help-p1">Le fichier reste sur votre appareil ; il n’est pas envoyé au serveur.</p>
+        <audio class="audio-player" controls hidden></audio>
+        <label class="field-label" for="status-p1">Votre évaluation</label>
+        <select class="status-select" id="status-p1">
+          <option value="not_evaluated">Pas encore évaluée</option>
+          <option value="correct">Prononciation correcte</option>
+          <option value="needs_correction">À corriger</option>
+        </select>
+        <label class="field-label" for="notes-p1">Notes facultatives</label>
+        <textarea class="notes-input" id="notes-p1" rows="2" placeholder="Ex. son à reprendre, remarque du locuteur…"></textarea>
+        <p class="save-state" aria-live="polite"></p>
+      </article>
+
+      <article class="phrase-card" data-phrase-id="p2">
+        <div class="phrase-top"><span class="phrase-index">TEST 02</span><span class="eval-badge" data-badge>Non évaluée</span></div>
+        <h2 class="phrase-text">Li tao</h2>
+        <p class="helper">Ne modifiez pas l’orthographe de cette phrase.</p>
+        <label class="field-label" for="audio-p2">Importer un échantillon audio</label>
+        <input class="audio-input" id="audio-p2" type="file" accept="audio/*" aria-describedby="audio-help-p2">
+        <p class="helper" id="audio-help-p2">Le fichier reste sur votre appareil ; il n’est pas envoyé au serveur.</p>
+        <audio class="audio-player" controls hidden></audio>
+        <label class="field-label" for="status-p2">Votre évaluation</label>
+        <select class="status-select" id="status-p2">
+          <option value="not_evaluated">Pas encore évaluée</option>
+          <option value="correct">Prononciation correcte</option>
+          <option value="needs_correction">À corriger</option>
+        </select>
+        <label class="field-label" for="notes-p2">Notes facultatives</label>
+        <textarea class="notes-input" id="notes-p2" rows="2" placeholder="Ex. son à reprendre, remarque du locuteur…"></textarea>
+        <p class="save-state" aria-live="polite"></p>
+      </article>
+
+      <article class="phrase-card" data-phrase-id="p3">
+        <div class="phrase-top"><span class="phrase-index">TEST 03</span><span class="eval-badge" data-badge>Non évaluée</span></div>
+        <h2 class="phrase-text">Daga goli</h2>
+        <p class="helper">Ne modifiez pas l’orthographe de cette phrase.</p>
+        <label class="field-label" for="audio-p3">Importer un échantillon audio</label>
+        <input class="audio-input" id="audio-p3" type="file" accept="audio/*" aria-describedby="audio-help-p3">
+        <p class="helper" id="audio-help-p3">Le fichier reste sur votre appareil ; il n’est pas envoyé au serveur.</p>
+        <audio class="audio-player" controls hidden></audio>
+        <label class="field-label" for="status-p3">Votre évaluation</label>
+        <select class="status-select" id="status-p3">
+          <option value="not_evaluated">Pas encore évaluée</option>
+          <option value="correct">Prononciation correcte</option>
+          <option value="needs_correction">À corriger</option>
+        </select>
+        <label class="field-label" for="notes-p3">Notes facultatives</label>
+        <textarea class="notes-input" id="notes-p3" rows="2" placeholder="Ex. son à reprendre, remarque du locuteur…"></textarea>
+        <p class="save-state" aria-live="polite"></p>
+      </article>
+    </section>
+
+    <section class="guide">
+      <h2>Comment valider un échantillon</h2>
+      <ol>
+        <li>Obtenez un audio depuis un moteur candidat ou un enregistrement réalisé avec l’accord du locuteur.</li>
+        <li>Importez le fichier sur la phrase correspondante et écoutez-le.</li>
+        <li>Demandez à une personne compétente en soninké de juger la prononciation, sans inventer de traduction.</li>
+        <li>Choisissez le statut et ajoutez si besoin une note précise, puis exportez les annotations.</li>
+      </ol>
+      <p class="privacy-note">Les annotations sont sauvegardées localement dans le navigateur. Les fichiers audio ne sont ni téléversés ni inclus dans les exports : conservez-les séparément et documentez le consentement ainsi que les droits de redistribution avant tout partage.</p>
+      <button class="button button-quiet" id="clear-data" type="button">Effacer les annotations locales</button>
+      <p id="global-message" class="global-message" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <footer><span>Soninké TTS Libre</span><span>Prototype expérimental · aucune traduction fournie</span></footer>
+</body>
+</html>

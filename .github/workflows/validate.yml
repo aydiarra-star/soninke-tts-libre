@@ -1,0 +1,32 @@
+name: Validation statique
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Vérifier le prototype et le corpus
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+      - name: Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Vérifier la syntaxe JavaScript
+        run: |
+          node --check app.js
+          node --check corpus.js
+      - name: Vérifier la syntaxe Python du script STT expérimental
+        run: python -m py_compile experiments/stt_transcribe.py experiments/evaluate_stt.py experiments/stt_metrics.py
+      - name: Tester les métriques WER/CER
+        run: python -m unittest discover -s tests -v
+      - name: Vérifier le corpus, les phrases initiales et les liens documentaires
+        run: node scripts/validate-project.mjs
