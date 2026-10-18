@@ -12,11 +12,17 @@ def run(args, **kwargs):
     return subprocess.run(args, check=True, **kwargs)
 
 def main():
-    from google.colab import drive
-    drive.mount("/content/drive")
+    # Le montage Drive est facultatif : si l'utilisateur n'a pas de Drive accessible,
+    # l'archive existante peut être sélectionnée directement dans Colab.
+    drive_root = Path("/content/drive/MyDrive")
+    try:
+        from google.colab import drive
+        drive.mount("/content/drive")
+    except Exception as exc:
+        print("Montage Google Drive indisponible; passage au sélecteur de fichier:", type(exc).__name__)
     archive = ARCHIVE_DEFAULT
-    if not archive.exists():
-        candidates = list(Path("/content/drive/MyDrive").rglob("soninke_audio_export.zip"))
+    if not archive.is_file():
+        candidates = list(drive_root.rglob("soninke_audio_export.zip")) if drive_root.is_dir() else []
         if candidates:
             archive = candidates[0]
         else:
@@ -27,6 +33,8 @@ def main():
             if len(matches) != 1:
                 raise FileNotFoundError("Téléverse un seul ZIP contenant l'export audio Soninké.")
             archive = Path("/content") / matches[0]
+    if not archive.is_file():
+        raise FileNotFoundError("Archive ZIP introuvable: " + str(archive))
     print("Archive:", archive, "bytes:", archive.stat().st_size)
 
     with zipfile.ZipFile(archive) as zf:
