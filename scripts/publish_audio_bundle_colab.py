@@ -43,6 +43,14 @@ def main():
         rows = list(csv.DictReader(io.StringIO(zf.read("manifest.csv").decode("utf-8-sig"))))
         if len(rows) != 577:
             raise RuntimeError("Le manifeste doit contenir 577 entrees, trouve: " + str(len(rows)))
+        if not rows:
+            raise RuntimeError("Manifeste audio vide.")
+        required = {"id"}
+        if not required.issubset(rows[0].keys()):
+            raise RuntimeError("Colonne id absente du manifeste audio.")
+        text_columns = ("text", "word", "soninke", "phrase")
+        if not any(column in rows[0] for column in text_columns):
+            raise RuntimeError("Colonne de transcription absente (text/word/soninke/phrase).")
         names = set(zf.namelist())
         temp = Path("/content/soninke-audio-publish")
         if temp.exists():
@@ -87,11 +95,15 @@ def main():
     for row in rows:
         aid = row["id"]
         available = (target_audio / (aid + ".wav")).is_file()
+        word = next((row.get(column, "").strip() for column in ("text", "word", "soninke", "phrase") if row.get(column, "").strip()), "")
+        if not word:
+            raise RuntimeError("Transcription vide pour " + aid)
+        duration_value = row.get("duration_seconds") or row.get("duration") or row.get("duration_s")
         entries.append({
-            "id": aid, "word": row["text"],
+            "id": aid, "word": word,
             "audioPath": "audio/" + aid + ".wav" if available else None,
             "audioAvailable": available,
-            "durationSeconds": float(row["duration_seconds"]) if row.get("duration_seconds") else None,
+            "durationSeconds": float(duration_value) if duration_value else None,
             "technicalStatus": row.get("technical_status") or "unknown",
             "source": row.get("source", ""), "license": row.get("license", ""),
             "attribution": row.get("attribution", "")
