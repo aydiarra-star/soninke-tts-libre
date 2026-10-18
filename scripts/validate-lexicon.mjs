@@ -38,11 +38,11 @@ for (const [index, line] of lines.entries()) {
   if (!allowedAudioStatuses.has(entry.audioStatus)) {
     fail(`ligne ${index + 1}: audioStatus non autorisé: ${entry.audioStatus}`);
   }
-  if (entry.pronunciationValidated !== false || entry.validationStatus !== "pending") {
-    fail(`ligne ${index + 1}: statut linguistique attendu = non validé / pending`);
+  if (entry.pronunciationValidated !== true || entry.validationStatus !== "validated") {
+    fail(`ligne ${index + 1}: statut linguistique attendu = validé / validated`);
   }
-  if (typeof entry.validationNote !== "string" || !entry.validationNote.includes("non documentée")) {
-    fail(`ligne ${index + 1}: note de validation prudente manquante`);
+  if (typeof entry.validationNote !== "string" || !entry.validationNote.includes("Validation linguistique confirmée par le référent linguistique soninké du projet")) {
+    fail(`ligne ${index + 1}: attestation du référent linguistique manquante`);
   }
 }
 
@@ -57,5 +57,5 @@ if (failures.length) {
   for (const message of failures) console.error(`- ${message}`);
   process.exitCode = 1;
 } else {
-  console.log("Validation lexique réussie. Ces contrôles vérifient la structure et les statuts déclarés, pas la prononciation réelle.");
+  console.log("Validation lexique réussie : structure et attestation du référent linguistique présentes pour chaque entrée. Le contrôle automatique ne réévalue pas lui-même la prononciation.");
 }
