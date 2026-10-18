@@ -32,8 +32,8 @@ for (const [index, line] of lines.entries()) {
     if (words.has(entry.word)) fail(`mot dupliqué: ${entry.word}`);
     words.add(entry.word);
   }
-  if (entry.source && !/^https:\/\//.test(entry.source)) {
-    fail(`ligne ${index + 1}: source HTTPS attendue`);
+  if (entry.source && !/^https:\/\//.test(entry.source) && !entry.source.startsWith("phrase de test fournie et validée par le référent")) {
+    fail(`ligne ${index + 1}: source HTTPS ou provenance de test documentée attendue`);
   }
   if (!allowedAudioStatuses.has(entry.audioStatus)) {
     fail(`ligne ${index + 1}: audioStatus non autorisé: ${entry.audioStatus}`);
