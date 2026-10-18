@@ -9,15 +9,16 @@ from pathlib import Path
 REQUIRED_COLUMNS = {"id", "soninke", "francais", "categorie", "source", "statut"}
 
 
-def validate(path: Path) -> list[str]:
+def validate(path: Path) -> tuple[list[str], list[str], int]:
     errors: list[str] = []
+    warnings: list[str] = []
     try:
         with path.open("r", encoding="utf-8-sig", newline="") as stream:
             reader = csv.DictReader(stream, delimiter=";")
             columns = set(reader.fieldnames or [])
             missing = REQUIRED_COLUMNS - columns
             if missing:
-                return [f"Colonnes manquantes: {', '.join(sorted(missing))}"]
+                return [f"Colonnes manquantes: {', '.join(sorted(missing))}"], warnings, 0
 
             seen_ids: set[str] = set()
             seen_pairs: dict[tuple[str, str], int] = {}
@@ -33,13 +34,13 @@ def validate(path: Path) -> list[str]:
                     errors.append(f"Ligne {line_number}: identifiant dupliqué « {entry_id} »")
                 seen_ids.add(entry_id)
 
+                # Repeated lexical forms may be legitimate homonyms or variants.
+                # Report for human review, never delete or reject them automatically.
                 pair = ((row.get("soninke") or "").strip(), (row.get("categorie") or "").strip())
                 if pair in seen_pairs:
-                    # Duplicate forms can be legitimate across categories or sources.
-                    # Warn only when the same form and category repeat; do not auto-delete.
-                    errors.append(
+                    warnings.append(
                         f"Ligne {line_number}: forme/catégorie répétée {pair!r} "
-                        f"(première ligne {seen_pairs[pair]}); vérifier sans supprimer automatiquement"
+                        f"(première ligne {seen_pairs[pair]}); revue humaine recommandée"
                     )
                 else:
                     seen_pairs[pair] = line_number
@@ -47,22 +48,27 @@ def validate(path: Path) -> list[str]:
             if count == 0:
                 errors.append("Aucune entrée de données.")
     except OSError as exc:
-        return [f"Impossible de lire {path}: {exc}"]
+        return [f"Impossible de lire {path}: {exc}"], warnings, 0
     except csv.Error as exc:
-        return [f"Erreur CSV: {exc}"]
+        return [f"Erreur CSV: {exc}"], warnings, 0
 
-    return errors
+    return errors, warnings, count
 
 
 def main() -> int:
     path = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("data/lexique-soninke-fr-base.csv")
-    errors = validate(path)
+    errors, warnings, count = validate(path)
     if errors:
-        print(f"Contrôle terminé avec {len(errors)} remarque(s)/erreur(s) :")
+        print(f"ÉCHEC — {len(errors)} erreur(s), {count} entrée(s) lue(s) :")
         for error in errors:
             print(f"- {error}")
+        for warning in warnings:
+            print(f"AVERTISSEMENT — {warning}")
         return 1
-    print(f"OK — fichier valide : {path}")
+
+    print(f"OK — {count} entrée(s) lue(s) : {path}")
+    for warning in warnings:
+        print(f"AVERTISSEMENT — {warning}")
     return 0
 
 
