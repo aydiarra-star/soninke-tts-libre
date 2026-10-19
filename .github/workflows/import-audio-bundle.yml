@@ -73,4 +73,3 @@ jobs:
 
             ## Avant fusion
             Vérifier les contrôles CI et écouter plusieurs fiches sur Safari iPhone.
-          labels: audio, automation
