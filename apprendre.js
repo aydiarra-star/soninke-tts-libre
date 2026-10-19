@@ -35,6 +35,7 @@ let sentenceEntries=[];
 let quizCurrent=null,quizAnswered=false,quizCorrect=0,quizTotal=0;
 function normalizeAnswer(value){return String(value||"").normalize("NFC").toLocaleLowerCase().trim().replace(/[.!?;:,]+$/g,"").replace(/\s+/g," ")}
 function startQuiz(){
+ quizCurrent=null;quizAnswered=false;$("quiz-check").disabled=true;$("quiz-next").disabled=true;$("quiz-answer").disabled=true;$("quiz-prompt").textContent="Préparation de la question…";
  const mode=$("quiz-mode").value;
  if(mode==="vocabulary"){
   const from=$("from").value,to=$("to").value;
@@ -101,7 +102,7 @@ $("entry-form").addEventListener("submit",ev=>{ev.preventDefault();const l=$("en
 local=loadLocal();
 $("sentence-search").addEventListener("input",renderSentences);
 $("sentence-level").addEventListener("change",renderSentences);
-$("quiz-start").addEventListener("click",startQuiz);$("quiz-check").addEventListener("click",checkQuiz);$("quiz-next").addEventListener("click",startQuiz);$("quiz-mode").addEventListener("change",()=>{$("quiz-direction-label").hidden=$("quiz-mode").value!=="sentence";$("quiz-feedback").textContent=""});$("quiz-direction-label").hidden=true;
+$("quiz-start").addEventListener("click",startQuiz);$("quiz-check").addEventListener("click",checkQuiz);$("quiz-next").addEventListener("click",startQuiz);$("quiz-mode").addEventListener("change",()=>{$("quiz-direction-label").hidden=$("quiz-mode").value!=="sentence";$("quiz-feedback").textContent=""});$("quiz-direction-label").hidden=$("quiz-mode").value!=="sentence";
 fetch("data/soninke-learning-corpus.json").then(response=>{if(!response.ok)throw Error("corpus "+response.status);return response.json()}).then(data=>{sentenceEntries=Array.isArray(data.entries)?data.entries:[];renderSentences()}).catch(error=>{$("sentence-count").textContent="Corpus indisponible";$("sentence-status").textContent="Le corpus de phrases n’a pas pu être chargé ("+error.message+"). Le lexique reste utilisable."});
 
 if("speechSynthesis"in window)speechSynthesis.addEventListener("voiceschanged",()=>{render();renderSentences()});
