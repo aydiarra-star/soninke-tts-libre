@@ -11,10 +11,13 @@ const parseJSON = (path) => {
   catch (error) { fail(`${path}: JSON invalide (${error.message})`); return null; }
 };
 
-for (const path of ["apprendre.html", "apprendre.css", "apprendre.js", "data/trilingual-lexicon.json", "data/wolof-fr-dictionary.json", "data/soninke-learning-corpus.json", "data/language-sources.json", "data/learning-curriculum.json", ".github/ISSUE_TEMPLATE/language_contribution.yml", "manifest.webmanifest", "sw.js", "assets/app-icon.svg"]) {
+for (const path of ["index.html", "apprendre.html", "apprendre.css", "apprendre.js", "data/trilingual-lexicon.json", "data/wolof-fr-dictionary.json", "data/soninke-learning-corpus.json", "data/language-sources.json", "data/learning-curriculum.json", ".github/ISSUE_TEMPLATE/language_contribution.yml", "manifest.webmanifest", "sw.js", "assets/app-icon.svg"]) {
   if (existsSync(resolve(root, path))) pass(`fichier requis présent : ${path}`);
   else fail(`fichier requis manquant : ${path}`);
 }
+const home = read("index.html");
+if (home.includes('href="apprendre.html"')) pass("accueil relié à l’espace multilingue");
+else fail("accueil : lien vers apprendre.html manquant");
 const html = read("apprendre.html");
 const pwaManifest = parseJSON("manifest.webmanifest");
 const contributionTemplate = read(".github/ISSUE_TEMPLATE/language_contribution.yml");
