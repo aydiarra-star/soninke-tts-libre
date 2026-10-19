@@ -39,6 +39,7 @@ function startQuiz(){
  const mode=$("quiz-mode").value;
  if(mode==="vocabulary"){
   const from=$("from").value,to=$("to").value;
+  if(from===to){$("quiz-prompt").textContent="Choisissez deux langues différentes."; $("quiz-feedback").textContent="Sélectionnez une langue source et une autre langue cible.";return}
   const options=entries.filter(entry=>val(entry,from,"word")&&val(entry,to,"word"));
   if(!options.length){$("quiz-feedback").textContent="Aucune paire complète pour ces langues. Choisissez Wolof ↔ Français ou utilisez l’exercice de phrases soninké–français.";return}
   const entry=options[Math.floor(Math.random()*options.length)];
