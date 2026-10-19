@@ -1,7 +1,7 @@
 (() => {
 "use strict";
 const $=id=>document.getElementById(id);
-let LANGS={soninke:{label:"Soninké",code:"SNK",speech:""},wolof:{label:"Wolof",code:"WOL",speech:"wo-SN"},fr:{label:"Français",code:"FR",speech:"fr-FR"},en:{label:"English",code:"EN",speech:"en-US"}};
+let LANGS={soninke:{label:"Soninké",code:"SNK",speech:""},wolof:{label:"Wolof",code:"WOL",speech:"wo-SN"},fr:{label:"Français",code:"FR",speech:"fr-FR"},en:{label:"Anglais",code:"EN",speech:"en-US"}};
 const CAT={greeting:"Salutations","daily-life":"Vie quotidienne",family:"Famille",travel:"Voyage",food:"Alimentation",grammar:"Grammaire",other:"Autre"};
 const POS={noun:"nom",verb:"verbe",adjective:"adjectif",adverb:"adverbe",preposition:"préposition",pronoun:"pronom",article:"article",conjunction:"conjonction",other:"non précisé"};
 const KEY="soninke-tts-libre-learning-v1",REVIEW_KEY="soninke-tts-libre-review-v1";let entries=[],local=[],reviewIds=[];
