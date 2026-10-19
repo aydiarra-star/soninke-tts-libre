@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - .github/workflows/import-audio-bundle.yml
+      - scripts/publish_audio_bundle_actions.py
   workflow_dispatch:
     inputs:
       google_drive_file_id:
