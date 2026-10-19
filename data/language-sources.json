@@ -51,9 +51,12 @@
       "url": "https://jangileen.kalam-alami.net/special/apropos",
       "kind": "dictionary-and-learning",
       "licenseStatus": "site-states-dictionary-data-can-be-redistributed; verify-individual-resources",
-      "action": "Candidate for structured Wolof–French import. The live dictionary page reports 911 Wolof words and its legal page says dictionary words, translations and example phrases can be redistributed/modified. Nine sourced starter entries are included in data/trilingual-lexicon.json; complete extraction and normalization are still pending.",
-      "observedEntryCount": 911,
-      "observedOn": "2026-10-19"
+      "action": "Maintain the sourced snapshot with the importer workflow. Audit variants, part of speech, and examples; do not describe this as the complete dictionary until the remaining source coverage is reconciled.",
+      "observedOn": "2026-10-19",
+      "reportedWolofWordCount": 911,
+      "importedRecordCount": 750,
+      "importedFromAlphabetPages": 26,
+      "importNotes": "The automated snapshot currently contains 750 French–Wolof records with per-entry source URLs. Jàngileen reports 911 Wolof words; this count is not directly comparable to the number of extracted French headword/sense records. Source examples are preserved without assigning a language because the site's example labels are inconsistent and need review."
     },
     {
       "id": "baatukaay",
