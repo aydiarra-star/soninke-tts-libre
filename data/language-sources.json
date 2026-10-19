@@ -119,6 +119,57 @@
       "kind": "machine-readable-dictionary",
       "licenseStatus": "Wiktionary-attribution-and-applicable-licence-required",
       "action": "Use for definitions, inflections and parts of speech; do not treat generated examples as verified language pedagogy."
+    },
+    {
+      "id": "diagana-soninke-fr-2011",
+      "name": "Ousmane Moussa Diagana — Dictionnaire soninké-français (Mauritanie), Karthala 2011",
+      "languages": [
+        "soninke",
+        "fr"
+      ],
+      "url": "https://www.furet.com/ebooks/dictionnaire-soninke-francais-mauritanie-ousmane-moussa-diagana-9782811133856_9782811133856_4.html",
+      "kind": "published-dictionary",
+      "reportedEntryCount": 5800,
+      "licenseStatus": "copyrighted; no bulk-reuse-without-permission",
+      "action": "Use as a linguistic reference for editorial comparison. Do not copy entries into the app without explicit permission or a separate open licence."
+    },
+    {
+      "id": "monteil-soninke-vocabulary-1966",
+      "name": "Ch. Monteil / V. Monteil — Vocabulaire soninké I–II",
+      "languages": [
+        "soninke",
+        "fr"
+      ],
+      "url": "https://www.africabib.org/rec.php?RID=186594224",
+      "kind": "historical-dictionary",
+      "reportedEntryCount": 7000,
+      "licenseStatus": "historical-publication; rights-and-transcription-check-required",
+      "action": "Bibliographic reference only. Historical western Soninke data and transcription require careful dialect and orthography notes; no bulk import until rights and source text are confirmed."
+    },
+    {
+      "id": "asjp-soninke-wordlists",
+      "name": "ASJP — listes comparatives Soninke",
+      "languages": [
+        "soninke",
+        "en"
+      ],
+      "url": "https://asjp.clld.org/languages/SONINKE_4",
+      "kind": "comparative-wordlist",
+      "licenseStatus": "CC-BY-4.0",
+      "action": "Potential source for a small comparative vocabulary; preserve the original transcription, gloss, variety/source and CC BY 4.0 attribution; do not silently normalize into the core lexicon."
+    },
+    {
+      "id": "mayoiga-soninke-dataset",
+      "name": "Mayoiga — Soninke-dataset (Hugging Face)",
+      "languages": [
+        "soninke",
+        "fr"
+      ],
+      "url": "https://huggingface.co/datasets/Mayoiga/Soninke-dataset",
+      "kind": "parallel-text-corpus",
+      "reportedEntryCount": 1310,
+      "licenseStatus": "dataset-card-license-not-found; underlying-text-rights-unverified",
+      "action": "Do not import until the dataset owner and underlying Calaméo text rights are clarified; use as a lead for research only."
     }
   ],
   "reviewStatus": "research-started; licence review and dataset extraction not yet complete"
