@@ -15,14 +15,13 @@ test("le lexique charge les entrées et un WAV est décodable par WebKit", async
     element.load();
   });
   await expect.poll(
-    () => audio.evaluate(element => ({
-      source: element.currentSrc,
-      readyState: element.readyState,
-      duration: element.duration,
-      error: element.error ? element.error.code : null
-    })),
-    { timeout: 15000, message: "Le navigateur doit décoder le WAV et obtenir sa durée." }
-  ).toMatchObject({ readyState: expect.any(Number), error: null });
+    () => audio.evaluate(element => element.readyState),
+    { timeout: 15000, message: "WebKit doit charger les métadonnées du WAV." }
+  ).toBeGreaterThanOrEqual(1);
+  await expect.poll(
+    () => audio.evaluate(element => Number.isFinite(element.duration) && element.duration > 0),
+    { timeout: 15000, message: "WebKit doit décoder une durée audio positive." }
+  ).toBeTruthy();
 
   const media = await audio.evaluate(element => ({
     source: element.currentSrc,
@@ -32,8 +31,8 @@ test("le lexique charge les entrées et un WAV est décodable par WebKit", async
   }));
   expect(media.source).toContain("/audio/snk-");
   expect(media.readyState).toBeGreaterThanOrEqual(1);
-  expect(Number.isFinite(media.duration)).toBeTruthy();
   expect(media.duration).toBeGreaterThan(0);
+  expect(media.error).toBeNull();
   expect(failedRequests).toEqual([]);
 });
 
