@@ -51,7 +51,7 @@ def main():
             glosses = []
             for sense in senses:
                 for gloss in (sense.get("glosses") or sense.get("raw_glosses") or []):
-                    gloss = re.sub(r"\\s+", " ", str(gloss)).strip()
+                    gloss = re.sub(r"\s+", " ", str(gloss)).strip()
                     if gloss and gloss not in glosses:
                         glosses.append(gloss)
             if not glosses:
