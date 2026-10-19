@@ -11,7 +11,7 @@ const parseJSON = (path) => {
   catch (error) { fail(`${path}: JSON invalide (${error.message})`); return null; }
 };
 
-for (const path of ["apprendre.html", "apprendre.css", "apprendre.js", "data/trilingual-lexicon.json", "data/wolof-fr-dictionary.json", "data/language-sources.json", "data/learning-curriculum.json"]) {
+for (const path of ["apprendre.html", "apprendre.css", "apprendre.js", "data/trilingual-lexicon.json", "data/wolof-fr-dictionary.json", "data/soninke-learning-corpus.json", "data/language-sources.json", "data/learning-curriculum.json"]) {
   if (existsSync(resolve(root, path))) pass(`fichier requis présent : ${path}`);
   else fail(`fichier requis manquant : ${path}`);
 }
@@ -73,7 +73,7 @@ if (sources?.policy?.includes("licensing")) pass("règle de licence avant import
 else fail("la politique de licence avant import doit être documentée");
 if (Array.isArray(curriculum?.learningStages) && curriculum.learningStages.length >= 5) pass("parcours pédagogique structuré");
 else fail("parcours pédagogique trop incomplet");
-for (const required of ['id="from"', 'id="to"', 'id="search"', 'id="results"', 'id="entry-form"', 'id="export-json"', 'id="export-csv"', 'id="grammar-filter"', 'id="ressources"', 'id="parcours"']) {
+for (const required of ['id="from"', 'id="to"', 'id="search"', 'id="results"', 'id="entry-form"', 'id="export-json"', 'id="export-csv"', 'id="grammar-filter"', 'id="sentence-search"', 'id="sentence-results"', 'id="ressources"', 'id="parcours"']) {
   if (html.includes(required)) pass(`interface contient ${required}`);
   else fail(`interface ne contient pas ${required}`);
 }
