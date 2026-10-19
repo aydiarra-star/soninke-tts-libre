@@ -18,6 +18,15 @@ for (const path of ["apprendre.html", "apprendre.css", "apprendre.js", "data/tri
 const html = read("apprendre.html");
 const pwaManifest = parseJSON("manifest.webmanifest");
 const contributionTemplate = read(".github/ISSUE_TEMPLATE/language_contribution.yml");
+const serviceWorker = read("sw.js");
+const cacheAssetsMatch = serviceWorker.match(/const CORE_ASSETS = \[([\s\S]*?)\];/);
+if (cacheAssetsMatch) {
+  const cacheAssets = [...cacheAssetsMatch[1].matchAll(/"([^"]+)"/g)].map(match => match[1]);
+  const missingCacheAssets = cacheAssets.filter(path => !existsSync(resolve(root, path)));
+  if (missingCacheAssets.length === 0) pass(`PWA : ${cacheAssets.length} ressources essentielles existent pour le cache hors connexion`);
+  else fail(`PWA : ressources à mettre en cache manquantes : ${missingCacheAssets.join(", ")}`);
+} else fail("PWA : liste CORE_ASSETS introuvable");
+
 const js = read("apprendre.js");
 const schema = parseJSON("data/trilingual-lexicon.json");
 const sources = parseJSON("data/language-sources.json");
