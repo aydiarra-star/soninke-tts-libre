@@ -56,7 +56,7 @@ class DictionaryParser(HTMLParser):
         if self.entry is not None and "definition-meaning" in classes:
             self.meaning = {"partOfSpeech": "", "translations": [], "comment": "", "examples": []}
         if self.meaning is not None and "definition-example" in classes:
-            self.example = {"fr": "", "wolof": ""}
+            self.example = {"translationClass": "", "originalClass": ""}
         ancestor_classes = set().union(*(item[1] for item in self.stack)) if self.stack else set()
         if self.meaning is not None and tag == "abbr" and "definition__term-type" in ancestor_classes:
             self.meaning["partOfSpeech"] = attr.get("title", "").strip()
@@ -84,9 +84,9 @@ class DictionaryParser(HTMLParser):
             if "definition__term-comment" in classes:
                 self.meaning["comment"] += text
             if self.example is not None and "definition-example__translation" in classes:
-                self.example["fr"] += text
+                self.example["translationClass"] += text
             if self.example is not None and "definition-example__original" in classes:
-                self.example["wolof"] += text
+                self.example["originalClass"] += text
 
     def handle_endtag(self, tag: str) -> None:
         if not self.stack:
@@ -102,7 +102,7 @@ class DictionaryParser(HTMLParser):
                     self.entry["headword"] = text
             self.anchor = None
         if top_tag == tag and "definition-example" in classes and self.example is not None and self.meaning is not None:
-            if self.example["fr"].strip() or self.example["wolof"].strip():
+            if self.example["translationClass"].strip() or self.example["originalClass"].strip():
                 self.meaning["examples"].append({k: v.strip() for k, v in self.example.items()})
             self.example = None
         if top_tag == tag and "definition-meaning" in classes and self.meaning is not None and self.entry is not None:
@@ -152,7 +152,13 @@ def normalize_entry(raw: dict, sense_index: int) -> dict | None:
     wolof_words = list(dict.fromkeys(" ".join(word.split()) for word in meaning.get("translations", []) if word.strip()))
     if not wolof_words:
         return None
-    example = next((item for item in meaning.get("examples", []) if item.get("fr") and item.get("wolof")), None)
+    examples = [
+        {"translationClass": " ".join(item.get("translationClass", "").split()),
+         "originalClass": " ".join(item.get("originalClass", "").split()),
+         "languageAssignmentStatus": "needs-review"}
+        for item in meaning.get("examples", [])
+        if item.get("translationClass", "").strip() or item.get("originalClass", "").strip()
+    ]
     source_path = raw.get("sourcePath") or "/dictionary"
     source_url = urljoin(BASE, quote(source_path, safe="/%"))
     entry_hash = hashlib.sha1(source_path.encode("utf-8")).hexdigest()[:8]
@@ -165,16 +171,17 @@ def normalize_entry(raw: dict, sense_index: int) -> dict | None:
         "wolof": {
             "word": " / ".join(wolof_words),
             "definition": comment,
-            "example": example["wolof"] if example else "",
+            "example": "",
             "audio_url": ""
         },
         "fr": {
             "word": french,
             "definition": comment,
-            "example": example["fr"] if example else "",
+            "example": "",
             "audio_url": ""
         },
         "en": {"word": "", "definition": "", "example": "", "audio_url": ""},
+        "sourceExamples": examples,
         "grammar_category": pos,
         "category": "grammar" if pos in {"verb", "pronoun", "article", "preposition", "conjunction"} else "other",
         "source": source_url,
