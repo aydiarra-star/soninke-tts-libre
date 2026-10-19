@@ -1,5 +1,8 @@
 const { test, expect } = require("@playwright/test");
 
+// Force Playwright to launch WebKit; this is the engine used by Safari.
+test.use({ browserName: "webkit" });
+
 test("le lexique charge les entrées et un WAV est décodable par WebKit", async ({ page }) => {
   const failedRequests = [];
   page.on("requestfailed", request => failedRequests.push(request.url() + " — " + request.failure()?.errorText));
