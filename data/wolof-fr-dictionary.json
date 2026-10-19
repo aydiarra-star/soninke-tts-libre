@@ -4,8 +4,21 @@
   "sourceUrl": "https://jangileen.kalam-alami.net/dictionary",
   "sourceLegalUrl": "https://jangileen.kalam-alami.net/special/apropos",
   "sourceLicenseNote": "Le site indique que les données du dictionnaire (mots, traductions et exemples) peuvent être redistribuées et modifiées.",
-  "observedSourceCount": 911,
-  "extractedAt": "2026-10-19T07:10:29Z",
+  "reportedWolofWordCount": 911,
+  "sourceHeadwordCount": 709,
+  "translatedHeadwordCount": 707,
+  "untranslatedHeadwordCount": 2,
+  "untranslatedHeadwords": [
+    {
+      "headword": "instant",
+      "source": "https://jangileen.kalam-alami.net/dictionary/word/fr/instant"
+    },
+    {
+      "headword": "longtemps",
+      "source": "https://jangileen.kalam-alami.net/dictionary/word/fr/longtemps"
+    }
+  ],
+  "extractedAt": "2026-10-19T07:24:10Z",
   "entryCount": 750,
   "entries": [
     {
