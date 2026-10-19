@@ -32,7 +32,7 @@ jobs:
       - name: Importer les entrées Jàngileen avec leurs sources
         run: python scripts/import_jangileen_dictionary.py --output data/wolof-fr-dictionary.json
       - name: Contrôler le JSON produit
-        run: python -c "import json; d=json.load(open('data/wolof-fr-dictionary.json', encoding='utf-8')); assert d['entryCount'] >= 500; assert d['entryCount'] == len(d['entries']); assert all(e.get('source','').startswith('https://') for e in d['entries']); print('OK:', d['entryCount'], 'entrées sourcées')"
+        run: python -c "import json; d=json.load(open('data/wolof-fr-dictionary.json', encoding='utf-8')); assert d['entryCount'] >= 500; assert d['entryCount'] == len(d['entries']); assert d['translatedHeadwordCount'] + d['untranslatedHeadwordCount'] == d['sourceHeadwordCount']; assert d['untranslatedHeadwordCount'] == len(d['untranslatedHeadwords']); assert all(e.get('source','').startswith('https://') for e in d['entries']); print('OK:', d['entryCount'], 'fiches; tête d’entrée traduite/non traduite:', d['translatedHeadwordCount'], d['untranslatedHeadwordCount'])"
       - name: Enregistrer l’instantané sur la branche de développement
         run: |
           git config user.name "github-actions[bot]"
