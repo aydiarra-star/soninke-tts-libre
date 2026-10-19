@@ -8,6 +8,18 @@ on:
       - "wolof_tts/generate_lexicon_batch.py"
       - ".github/workflows/wolof-lexicon-audio-batch.yml"
       - "data/wolof-fr-dictionary.json"
+  workflow_dispatch:
+    inputs:
+      start_index:
+        description: "Index de départ dans le lexique trié (0, 10, 20...)"
+        required: true
+        default: "0"
+        type: string
+      batch_size:
+        description: "Nombre de mots à générer (1 à 20)"
+        required: true
+        default: "10"
+        type: string
 
 permissions:
   contents: read
@@ -17,8 +29,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     env:
-      WOLF_BATCH_START: "0"
-      WOLF_BATCH_SIZE: "10"
+      WOLF_BATCH_START: ${{ github.event_name == 'workflow_dispatch' && inputs.start_index || '0' }}
+      WOLF_BATCH_SIZE: ${{ github.event_name == 'workflow_dispatch' && inputs.batch_size || '10' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
