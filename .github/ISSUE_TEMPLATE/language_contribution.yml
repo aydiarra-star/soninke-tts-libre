@@ -1,0 +1,103 @@
+name: Contribution linguistique
+description: Proposer un mot, une phrase, une traduction, une correction ou un audio avec sa provenance.
+title: "[Contribution linguistique] "
+labels: ["community-contribution"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Merci de contribuer au lexique Soninké TTS Libre. Cette fiche sera revue avant intégration : ouvrir une issue ne publie pas automatiquement la contribution dans le dictionnaire.
+        
+        Si vous ajoutez un audio, joignez le fichier après la création de l’issue. N’envoyez que des enregistrements que vous avez le droit de partager. Indiquez la variété, le contexte et la source si vous les connaissez.
+  - type: dropdown
+    id: language
+    attributes:
+      label: Langue principale
+      options:
+        - Soninké
+        - Wolof
+        - Français
+        - English
+        - Autre langue
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Type de contribution
+      options:
+        - Nouveau mot
+        - Nouvelle phrase
+        - Traduction
+        - Correction orthographique
+        - Prononciation / audio
+        - Grammaire / explication
+    validations:
+      required: true
+  - type: input
+    id: word
+    attributes:
+      label: Mot ou phrase exact(e)
+      description: Gardez la graphie telle que vous la proposez.
+      placeholder: Mot ou phrase
+    validations:
+      required: true
+  - type: textarea
+    id: translations
+    attributes:
+      label: Traductions et définitions
+      description: Ajoutez les traductions disponibles en indiquant chaque langue. Laissez vide si vous ne connaissez pas la réponse.
+      placeholder: |
+        Français :
+        English :
+        Soninké :
+        Wolof :
+    validations:
+      required: false
+  - type: textarea
+    id: example
+    attributes:
+      label: Exemple en contexte
+      description: Phrase complète, traduction de l’exemple et contexte si disponibles.
+    validations:
+      required: false
+  - type: input
+    id: source
+    attributes:
+      label: Source ou référence
+      description: URL du dictionnaire, référence bibliographique, locuteur ou contexte.
+      placeholder: https://…
+    validations:
+      required: false
+  - type: input
+    id: audio_reference
+    attributes:
+      label: Fichier audio ou lien (facultatif)
+      description: Après création de l’issue, vous pouvez joindre un fichier audio dans un commentaire. Précisez le nom du locuteur si son consentement le permet.
+    validations:
+      required: false
+  - type: textarea
+    id: dialect
+    attributes:
+      label: Variété, région et notes de prononciation
+      description: Facultatif ; ne normalisez pas une variante sans l’indiquer.
+    validations:
+      required: false
+  - type: checkboxes
+    id: text_license
+    attributes:
+      label: Autorisation pour le contenu écrit
+      options:
+        - label: Je suis l’auteur de cette contribution écrite, ou j’ai le droit de la partager sous licence CC BY 4.0, et j’accepte l’attribution de ma contribution.
+          required: true
+  - type: checkboxes
+    id: audio_license
+    attributes:
+      label: Autorisation pour l’audio (si un audio est joint)
+      options:
+        - label: J’ai le droit de partager cet enregistrement sous licence CC BY 4.0 et j’ai obtenu le consentement nécessaire du locuteur.
+          required: false
+  - type: markdown
+    attributes:
+      value: |
+        Les contributions sont conservées comme propositions jusqu’à ce qu’une personne responsable les examine. Une prononciation, une traduction et une source peuvent avoir des statuts de validation différents.
