@@ -21,7 +21,7 @@ test("une fiche locale peut être ajoutée et retrouvée sans serveur", async ({
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("http://127.0.0.1:4173/apprendre.html");
   await expect(page.locator("#entry-count")).toContainText("fiches", { timeout: 20000 });
-  await page.locator("#show-add").click();
+  await page.locator("#show-add-bottom").click();
   await page.locator("#entry-language").selectOption("soninke");
   await page.locator("#entry-word").fill("smoke-test-soninke");
   await page.locator("#entry-fr").fill("test navigateur");
