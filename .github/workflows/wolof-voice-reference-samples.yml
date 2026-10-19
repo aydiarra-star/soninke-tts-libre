@@ -21,15 +21,20 @@ jobs:
       - name: Checkout branche de travail
         uses: actions/checkout@v4
 
-      - name: Vérifier la présence de la référence privée
+      - name: Vérifier les secrets privés requis
         env:
           WOLOF_REFERENCE_AUDIO_B64: ${{ secrets.WOLOF_REFERENCE_AUDIO_B64 }}
+          WOLOF_ARTIFACT_ENCRYPTION_KEY: ${{ secrets.WOLOF_ARTIFACT_ENCRYPTION_KEY }}
         run: |
           if [ -z "$WOLOF_REFERENCE_AUDIO_B64" ]; then
-            echo "::error::Secret WOLOF_REFERENCE_AUDIO_B64 absent. La référence vocale ne doit jamais être commise dans Git."
+            echo "::error::Secret WOLOF_REFERENCE_AUDIO_B64 absent. Ne jamais commettre l'enregistrement."
             exit 1
           fi
-          echo "Référence privée détectée. Son contenu ne sera pas affiché dans les logs."
+          if [ -z "$WOLOF_ARTIFACT_ENCRYPTION_KEY" ]; then
+            echo "::error::Secret WOLOF_ARTIFACT_ENCRYPTION_KEY absent. Les WAV ne doivent pas être publiés en clair depuis un dépôt public."
+            exit 1
+          fi
+          echo "Secrets requis détectés. Aucune valeur secrète n'est affichée."
 
       - name: Installer Python et FFmpeg
         uses: actions/setup-python@v5
@@ -37,7 +42,7 @@ jobs:
           python-version: "3.11"
       - run: |
           sudo apt-get update
-          sudo apt-get install -y ffmpeg
+          sudo apt-get install -y ffmpeg openssl
 
       - name: Installer PyTorch CPU et dépendances Oolel-Voices
         run: |
@@ -54,10 +59,22 @@ jobs:
           PYTHONUNBUFFERED: "1"
         run: python scripts/generate_wolof_voice_reference_samples.py
 
-      - name: Publier les seuls WAV de test et le manifeste comme artefact temporaire
+      - name: Chiffrer l'archive avant tout stockage d'artefact
+        env:
+          WOLOF_ARTIFACT_ENCRYPTION_KEY: ${{ secrets.WOLOF_ARTIFACT_ENCRYPTION_KEY }}
+        run: |
+          set -eu
+          openssl enc -aes-256-cbc -salt -pbkdf2 -iter 200000 \
+            -in wolof-voice-reference-samples.zip \
+            -out wolof-voice-reference-samples.zip.enc \
+            -pass env:WOLOF_ARTIFACT_ENCRYPTION_KEY
+          rm -f wolof-voice-reference-samples.zip
+          rm -rf wolof-voice-reference-output
+
+      - name: Publier uniquement l'archive chiffrée temporaire
         uses: actions/upload-artifact@v4
         with:
-          name: wolof-voice-reference-samples-unvalidated
-          path: wolof-voice-reference-samples.zip
+          name: wolof-voice-reference-samples-encrypted
+          path: wolof-voice-reference-samples.zip.enc
           if-no-files-found: error
           retention-days: 7
