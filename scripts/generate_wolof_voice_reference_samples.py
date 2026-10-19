@@ -6,8 +6,8 @@ It is written to a temporary runner directory and is never included in the artif
 """
 import base64
 import csv
-import io
 import os
+import subprocess
 import tempfile
 import zipfile
 from pathlib import Path
@@ -46,22 +46,27 @@ def main():
 
     with tempfile.TemporaryDirectory(prefix="wolof-voice-ref-") as tmp:
         tmp_path = Path(tmp)
-        # Decode the supplied audio without logging it or packaging it.
         source = tmp_path / "reference.m4a"
+        reference_wav = tmp_path / "reference.wav"
         source.write_bytes(raw)
         del raw
         try:
-            waveform, sample_rate = torchaudio.load(str(source))
+            subprocess.run(
+                ["ffmpeg", "-nostdin", "-hide_banner", "-loglevel", "error",
+                 "-y", "-i", str(source), "-ac", "1", "-ar", "22050",
+                 str(reference_wav)],
+                check=True, timeout=60,
+            )
+            waveform, sample_rate = torchaudio.load(str(reference_wav))
         except Exception as exc:
             raise SystemExit(
-                "Could not decode the reference audio. Supply a valid M4A/WAV/MP3 "
-                "as base64 in the private Actions secret."
+                "Could not decode the private reference recording. Supply a valid "
+                "M4A/WAV/MP3 as base64 in the private Actions secret."
             ) from exc
         if waveform.numel() == 0 or not torch.isfinite(waveform).all().item():
             raise SystemExit("Reference audio is empty or contains invalid samples.")
         if waveform.shape[0] > 1:
             waveform = waveform.mean(dim=0, keepdim=True)
-        reference_wav = tmp_path / "reference.wav"
         torchaudio.save(str(reference_wav), waveform, sample_rate)
         del waveform
 
@@ -82,12 +87,10 @@ def main():
                 )
             if isinstance(audio, torch.Tensor):
                 audio = audio.detach().cpu()
-                if audio.ndim == 1:
-                    audio = audio.unsqueeze(0)
             else:
                 audio = torch.as_tensor(audio)
-                if audio.ndim == 1:
-                    audio = audio.unsqueeze(0)
+            if audio.ndim == 1:
+                audio = audio.unsqueeze(0)
             if audio.numel() == 0 or not torch.isfinite(audio).all().item():
                 raise RuntimeError(f"Invalid generated audio for {word}.")
             if audio.abs().max().item() == 0:
