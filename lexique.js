@@ -11,6 +11,7 @@
   const previous = document.getElementById("previous-page");
   const next = document.getElementById("next-page");
   let entries = [];
+  let audioById = new Map();
   let page = 0;
 
   function el(tag, className, text) {
@@ -47,6 +48,18 @@
         entry.pronunciationValidated === true ? "Prononciation validée" : (entry.technicalStatus === "generation_error" || entry.audioStatus === "generation_error" ? "Erreur technique — validation en attente" : "En attente de validation linguistique")));
       card.append(top);
       card.append(el("h2", "corpus-soninke", entry.word));
+      const audioInfo = audioById.get(entry.id);
+      if (audioInfo && audioInfo.audioAvailable && audioInfo.audioPath) {
+        const audio = el("audio", "lexicon-audio-player");
+        audio.controls = true;
+        audio.preload = "none";
+        audio.src = audioInfo.audioPath;
+        audio.setAttribute("aria-label", "Écouter la prononciation de " + entry.word);
+        card.append(audio);
+        card.append(el("p", "corpus-field-label", "Audio disponible" + (audioInfo.durationSeconds ? " · " + audioInfo.durationSeconds.toFixed(2).replace(".", ",") + " s" : "")));
+      } else {
+        card.append(el("p", "corpus-caveat", "Audio indisponible pour cette entrée ; aucun fichier n’a été inventé."));
+      }
       const details = entry.audioStatus === "audio_present_reused"
         ? "Statut audio du manifeste : audio existant réutilisé"
         : entry.audioStatus === "generated"
@@ -73,15 +86,18 @@
   filter.addEventListener("change", () => { page = 0; render(); });
   previous.addEventListener("click", () => { if (page > 0) { page--; render(); window.scrollTo({top: 0, behavior: "auto"}); } });
   next.addEventListener("click", () => { page++; render(); window.scrollTo({top: 0, behavior: "auto"}); });
-  fetch(DATA_URL)
-    .then(response => { if (!response.ok) throw new Error("HTTP " + response.status); return response.text(); })
-    .then(text => {
-      entries = text.split(/\r?\n/).filter(line => line.trim()).map(line => JSON.parse(line));
+  Promise.all([
+    fetch(DATA_URL).then(response => { if (!response.ok) throw new Error("Lexique HTTP " + response.status); return response.text(); }),
+    fetch("data/audio-manifest.json").then(response => { if (!response.ok) throw new Error("Manifeste audio HTTP " + response.status); return response.json(); })
+  ])
+    .then(([text, audioData]) => {
+      entries = text.split(/\\r?\\n/).filter(line => line.trim()).map(line => JSON.parse(line));
       if (!entries.length) throw new Error("lexique vide");
+      audioById = new Map((audioData.entries || []).map(item => [item.id, item]));
       render();
     })
-    .catch(() => {
+    .catch(error => {
       count.textContent = "Lexique indisponible";
-      message.textContent = "Impossible de charger le lexique. Vérifiez que la page est ouverte depuis le site publié.";
+      message.textContent = "Impossible de charger le lexique et son manifeste audio. " + error.message;
     });
 })();
