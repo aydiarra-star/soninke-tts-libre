@@ -7,7 +7,7 @@ const POS={noun:"nom",verb:"verbe",adjective:"adjectif",adverb:"adverbe",preposi
 const KEY="soninke-tts-libre-learning-v1";let entries=[],local=[];
 const sameSource=(a,b)=>{try{return decodeURIComponent(a)===decodeURIComponent(b)}catch(_){return a===b}};
 const val=(e,l,k)=>String(e&&e[l]&&e[l][k]||"").trim();
-const isHttpUrl=value=>/^https?:\\/\\//i.test(String(value||""));
+const isHttpUrl=value=>/^https?:\/\//i.test(String(value||""));
 const norm=e=>({...e,id:e.id||"local-"+(typeof crypto!=="undefined"&&crypto.randomUUID?crypto.randomUUID():Date.now()+"-"+Math.random()),category:e.category||"other",grammar_category:e.grammar_category||"",source:e.source||"",sourceName:e.sourceName||"",license:e.license||"",sourceExamples:Array.isArray(e.sourceExamples)?e.sourceExamples:[],origin:e.origin||"community",status:e.status||"draft",pronunciationStatus:e.pronunciationStatus||"unverified",translationStatus:e.translationStatus||"unverified"});
 function configureLanguages(definitions){
  const active=(definitions||[]).filter(item=>item&&item.code&&item.name);
