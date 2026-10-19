@@ -90,7 +90,7 @@ for (const required of ['id="from"', 'id="to"', 'id="search"', 'id="results"', '
   if (html.includes(required)) pass(`interface contient ${required}`);
   else fail(`interface ne contient pas ${required}`);
 }
-for (const required of ["speechSynthesis", "data/soninke-lexicon.jsonl", "data/audio-manifest.json", "data/trilingual-lexicon.json", "localStorage", "pronunciationStatus", "translationStatus", "path-action"]) {
+for (const required of ["speechSynthesis", "data/soninke-lexicon.jsonl", "data/audio-manifest.json", "data/trilingual-lexicon.json", "localStorage", "pronunciationStatus", "translationStatus", "path-action", "configureLanguages", "Object.keys(LANGS).flatMap"]) {
   if (js.includes(required)) pass(`comportement attendu présent : ${required}`);
   else fail(`comportement attendu absent : ${required}`);
 }
