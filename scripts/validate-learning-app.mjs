@@ -87,13 +87,13 @@ if (sources?.policy?.includes("licensing")) pass("règle de licence avant import
 else fail("la politique de licence avant import doit être documentée");
 if (Array.isArray(curriculum?.learningStages) && curriculum.learningStages.length >= 5) pass("parcours pédagogique structuré");
 else fail("parcours pédagogique trop incomplet");
-for (const required of ['id="from"', 'id="to"', 'id="search"', 'id="results"', 'id="entry-form"', 'id="translation-fields"', 'id="export-json"', 'id="export-csv"', 'id="grammar-filter"', 'id="review-only"', 'id="quiz-mode"', 'id="quiz-start"', 'id="quiz-check"', 'id="quiz-next"', 'id="quiz-prompt"', 'id="sentence-search"', 'id="sentence-category"', 'id="sentence-results"', 'id="ressources"', 'id="parcours"']) {
+for (const required of ['id="from"', 'id="to"', 'id="search"', 'id="results"', 'id="entry-form"', 'id="translation-fields"', 'id="export-json"', 'id="export-csv"', 'id="grammar-filter"', 'id="review-only"', 'id="coverage-gaps"', 'id="coverage-list"', 'id="quiz-mode"', 'id="quiz-start"', 'id="quiz-check"', 'id="quiz-next"', 'id="quiz-prompt"', 'id="sentence-search"', 'id="sentence-category"', 'id="sentence-results"', 'id="ressources"', 'id="parcours"']) {
   if (html.includes(required)) pass(`interface contient ${required}`);
   else fail(`interface ne contient pas ${required}`);
 }
 if (contributionTemplate.includes("CC BY 4.0") && contributionTemplate.includes("consentement") && contributionTemplate.includes("avant intégration")) pass("formulaire de contribution et consentement de licence présents");
 else fail("formulaire de contribution : consentement/licence ou revue avant intégration manquant");
-for (const required of ["speechSynthesis", "data/soninke-lexicon.jsonl", "data/audio-manifest.json", "data/trilingual-lexicon.json", "localStorage", "REVIEW_KEY", "saveReviewIds", "pronunciationStatus", "translationStatus", "path-action", "configureLanguages", "Object.keys(LANGS).flatMap"]) {
+for (const required of ["speechSynthesis", "data/soninke-lexicon.jsonl", "data/audio-manifest.json", "data/trilingual-lexicon.json", "localStorage", "REVIEW_KEY", "saveReviewIds", "pronunciationStatus", "translationStatus", "path-action", "configureLanguages", "Object.keys(LANGS).flatMap", "renderCoverageGaps"]) {
   if (js.includes(required)) pass(`comportement attendu présent : ${required}`);
   else fail(`comportement attendu absent : ${required}`);
 }
