@@ -41,22 +41,27 @@ self.addEventListener("fetch", event => {
   if (request.method !== "GET") return;
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
-  if (request.mode === "navigate") {
+  if (request.mode === "navigate" || url.pathname.includes("/data/")) {
     event.respondWith(
       fetch(request).then(response => {
         if (response.ok) caches.open(CACHE_NAME).then(cache => cache.put(request, response.clone()));
         return response;
-      }).catch(() => caches.match(request).then(cached => cached || caches.match("./apprendre.html")))
+      }).catch(() => caches.match(request).then(cached => cached || (request.mode === "navigate" ? caches.match("./apprendre.html") : undefined)))
     );
     return;
   }
   event.respondWith(
-    caches.match(request).then(cached => {
-      if (cached) return cached;
-      return fetch(request).then(response => {
-        if (response.ok) caches.open(CACHE_NAME).then(cache => cache.put(request, response.clone()));
+    caches.open(CACHE_NAME).then(async cache => {
+      const cached = await cache.match(request);
+      const update = fetch(request).then(response => {
+        if (response.ok) cache.put(request, response.clone());
         return response;
-      });
+      }).catch(() => cached);
+      if (cached) {
+        event.waitUntil(update);
+        return cached;
+      }
+      return update;
     })
   );
 });
