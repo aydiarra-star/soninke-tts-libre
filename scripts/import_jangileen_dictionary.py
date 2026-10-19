@@ -57,11 +57,11 @@ class DictionaryParser(HTMLParser):
             self.meaning = {"partOfSpeech": "", "translations": [], "comment": "", "examples": []}
         if self.meaning is not None and "definition-example" in classes:
             self.example = {"fr": "", "wolof": ""}
-        if self.meaning is not None and "definition__term-type" in classes:
+        ancestor_classes = set().union(*(item[1] for item in self.stack)) if self.stack else set()
+        if self.meaning is not None and tag == "abbr" and "definition__term-type" in ancestor_classes:
             self.meaning["partOfSpeech"] = attr.get("title", "").strip()
         if tag == "a" and self.entry is not None:
             href = attr.get("href", "")
-            ancestor_classes = set().union(*(item[1] for item in self.stack)) if self.stack else set()
             if "definition__term" in ancestor_classes and "definition-meaning" not in ancestor_classes:
                 self.entry["sourcePath"] = href
                 self.anchor = {"kind": "headword", "text": ""}
