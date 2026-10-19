@@ -63,3 +63,12 @@ Une page de dictionnaire externe n’est pas un corpus audio. Une voix de synth�
 
 ## Corpus de phrases soninké intégré
 106 phrases et paragraphes soninké–français ont été importés depuis cinq fichiers `corpus/valide/` du dépôt `snk_engine`, à une révision épinglée, sous CC BY 4.0 avec attribution. L’application conserve la graphie d’origine, la source et le niveau. La mention « validé dans la source » ne signifie pas que ce dépôt a revérifié indépendamment chaque phrase. Les phrases n’ont pas d’audio natif associé dans ce lot ; l’application ne prétend pas en disposer.
+
+
+## Références soninké supplémentaires examinées
+- **Ousmane Moussa Diagana, *Dictionnaire soninké-français (Mauritanie)*, Karthala, 2011** : référence publiée signalée avec plus de 5 800 entrées. À utiliser pour l’étude et la comparaison linguistique ; aucune copie massive sans autorisation.
+- **Ch. Monteil / V. Monteil, *Vocabulaire soninké I–II* (1966)** : référence historique annoncée à plus de 7 000 mots, principalement du soninké occidental avec une transcription historique. Ne pas fusionner directement avec les graphies actuelles ; vérifier les droits et documenter les variantes.
+- **ASJP Soninke wordlists** : listes comparatives sous CC BY 4.0 ; candidate pour une annexe comparative, pas pour remplacer le lexique principal.
+- **Mayoiga/Soninke-dataset (Hugging Face)** : environ 1 310 lignes soninké–français provenant notamment de textes Calaméo, mais la licence du dataset et les droits sur les textes sous-jacents n’étaient pas clairement indiqués dans la fiche examinée. Aucune importation avant clarification.
+
+Ces ressources sont enregistrées dans `data/language-sources.json`. La présence d’un lien ou d’un nombre d’entrées dans le catalogue ne signifie pas que les données ont été intégrées ni que leur licence autorise la copie.
