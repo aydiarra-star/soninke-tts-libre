@@ -170,6 +170,18 @@
       "reportedEntryCount": 1310,
       "licenseStatus": "dataset-card-license-not-found; underlying-text-rights-unverified",
       "action": "Do not import until the dataset owner and underlying Calaméo text rights are clarified; use as a lead for research only."
+    },
+    {
+      "id": "panlexia-english-french",
+      "name": "Panlexia — dictionnaire multilingue fondé sur des concepts",
+      "languages": [
+        "en",
+        "fr"
+      ],
+      "url": "https://github.com/barumau/panlexia",
+      "kind": "multilingual-concept-lexicon",
+      "licenseStatus": "repository-content-CC-BY-4.0-but-underlying-source-licences-vary",
+      "action": "Useful candidate for English–French concept-linked vocabulary. Do not import the complete generated files as one uniform licence: trace each concept/source to Concepticon, NorthEuraLex, ULD, WOLD and other upstream datasets, and preserve the strictest applicable terms."
     }
   ],
   "reviewStatus": "research-started; licence review and dataset extraction not yet complete"
