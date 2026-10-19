@@ -28,6 +28,10 @@
         "alphabet-and-sounds",
         "greetings",
         "numbers-1-20"
+      ],
+      "sourceIds": [
+        "asawan-literacy-guides",
+        "snk-engine"
       ]
     },
     {
@@ -45,6 +49,10 @@
         "food",
         "time",
         "directions"
+      ],
+      "sourceIds": [
+        "jangileen",
+        "snk-engine"
       ]
     },
     {
@@ -62,6 +70,10 @@
         "negation",
         "questions",
         "verbs-in-context"
+      ],
+      "sourceIds": [
+        "snk-engine",
+        "asawan-soninke-lexicon"
       ]
     },
     {
@@ -77,6 +89,9 @@
         "slow-listening",
         "word-to-audio",
         "short-dialogues"
+      ],
+      "sourceIds": [
+        "snk-engine"
       ]
     },
     {
@@ -92,6 +107,10 @@
         "spelling",
         "reading-practice",
         "writing-practice"
+      ],
+      "sourceIds": [
+        "asawan-literacy-guides",
+        "snk-engine"
       ]
     },
     {
@@ -107,6 +126,10 @@
         "flashcards",
         "recall-quiz",
         "spaced-review"
+      ],
+      "sourceIds": [
+        "snk-engine",
+        "jangileen"
       ]
     }
   ],
