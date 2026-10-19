@@ -2,7 +2,7 @@ name: Validation statique
 
 on:
   pull_request:
-    branches: [main]
+    branches: [main, audio/integrate-lexicon-wav]
   push:
     branches: [main, feat/multilingual-learning-app]
 
