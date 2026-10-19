@@ -75,7 +75,7 @@ def main() -> None:
             "wolof": word,
             "francais": entry.get("francais", ""),
             "part_of_speech": entry.get("part_of_speech", ""),
-            "audio_file": filename,
+            "audio_file": f"wolof-adia-samples/{filename}",
             "model": MODEL_ID,
             "sample_rate_hz": info.samplerate,
             "channels": info.channels,
