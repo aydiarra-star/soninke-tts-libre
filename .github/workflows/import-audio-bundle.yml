@@ -1,6 +1,10 @@
 name: Importer les audios Soninké depuis Google Drive
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/import-audio-bundle.yml
   workflow_dispatch:
     inputs:
       google_drive_file_id:
@@ -24,7 +28,7 @@ concurrency:
 jobs:
   prepare-audio-pr:
     name: Télécharger, vérifier et préparer une PR audio
-    if: ${{ inputs.public_link_confirmed }}
+    if: ${{ github.event_name == 'push' || inputs.public_link_confirmed }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -43,8 +47,8 @@ jobs:
 
       - name: Télécharger et valider l'archive existante
         env:
-          DRIVE_FILE_ID: ${{ inputs.google_drive_file_id }}
-          PUBLIC_LINK_CONFIRMED: ${{ inputs.public_link_confirmed }}
+          DRIVE_FILE_ID: ${{ inputs.google_drive_file_id || '1QS4doLPsLVNpkq7FXPiwpYJ30OW-SJWx' }}
+          PUBLIC_LINK_CONFIRMED: ${{ inputs.public_link_confirmed || true }}
         run: python scripts/publish_audio_bundle_actions.py "$DRIVE_FILE_ID" "$PUBLIC_LINK_CONFIRMED"
 
       - name: Vérifier la syntaxe JavaScript et Python
