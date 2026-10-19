@@ -46,7 +46,7 @@ self.addEventListener("fetch", event => {
       fetch(request).then(response => {
         if (response.ok) caches.open(CACHE_NAME).then(cache => cache.put(request, response.clone()));
         return response;
-      }).catch(() => caches.match(request).then(cached => cached || (request.mode === "navigate" ? caches.match("./apprendre.html") : undefined)))
+      }).catch(() => caches.match(request).then(cached => cached || (request.mode === "navigate" ? caches.match("./apprendre.html").then(page => page || new Response("Offline page unavailable", { status: 503 })) : new Response("Offline resource unavailable", { status: 503 }))))
     );
     return;
   }
@@ -56,7 +56,7 @@ self.addEventListener("fetch", event => {
       const update = fetch(request).then(response => {
         if (response.ok) cache.put(request, response.clone());
         return response;
-      }).catch(() => cached);
+      }).catch(() => cached || new Response("Offline resource unavailable", { status: 503 }));
       if (cached) {
         event.waitUntil(update);
         return cached;
