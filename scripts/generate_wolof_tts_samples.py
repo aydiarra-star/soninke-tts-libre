@@ -80,15 +80,18 @@ for i, item in enumerate(samples, start=1):
     path = OUT / filename
     sf.write(path, audio_array, sampling_rate, subtype="PCM_16")
     duration = len(audio_array) / sampling_rate
+    duration_status = "duration_review_required" if duration > 5.0 else "duration_plausible_unvalidated"
     manifest.append({
         **item,
         "model_id": MODEL_ID,
         "sampling_rate": sampling_rate,
         "audio_file": filename,
         "duration_seconds": round(duration, 3),
+        "duration_status": duration_status,
         "validation_status": "unvalidated",
     })
-    print(f"{i}/{len(samples)}: {item['wolof_text']} — {item['fr_text']} ({duration:.2f}s)")
+    warning = " — REVIEW: unusually long sample" if duration_status == "duration_review_required" else ""
+    print(f"{i}/{len(samples)}: {item['wolof_text']} — {item['fr_text']} ({duration:.2f}s){warning}")
 
 manifest_path = OUT / "manifest.csv"
 with manifest_path.open("w", newline="", encoding="utf-8") as f:
