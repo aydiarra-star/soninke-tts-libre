@@ -24,7 +24,7 @@ concurrency:
 jobs:
   prepare-audio-pr:
     name: Télécharger, vérifier et préparer une PR audio
-    if: \${{ inputs.public_link_confirmed }}
+    if: ${{ inputs.public_link_confirmed }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -43,8 +43,8 @@ jobs:
 
       - name: Télécharger et valider l'archive existante
         env:
-          DRIVE_FILE_ID: \${{ inputs.google_drive_file_id }}
-          PUBLIC_LINK_CONFIRMED: \${{ inputs.public_link_confirmed }}
+          DRIVE_FILE_ID: ${{ inputs.google_drive_file_id }}
+          PUBLIC_LINK_CONFIRMED: ${{ inputs.public_link_confirmed }}
         run: python scripts/publish_audio_bundle_actions.py "$DRIVE_FILE_ID" "$PUBLIC_LINK_CONFIRMED"
 
       - name: Vérifier la syntaxe JavaScript et Python
@@ -55,7 +55,7 @@ jobs:
       - name: Créer ou actualiser une Pull Request, sans fusion automatique
         uses: peter-evans/create-pull-request@v7
         with:
-          token: \${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           base: main
           branch: audio/integrate-lexicon-wav
           delete-branch: true
