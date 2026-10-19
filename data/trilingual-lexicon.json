@@ -21,7 +21,7 @@
     },
     {
       "code": "en",
-      "name": "English",
+      "name": "Anglais",
       "audioPolicy": "browser-voice-or-recording",
       "speechLocale": "en-US"
     }
