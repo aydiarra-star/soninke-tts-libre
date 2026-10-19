@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import hashlib
 import re
 import sys
 import time
@@ -154,7 +155,8 @@ def normalize_entry(raw: dict, sense_index: int) -> dict | None:
     example = next((item for item in meaning.get("examples", []) if item.get("fr") and item.get("wolof")), None)
     source_path = raw.get("sourcePath") or "/dictionary"
     source_url = urljoin(BASE, quote(source_path, safe="/%"))
-    entry_id = f"jangileen-{slugify(french)}-{sense_index + 1}"
+    entry_hash = hashlib.sha1(source_path.encode("utf-8")).hexdigest()[:8]
+    entry_id = f"jangileen-{slugify(french)}-{sense_index + 1}-{entry_hash}"
     pos = map_pos(meaning.get("partOfSpeech", ""))
     comment = " ".join(meaning.get("comment", "").split())
     return {
@@ -204,8 +206,8 @@ def main() -> int:
         page = fetch(url)
         page_parser = DictionaryParser()
         page_parser.feed(page)
-        if not page_parser.entries:
-            raise RuntimeError(f"Aucune entrée trouvée sur {url}; import interrompu pour ne pas publier un lot partiel.")
+        if not page_parser.entries and not re.search(r"<h1>\s*0 mots français commençant", page, re.IGNORECASE):
+            raise RuntimeError(f"Aucune entrée trouvée et page vide non confirmée sur {url}; import interrompu pour ne pas publier un lot partiel.")
         all_raw.extend(page_parser.entries)
         print(f"[{index}/{len(paths)}] {path}: {len(page_parser.entries)} entrées", flush=True)
         time.sleep(max(0.0, args.delay))
