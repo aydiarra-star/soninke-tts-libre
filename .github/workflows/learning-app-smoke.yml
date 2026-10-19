@@ -1,0 +1,39 @@
+name: Browser smoke — application multilingue
+
+on:
+  pull_request:
+    branches: [audio/integrate-lexicon-wav]
+  push:
+    branches: [feat/multilingual-learning-app]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  learning-app-webkit:
+    name: Parcours mobile WebKit — apprentissage
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+      - name: Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Installer Playwright et WebKit
+        run: |
+          npm install --no-save @playwright/test
+          npx playwright install --with-deps webkit
+      - name: Démarrer le serveur statique
+        run: |
+          python -m http.server 4174 > /tmp/learning-http.log 2>&1 &
+          for i in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:4174/apprendre.html >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/learning-http.log
+          exit 1
+      - name: Tester les données, la recherche et le quiz
+        run: npx playwright test tests/browser/learning-app-smoke.spec.js
