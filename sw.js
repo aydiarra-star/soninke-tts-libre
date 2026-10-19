@@ -44,24 +44,18 @@ self.addEventListener("fetch", event => {
   if (request.mode === "navigate" || url.pathname.includes("/data/")) {
     event.respondWith(
       fetch(request).then(response => {
-        if (response.ok) caches.open(CACHE_NAME).then(cache => cache.put(request, response.clone()));
-        return response;
+        if (!response.ok) return response;
+        return caches.open(CACHE_NAME).then(cache => cache.put(request, response.clone())).then(() => response);
       }).catch(() => caches.match(request).then(cached => cached || (request.mode === "navigate" ? caches.match("./apprendre.html").then(page => page || new Response("Offline page unavailable", { status: 503 })) : new Response("Offline resource unavailable", { status: 503 }))))
     );
     return;
   }
+  const updatePromise = caches.open(CACHE_NAME).then(cache => fetch(request).then(response => {
+    if (!response.ok) return response;
+    return cache.put(request, response.clone()).then(() => response);
+  }));
+  event.waitUntil(updatePromise.catch(() => {}));
   event.respondWith(
-    caches.open(CACHE_NAME).then(async cache => {
-      const cached = await cache.match(request);
-      const update = fetch(request).then(response => {
-        if (response.ok) cache.put(request, response.clone());
-        return response;
-      }).catch(() => cached || new Response("Offline resource unavailable", { status: 503 }));
-      if (cached) {
-        event.waitUntil(update);
-        return cached;
-      }
-      return update;
-    })
+    caches.match(request).then(cached => cached || updatePromise.catch(() => new Response("Offline resource unavailable", { status: 503 })))
   );
 });
