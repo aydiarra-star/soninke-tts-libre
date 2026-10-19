@@ -11,7 +11,7 @@ const parseJSON = (path) => {
   catch (error) { fail(`${path}: JSON invalide (${error.message})`); return null; }
 };
 
-for (const path of ["apprendre.html", "apprendre.css", "apprendre.js", "data/trilingual-lexicon.json", "data/language-sources.json", "data/learning-curriculum.json"]) {
+for (const path of ["apprendre.html", "apprendre.css", "apprendre.js", "data/trilingual-lexicon.json", "data/wolof-fr-dictionary.json", "data/language-sources.json", "data/learning-curriculum.json"]) {
   if (existsSync(resolve(root, path))) pass(`fichier requis présent : ${path}`);
   else fail(`fichier requis manquant : ${path}`);
 }
@@ -21,6 +21,7 @@ const schema = parseJSON("data/trilingual-lexicon.json");
 const sources = parseJSON("data/language-sources.json");
 const curriculum = parseJSON("data/learning-curriculum.json");
 const manifest = parseJSON("data/audio-manifest.json");
+const wolofDictionary = parseJSON("data/wolof-fr-dictionary.json");
 const lines = read("data/soninke-lexicon.jsonl").split(/\r?\n/).filter((line) => line.trim());
 const languageCodes = ["soninke", "wolof", "fr", "en"];
 
@@ -49,6 +50,18 @@ if (Array.isArray(schema?.entries)) {
   if (ids.size === schema.entries.length) pass(`${schema.entries.length} fiches multilingues sourcées, identifiants uniques`);
 } else fail("schema.entries doit être un tableau");
 
+if (Array.isArray(wolofDictionary?.entries) && wolofDictionary.entryCount === wolofDictionary.entries.length && wolofDictionary.entryCount >= 500) {
+  const wolofIds = new Set();
+  let sourceErrors = 0;
+  for (const entry of wolofDictionary.entries) {
+    if (!entry.id || wolofIds.has(entry.id)) sourceErrors++;
+    wolofIds.add(entry.id);
+    if (!String(entry.source || "").startsWith("https://")) sourceErrors++;
+    if (!entry.fr?.word || !entry.wolof?.word) sourceErrors++;
+  }
+  if (!sourceErrors) pass(`dictionnaire Jàngileen importé : ${wolofDictionary.entryCount} fiches sourcées et identifiants uniques`);
+  else fail(`dictionnaire Jàngileen : ${sourceErrors} anomalies dans les sources, mots ou identifiants`);
+} else fail("dictionnaire Jàngileen incomplet : au moins 500 fiches et un compteur cohérent sont attendus");
 if (Array.isArray(sources?.sources) && sources.sources.length >= 5) pass("catalogue des sources documenté");
 else fail("catalogue des sources absent ou incomplet");
 if (sources?.policy?.includes("licensing")) pass("règle de licence avant import présente");
