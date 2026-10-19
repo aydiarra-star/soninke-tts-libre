@@ -6,6 +6,7 @@ on:
       - feat/wolof-lexicon-audio-batches
     paths:
       - "wolof_tts/audit_lexicon_coverage.py"
+      - "wolof_tts/import_kaikki_candidates.py"
       - "data/wolof-fr-dictionary.json"
       - ".github/workflows/wolof-lexicon-audit.yml"
   workflow_dispatch:
@@ -24,12 +25,16 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Audit lexicon without modifying source data
+      - name: Import Kaikki entries as review-only candidates
+        run: python wolof_tts/import_kaikki_candidates.py --output kaikki-wolof-candidates.json
+      - name: Audit current Jàngileen lexicon without modifying source data
         run: python wolof_tts/audit_lexicon_coverage.py --report wolof-lexicon-audit.json
-      - name: Publish audit report
+      - name: Publish audit reports
         uses: actions/upload-artifact@v4
         with:
           name: wolof-lexicon-coverage-audit
-          path: wolof-lexicon-audit.json
+          path: |
+            wolof-lexicon-audit.json
+            kaikki-wolof-candidates.json
           if-no-files-found: error
           retention-days: 14
