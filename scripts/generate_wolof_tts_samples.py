@@ -77,9 +77,25 @@ for i, item in enumerate(samples, start=1):
     audio_array = audio.detach().cpu().numpy().squeeze()
     if audio_array.size == 0:
         raise RuntimeError(f"Empty audio generated for {item['id']}")
+    if audio_array.ndim != 1:
+        raise RuntimeError(
+            f"Expected mono/1-D audio for {item['id']}, got shape {audio_array.shape}"
+        )
+    if not torch.isfinite(torch.as_tensor(audio_array)).all().item():
+        raise RuntimeError(f"Non-finite audio samples generated for {item['id']}")
+    peak_amplitude = float(abs(audio_array).max())
+    if peak_amplitude == 0.0:
+        raise RuntimeError(f"Silent audio generated for {item['id']}")
     path = OUT / filename
     sf.write(path, audio_array, sampling_rate, subtype="PCM_16")
-    duration = len(audio_array) / sampling_rate
+    # Verify the saved WAV, not only the in-memory tensor.
+    saved_info = sf.info(path)
+    if saved_info.channels != 1 or saved_info.samplerate != sampling_rate:
+        raise RuntimeError(
+            f"Unexpected WAV format for {item['id']}: "
+            f"{saved_info.channels} channels at {saved_info.samplerate} Hz"
+        )
+    duration = saved_info.duration
     duration_status = "duration_review_required" if duration > 5.0 else "duration_plausible_unvalidated"
     manifest.append({
         **item,
@@ -87,6 +103,7 @@ for i, item in enumerate(samples, start=1):
         "sampling_rate": sampling_rate,
         "audio_file": filename,
         "duration_seconds": round(duration, 3),
+        "peak_amplitude": round(peak_amplitude, 6),
         "duration_status": duration_status,
         "validation_status": "unvalidated",
     })
