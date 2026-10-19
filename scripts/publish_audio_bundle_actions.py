@@ -124,7 +124,7 @@ def update_lexique():
         if anchor_entries not in js:
             fail("Déclaration entries introuvable dans lexique.js.")
         js = js.replace(anchor_entries, anchor_entries + "  let audioById = new Map();\n", 1)
-    pattern = re.compile(r'  fetch\\(DATA_URL\\).*?    \\.catch\\(\\(\\) => \\{.*?    \\}\\);', re.DOTALL)
+    pattern = re.compile(r'  fetch\(DATA_URL\).*?    \.catch\(\(\) => \{.*?    \}\);', re.DOTALL)
     replacement = '''  Promise.all([
     fetch(DATA_URL).then(response => { if (!response.ok) throw new Error("Lexique HTTP " + response.status); return response.text(); }),
     fetch("data/audio-manifest.json").then(response => { if (!response.ok) throw new Error("Manifeste audio HTTP " + response.status); return response.json(); })
