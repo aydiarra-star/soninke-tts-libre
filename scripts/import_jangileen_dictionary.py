@@ -219,14 +219,16 @@ def main() -> int:
         print(f"[{index}/{len(paths)}] {path}: {len(page_parser.entries)} entrées", flush=True)
         time.sleep(max(0.0, args.delay))
     normalized: dict[str, dict] = {}
-    translated_paths: set[str] = set()
-    untranslated_by_path: dict[str, dict[str, str]] = {}
-    all_paths: set[str] = set()
+    translated_headwords: set[str] = set()
+    all_headwords: dict[str, dict[str, str]] = {}
     for raw in all_raw:
         source_path = raw.get("sourcePath") or "/dictionary"
         source_url = urljoin(BASE, quote(source_path, safe="/%"))
-        all_paths.add(source_path)
         headword = " ".join(raw.get("headword", "").split())
+        if not headword:
+            continue
+        key = headword.casefold()
+        all_headwords.setdefault(key, {"headword": headword, "source": source_url})
         produced = False
         for sense_index in range(max(1, len(raw.get("meanings") or []))):
             entry = normalize_entry(raw, sense_index)
@@ -234,14 +236,15 @@ def main() -> int:
                 normalized[entry["id"]] = entry
                 produced = True
         if produced:
-            translated_paths.add(source_path)
-        else:
-            untranslated_by_path[source_path] = {"headword": headword, "source": source_url}
+            translated_headwords.add(key)
     if len(normalized) < 500:
         raise RuntimeError(f"Seulement {len(normalized)} fiches normalisées ; au moins 500 sont attendues pour éviter un import partiel.")
-    source_headword_count = len(all_paths)
-    translated_headword_count = len(translated_paths)
-    untranslated_headwords = sorted(untranslated_by_path.values(), key=lambda item: item["headword"].casefold())
+    source_headword_count = len(all_headwords)
+    translated_headword_count = len(translated_headwords)
+    untranslated_headwords = sorted(
+        (value for key, value in all_headwords.items() if key not in translated_headwords),
+        key=lambda item: item["headword"].casefold()
+    )
     if translated_headword_count + len(untranslated_headwords) != source_headword_count:
         raise RuntimeError("Le bilan des entrées source ne concorde pas ; import interrompu.")
     result = {
