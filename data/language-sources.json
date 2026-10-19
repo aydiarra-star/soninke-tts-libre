@@ -39,7 +39,10 @@
       "kind": "grammar-corpus",
       "licenseStatus": "CC-BY-4.0-declared-for-data-and-docs",
       "attribution": "noah-medra (ORCID 0009-0003-6018-9802), snk_engine (2026)",
-      "action": "Preserve exact source, revision, attribution, dialect notes, and licence per imported record."
+      "action": "Use the pinned speaker-translated corpus for sentence practice with attribution. Preserve original spelling and source; distinguish source-validated from revalidated by this app.",
+      "importedCorpusRecords": 106,
+      "importedCorpusRevision": "49f50a939ded51c5ffe7db404c45f40fc75a3c88",
+      "importedCorpusLicense": "CC-BY-4.0"
     },
     {
       "id": "jangileen",
