@@ -17,9 +17,6 @@ on:
     branches:
       - feat/wolof-tts-reader-evaluation
     paths:
-      - ".github/workflows/wolof-adia-tts-samples.yml"
-      - "scripts/generate_wolof_adia_samples.py"
-      - "scripts/import_kaikki_wolof.py"
       - "data/wolof/lexicon_seed.csv"
 
 permissions:
@@ -75,5 +72,3 @@ jobs:
             data/wolof/source/kaikki-frwiktionary-wolof.jsonl
           if-no-files-found: error
           retention-days: 14
-          if-no-files-found: error
-          retention-days: 7
