@@ -32,6 +32,37 @@ function loadLocal(){try{const x=JSON.parse(localStorage.getItem(KEY)||"[]");ret
 function voiceAvailable(language){if(!("speechSynthesis"in window))return false;const prefix=language.split("-")[0].toLowerCase();return speechSynthesis.getVoices().some(voice=>voice.lang.toLowerCase().startsWith(prefix))}
 function render(){const from=$("from").value,to=$("to").value,q=$("search").value.trim().toLocaleLowerCase(),cat=$("category").value,grammar=$("grammar-filter").value;const shown=entries.filter(e=>(!q||Object.keys(LANGS).flatMap(l=>["word","definition","example"].map(k=>val(e,l,k))).concat(e.source||"",(e.sourceExamples||[]).flatMap(x=>[x.translationClass,x.originalClass])).join(" ").toLocaleLowerCase().includes(q))&&(!cat||e.category===cat)&&(!grammar||e.grammar_category===grammar)&&val(e,from,"word"));$("entry-count").textContent=shown.length+" fiches";$("results").replaceChildren();$("empty").hidden=shown.length!==0;$("status").textContent=shown.length?"Les statuts de validation et les sources sont conservés séparément.":"Aucun résultat. Essayez une autre recherche ou ajoutez une fiche.";shown.slice(0,100).forEach(e=>{const c=document.createElement("article");c.className="word-card";const top=document.createElement("div");top.className="card-top";const tag=document.createElement("span");tag.className="tag";tag.textContent=LANGS[from].label;const state=document.createElement("span");state.className="state";state.textContent=e.status==="validated"?"Fiche validée":"À vérifier / compléter";top.append(tag,state);c.append(top);const h=document.createElement("h3");h.textContent=val(e,from,"word")||"Mot non renseigné";c.append(h);const t=document.createElement("p");t.className="translation";t.textContent=val(e,to,"word")||"Traduction à compléter";c.append(t);const d=val(e,to,"definition")||val(e,from,"definition");if(d){const p=document.createElement("p");p.className="detail";p.textContent=d;c.append(p)}const ex=val(e,to,"example")||val(e,from,"example");if(ex){const p=document.createElement("p");p.className="example";p.textContent=ex;c.append(p)}(e.sourceExamples||[]).filter(x=>x.translationClass||x.originalClass).forEach(x=>{const p=document.createElement("p");p.className="example";p.textContent="Exemple source à vérifier (langues non attribuées) : "+[x.translationClass,x.originalClass].filter(Boolean).join(" ⇄ ");c.append(p)});const row=document.createElement("div");row.className="audio-row";[...new Set([from,to])].forEach(l=>{const b=document.createElement("button");b.type="button";b.className="audio-button";const url=(e[l]||{}).audio_url;if(url){b.textContent="▶ Écouter "+LANGS[l].label;b.onclick=()=>{const a=new Audio(url);a.play().catch(()=>{$("status").textContent="Lecture impossible : vérifiez le fichier audio.";})}}else if(LANGS[l].speech&&val(e,l,"word")&&"speechSynthesis"in window){if(voiceAvailable(LANGS[l].speech)){b.textContent="🔊 Voix "+LANGS[l].label;b.onclick=()=>{const voice=speechSynthesis.getVoices().find(v=>v.lang.toLowerCase().startsWith(LANGS[l].speech.split("-")[0].toLowerCase()));if(!voice){$("status").textContent="Aucune voix compatible installée pour "+LANGS[l].label+".";return}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(val(e,l,"word"));u.lang=LANGS[l].speech;u.voice=voice;speechSynthesis.speak(u);$("status").textContent="Voix de synthèse du navigateur ; ce n’est pas un enregistrement natif."}}else{b.textContent="Voix "+LANGS[l].label+" indisponible";b.disabled=true}}else{b.textContent="Audio "+LANGS[l].label+" à ajouter";b.disabled=true}row.append(b)});c.append(row);const m=document.createElement("p");m.className="meta";m.textContent=(CAT[e.category]||"Autre")+(e.grammar_category?" · grammaire : "+(POS[e.grammar_category]||e.grammar_category):"")+" · audio : "+e.pronunciationStatus+" · traduction : "+e.translationStatus+(e.sourceName?" · "+e.sourceName:"")+(e.source?" · source : "+e.source:"");c.append(m);$("results").append(c)});if(shown.length>100)$("status").textContent+=" Affichage limité aux 100 premières fiches."}
 let sentenceEntries=[];
+let quizCurrent=null,quizAnswered=false,quizCorrect=0,quizTotal=0;
+function normalizeAnswer(value){return String(value||"").normalize("NFC").toLocaleLowerCase().trim().replace(/[.!?;:,]+$/g,"").replace(/\s+/g," ")}
+function startQuiz(){
+ const mode=$("quiz-mode").value;
+ if(mode==="vocabulary"){
+  const from=$("from").value,to=$("to").value;
+  const options=entries.filter(entry=>val(entry,from,"word")&&val(entry,to,"word"));
+  if(!options.length){$("quiz-feedback").textContent="Aucune paire complète pour ces langues. Choisissez Wolof ↔ Français ou utilisez l’exercice de phrases soninké–français.";return}
+  const entry=options[Math.floor(Math.random()*options.length)];
+  quizCurrent={prompt:val(entry,from,"word"),expected:val(entry,to,"word"),source:LANGS[from].label,target:LANGS[to].label};
+  $("quiz-prompt-label").textContent="TRADUIRE VERS "+quizCurrent.target.toLocaleUpperCase();
+ }else{
+  const options=sentenceEntries.filter(entry=>entry.niveau==="phrase"&&entry.snk&&entry.fr);
+  if(!options.length){$("quiz-feedback").textContent="Le corpus de phrases n’est pas disponible.";return}
+  const entry=options[Math.floor(Math.random()*options.length)];
+  const direction=$("quiz-direction").value;
+  quizCurrent=direction==="fr-soninke"?{prompt:entry.fr,expected:entry.snk,source:"Français",target:"Soninké"}:{prompt:entry.snk,expected:entry.fr,source:"Soninké",target:"Français"};
+  $("quiz-prompt-label").textContent="TRADUIRE VERS "+quizCurrent.target.toLocaleUpperCase();
+ }
+ quizAnswered=false;$("quiz-prompt").textContent=quizCurrent.prompt;$("quiz-answer").value="";$("quiz-answer").disabled=false;$("quiz-answer").focus();$("quiz-feedback").textContent="";$("quiz-check").disabled=false;$("quiz-next").disabled=true;
+}
+function checkQuiz(){
+ if(!quizCurrent||quizAnswered)return;
+ const answer=normalizeAnswer($("quiz-answer").value);
+ const expected=quizCurrent.expected.split(/\s*\/\s*/).map(normalizeAnswer);
+ const correct=expected.includes(answer);
+ quizTotal++;if(correct)quizCorrect++;
+ $("quiz-score").textContent="Score : "+quizCorrect+"/"+quizTotal;
+ $("quiz-feedback").textContent=correct?"Bonne réponse !":"Réponse attendue : "+quizCurrent.expected;
+ quizAnswered=true;$("quiz-check").disabled=true;$("quiz-next").disabled=false;$("quiz-answer").disabled=true;
+}
 function renderSentences(){
  const query=$("sentence-search").value.trim().toLocaleLowerCase(),level=$("sentence-level").value;
  const shown=sentenceEntries.filter(e=>(!query||((e.snk||"")+" "+(e.fr||"")).toLocaleLowerCase().includes(query))&&(!level||e.niveau===level));
@@ -70,6 +101,7 @@ $("entry-form").addEventListener("submit",ev=>{ev.preventDefault();const l=$("en
 local=loadLocal();
 $("sentence-search").addEventListener("input",renderSentences);
 $("sentence-level").addEventListener("change",renderSentences);
+$("quiz-start").addEventListener("click",startQuiz);$("quiz-check").addEventListener("click",checkQuiz);$("quiz-next").addEventListener("click",startQuiz);$("quiz-mode").addEventListener("change",()=>{$("quiz-direction-label").hidden=$("quiz-mode").value!=="sentence";$("quiz-feedback").textContent=""});$("quiz-direction-label").hidden=true;
 fetch("data/soninke-learning-corpus.json").then(response=>{if(!response.ok)throw Error("corpus "+response.status);return response.json()}).then(data=>{sentenceEntries=Array.isArray(data.entries)?data.entries:[];renderSentences()}).catch(error=>{$("sentence-count").textContent="Corpus indisponible";$("sentence-status").textContent="Le corpus de phrases n’a pas pu être chargé ("+error.message+"). Le lexique reste utilisable."});
 
 if("speechSynthesis"in window)speechSynthesis.addEventListener("voiceschanged",()=>{render();renderSentences()});
