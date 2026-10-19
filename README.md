@@ -29,6 +29,7 @@ Une branche de travail prépare un espace mobile-first pour apprendre **soninké
 
 - [Ouvrir le prototype source](apprendre.html) (la branche doit être publiée pour être consultable comme page web) ;
 - [PR #15 — application multilingue](https://github.com/aydiarra-star/soninke-tts-libre/pull/15) ;
+- [Instantané du dictionnaire Wolof–Français — 750 fiches sourcées](data/wolof-fr-dictionary.json) ;
 - [Catalogue des dictionnaires et licences](data/language-sources.json) ;
 - [Plan d’import des dictionnaires](docs/LANGUAGE-DATA-IMPORT-PLAN.md) ;
 - [Parcours pédagogique A0–A2](data/learning-curriculum.json).
