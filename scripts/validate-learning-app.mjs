@@ -43,7 +43,7 @@ if (Array.isArray(schema?.entries)) {
       if (!entry[lang] || typeof entry[lang] !== "object") fail(`fiche ${entry.id}: bloc de langue manquant ${lang}`);
       else if (typeof entry[lang].word !== "string") fail(`fiche ${entry.id}: champ word absent pour ${lang}`);
     }
-    if (!/^https:\\/\\//.test(entry.source || "")) fail(`fiche ${entry.id}: source URL obligatoire`);
+    if (!String(entry.source || "").startsWith("https://")) fail(`fiche ${entry.id}: source URL obligatoire`);
     if (!entry.status || !entry.pronunciationStatus || !entry.translationStatus) fail(`fiche ${entry.id}: statuts distincts obligatoires`);
   }
   if (ids.size === schema.entries.length) pass(`${schema.entries.length} fiches multilingues sourcées, identifiants uniques`);
