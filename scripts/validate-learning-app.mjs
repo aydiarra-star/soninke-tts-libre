@@ -11,11 +11,12 @@ const parseJSON = (path) => {
   catch (error) { fail(`${path}: JSON invalide (${error.message})`); return null; }
 };
 
-for (const path of ["apprendre.html", "apprendre.css", "apprendre.js", "data/trilingual-lexicon.json", "data/wolof-fr-dictionary.json", "data/soninke-learning-corpus.json", "data/language-sources.json", "data/learning-curriculum.json", ".github/ISSUE_TEMPLATE/language_contribution.yml"]) {
+for (const path of ["apprendre.html", "apprendre.css", "apprendre.js", "data/trilingual-lexicon.json", "data/wolof-fr-dictionary.json", "data/soninke-learning-corpus.json", "data/language-sources.json", "data/learning-curriculum.json", ".github/ISSUE_TEMPLATE/language_contribution.yml", "manifest.webmanifest", "sw.js", "assets/app-icon.svg"]) {
   if (existsSync(resolve(root, path))) pass(`fichier requis présent : ${path}`);
   else fail(`fichier requis manquant : ${path}`);
 }
 const html = read("apprendre.html");
+const manifest = parseJSON("manifest.webmanifest");
 const contributionTemplate = read(".github/ISSUE_TEMPLATE/language_contribution.yml");
 const js = read("apprendre.js");
 const schema = parseJSON("data/trilingual-lexicon.json");
@@ -91,9 +92,11 @@ for (const required of ['id="from"', 'id="to"', 'id="search"', 'id="results"', '
   if (html.includes(required)) pass(`interface contient ${required}`);
   else fail(`interface ne contient pas ${required}`);
 }
+if (manifest?.start_url === "./apprendre.html" && manifest?.display === "standalone" && Array.isArray(manifest?.icons) && manifest.icons.some(icon => icon.src === "assets/app-icon.svg")) pass("manifeste PWA et icône présents");
+else fail("manifeste PWA incomplet");
 if (contributionTemplate.includes("CC BY 4.0") && contributionTemplate.includes("consentement") && contributionTemplate.includes("avant intégration")) pass("formulaire de contribution et consentement de licence présents");
 else fail("formulaire de contribution : consentement/licence ou revue avant intégration manquant");
-for (const required of ["speechSynthesis", "data/soninke-lexicon.jsonl", "data/audio-manifest.json", "data/trilingual-lexicon.json", "localStorage", "REVIEW_KEY", "saveReviewIds", "pronunciationStatus", "translationStatus", "path-action", "configureLanguages", "Object.keys(LANGS).flatMap", "renderCoverageGaps"]) {
+for (const required of ["speechSynthesis", "data/soninke-lexicon.jsonl", "data/audio-manifest.json", "data/trilingual-lexicon.json", "localStorage", "REVIEW_KEY", "saveReviewIds", "pronunciationStatus", "translationStatus", "path-action", "configureLanguages", "Object.keys(LANGS).flatMap", "renderCoverageGaps", "serviceWorker.register"]) {
   if (js.includes(required)) pass(`comportement attendu présent : ${required}`);
   else fail(`comportement attendu absent : ${required}`);
 }
