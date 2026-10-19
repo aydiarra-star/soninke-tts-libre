@@ -54,3 +54,7 @@ La page propose deux modes de quiz : vocabulaire dans les langues choisies, quan
 
 ## Contributions communautaires
 L’ajout local dans la page ne publie rien sur le dépôt. Pour proposer une entrée au lexique commun, le formulaire GitHub `.github/ISSUE_TEMPLATE/language_contribution.yml` collecte la langue, le mot, les traductions, la source, le contexte et les autorisations de partage. Les audios peuvent être joints à l’issue après sa création. Les propositions restent à examiner avant toute intégration ; le consentement du locuteur et la licence du fichier audio doivent être explicites.
+
+
+## Révisions locales
+Chaque fiche peut être ajoutée à une liste « Mes révisions », conservée dans le navigateur avec `localStorage`. Le filtre permet de retrouver les mots choisis à la prochaine visite sur le même navigateur. Cette liste n’est ni synchronisée entre appareils ni envoyée au serveur.
