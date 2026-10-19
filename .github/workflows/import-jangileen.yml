@@ -37,6 +37,10 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cp data/wolof-fr-dictionary.json /tmp/wolof-fr-dictionary.json
+          git fetch origin feat/multilingual-learning-app
+          git reset --hard origin/feat/multilingual-learning-app
+          cp /tmp/wolof-fr-dictionary.json data/wolof-fr-dictionary.json
           git add data/wolof-fr-dictionary.json
           if git diff --cached --quiet; then
             echo "Aucune modification du dictionnaire."
