@@ -46,7 +46,7 @@ def main():
 
     with tempfile.TemporaryDirectory(prefix="wolof-voice-ref-") as tmp:
         tmp_path = Path(tmp)
-        source = tmp_path / "reference.m4a"
+        source = tmp_path / "reference.audio"
         reference_wav = tmp_path / "reference.wav"
         source.write_bytes(raw)
         del raw
@@ -60,8 +60,8 @@ def main():
             waveform, sample_rate = torchaudio.load(str(reference_wav))
         except Exception as exc:
             raise SystemExit(
-                "Could not decode the private reference recording. Supply a valid "
-                "M4A/WAV/MP3 as base64 in the private Actions secret."
+                "Could not decode the private reference recording. Supply valid "
+                "M4A/WAV/MP3/OGG audio as base64 in the private Actions secret."
             ) from exc
         if waveform.numel() == 0 or not torch.isfinite(waveform).all().item():
             raise SystemExit("Reference audio is empty or contains invalid samples.")
@@ -128,7 +128,7 @@ def main():
         for path in out.iterdir():
             if path.is_file():
                 zf.write(path, arcname=path.name)
-    print("Created private-run artifact archive with three unvalidated WAVs.")
+    print("Created private-run archive with three unvalidated WAVs.")
 
 
 if __name__ == "__main__":
