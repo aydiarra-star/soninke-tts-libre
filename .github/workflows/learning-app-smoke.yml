@@ -2,7 +2,7 @@ name: Browser smoke — application multilingue
 
 on:
   pull_request:
-    branches: [audio/integrate-lexicon-wav]
+    branches: [main]
   push:
     branches: [feat/multilingual-learning-app]
   workflow_dispatch:
