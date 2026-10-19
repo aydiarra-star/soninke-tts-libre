@@ -7,7 +7,7 @@ Créer un lexique pédagogique utile, consultable hors ligne après chargement, 
 ## État réel au 19 octobre 2026
 
 - **Soninké** : le dépôt contient 577 entrées du lexique du projet et un manifeste de 576 WAV disponibles. L’entrée `snk-00308` reste sans WAV. La validation linguistique attestée par le référent du projet est conservée séparément de la disponibilité technique du fichier.
-- **Wolof** : neuf entrées de départ issues du dictionnaire Jàngileen ont été ajoutées à `data/trilingual-lexicon.json`, avec leur URL source. Ce n’est pas encore un dictionnaire complet.
+- **Wolof** : un instantané automatisé de 750 fiches français–wolof est importé depuis 26 pages alphabétiques de Jàngileen, avec URL source par fiche. Le site affiche 911 mots wolof ; ce chiffre et le nombre de fiches importées ne sont pas directement comparables. Ce n’est donc pas encore une preuve de couverture complète.
 - **Français et anglais** : ils servent de langues-pivots dans le modèle. Les définitions, formes grammaticales, exemples et audio seront renseignés depuis des sources ouvertes ou rédigés comme contenu original puis revus.
 - **Parcours** : une première structure A0–A2 est disponible dans `data/learning-curriculum.json`. La page propose des raccourcis par catégorie ; elle ne prétend pas encore fournir toutes les leçons.
 
@@ -22,7 +22,7 @@ Créer un lexique pédagogique utile, consultable hors ligne après chargement, 
 | [Kaikki/Wiktionary Wolof](https://kaikki.org/frwiktionary/Wolof/index.html) | Source structurée de mots, sens et catégories | Respecter l’attribution et la licence applicable aux données Wiktionary |
 | [Wiktionary anglais](https://en.wiktionary.org/) et [Wiktionary français](https://fr.wiktionary.org/) | Définitions, formes et catégories en complément | Attribution et partage à l’identique quand la licence l’exige |
 
-Le dictionnaire Jàngileen affichait 911 mots wolof au moment de la recherche. L’application ne contient actuellement que neuf fiches extraites comme amorce. La prochaine importation doit couvrir les entrées accessibles, normaliser les doublons et garder l’URL de chaque fiche. Le nombre final importé doit être mesuré, pas supposé.
+Le dictionnaire Jàngileen affichait 911 mots wolof au moment de la recherche. L’importateur récupère 750 fiches français–wolof à partir des 26 pages alphabétiques, normalise les sens et garde l’URL de chaque fiche. Les nombres ne sont pas directement comparables : la couverture doit être rapprochée de la structure du dictionnaire avant de déclarer l’import complet. Les exemples sont conservés dans leur forme brute lorsqu’on ne peut pas attribuer leur langue avec certitude, car les libellés d’exemples ne sont pas cohérents sur toutes les entrées.
 
 ## Champs obligatoires par entrée
 
