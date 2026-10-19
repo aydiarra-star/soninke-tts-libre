@@ -1,0 +1,76 @@
+name: Importer les audios Soninké depuis Google Drive
+
+on:
+  workflow_dispatch:
+    inputs:
+      google_drive_file_id:
+        description: "ID du ZIP soninke_audio_export.zip partagé en lecture via son lien"
+        required: true
+        type: string
+      public_link_confirmed:
+        description: "Confirmer que le ZIP est accessible à toute personne disposant du lien"
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: soninke-audio-bundle-import
+  cancel-in-progress: false
+
+jobs:
+  prepare-audio-pr:
+    name: Télécharger, vérifier et préparer une PR audio
+    if: \${{ inputs.public_link_confirmed }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Récupérer main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Installer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Installer le téléchargeur Google Drive
+        run: python -m pip install --disable-pip-version-check gdown
+
+      - name: Télécharger et valider l'archive existante
+        env:
+          DRIVE_FILE_ID: \${{ inputs.google_drive_file_id }}
+          PUBLIC_LINK_CONFIRMED: \${{ inputs.public_link_confirmed }}
+        run: python scripts/publish_audio_bundle_actions.py "$DRIVE_FILE_ID" "$PUBLIC_LINK_CONFIRMED"
+
+      - name: Vérifier la syntaxe JavaScript et Python
+        run: |
+          node --check lexique.js
+          python -m py_compile scripts/publish_audio_bundle_actions.py
+
+      - name: Créer ou actualiser une Pull Request, sans fusion automatique
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: \${{ secrets.GITHUB_TOKEN }}
+          base: main
+          branch: audio/integrate-lexicon-wav
+          delete-branch: true
+          commit-message: "feat(audio): integrate lexicon WAV players and manifest"
+          title: "feat(audio): intégrer les audios du lexique soninké"
+          body: |
+            ## Objectif
+            Publier les WAV existants et ajouter des lecteurs HTML5 au lexique.
+
+            ## Contrôles automatiques
+            - Le script vérifie l'intégrité du ZIP, les 577 entrées et les WAV.
+            - Le doublon exact est ignoré.
+            - snk-00308 reste explicitement sans audio; aucun fichier n'est inventé.
+            - Les changements sont proposés dans cette PR; aucune fusion automatique.
+
+            ## Avant fusion
+            Vérifier les contrôles CI et écouter plusieurs fiches sur Safari iPhone.
+          labels: audio, automation
