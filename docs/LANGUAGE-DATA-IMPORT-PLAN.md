@@ -59,3 +59,7 @@ Le dictionnaire Jàngileen affichait 911 mots wolof au moment de la recherche. L
 ## Limites à ne pas masquer
 
 Une page de dictionnaire externe n’est pas un corpus audio. Une voix de synthèse du navigateur n’est pas un enregistrement natif. Une traduction d’une seule source n’est pas automatiquement validée par la communauté. L’application doit afficher ces différences au lieu de promettre une couverture ou une qualité inexistante.
+
+
+## Corpus de phrases soninké intégré
+106 phrases et paragraphes soninké–français ont été importés depuis cinq fichiers `corpus/valide/` du dépôt `snk_engine`, à une révision épinglée, sous CC BY 4.0 avec attribution. L’application conserve la graphie d’origine, la source et le niveau. La mention « validé dans la source » ne signifie pas que ce dépôt a revérifié indépendamment chaque phrase. Les phrases n’ont pas d’audio natif associé dans ce lot ; l’application ne prétend pas en disposer.
