@@ -45,7 +45,7 @@ function renderCoverageGaps(){
   const word=document.createElement("strong");word.textContent=gap.headword;card.append(word);
   if(isHttpUrl(gap.source)){const link=document.createElement("a");link.href=gap.source;link.target="_blank";link.rel="noopener noreferrer";link.className="source-link";link.textContent="Source Jàngileen ↗";card.append(link)}
   const button=document.createElement("button");button.type="button";button.className="secondary";button.textContent="Proposer une traduction";
-  button.onclick=()=>{openForm();$("entry-language").value="fr";$("entry-word").value=gap.headword;const french=$("entry-fr");if(french)french.value=gap.headword;const wolof=$("entry-wolof");if(wolof)wolof.focus()};
+  button.onclick=()=>{openForm();$("entry-language").value="fr";$("entry-word").value=gap.headword;const french=$("entry-fr");if(french)french.value=gap.headword;const source=$("entry-source");if(source)source.value=gap.source||"";const wolof=$("entry-wolof");if(wolof)wolof.focus()};
   card.append(button);$("coverage-list").append(card);
  });
 }
