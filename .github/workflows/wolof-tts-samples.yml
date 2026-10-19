@@ -30,6 +30,9 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
           python -m pip install "git+https://github.com/huggingface/parler-tts.git" transformers accelerate soundfile
+          # Parler-TTS dependencies can pull a CUDA torchaudio wheel; restore CPU-only wheels last.
+          python -m pip install --force-reinstall --no-deps torch torchaudio --index-url https://download.pytorch.org/whl/cpu
+          python -c "import torch, torchaudio; print('torch', torch.__version__, 'cuda?', torch.cuda.is_available()); print('torchaudio', torchaudio.__version__)"
       - name: Générer les échantillons
         env:
           HF_HUB_DISABLE_TELEMETRY: "1"
