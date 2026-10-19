@@ -24,7 +24,7 @@ KAIKKI_PAGE = "https://kaikki.org/frwiktionary/Wolof/index.html"
 LICENSE_NOTE = "Wiktionary-derived data; retain attribution and comply with applicable CC BY-SA/GFDL terms."
 KNOWN_AUDIO_HEADWORDS = {
     "aada", "aay", "aaye", "ab", "abb", "ag", "ak", "alal", "alkaati", "altine",
-    "agsil ak jàmm ci sa kër", "aksidaa", "alarba", "albaani", "alemaanñ", "all",
+    "agsil ak jàmm ci sa kër", "aksidaa", "alarba", "albaani", "alemaañ", "all",
 }
 
 def norm(value):
