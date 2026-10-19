@@ -58,7 +58,12 @@ if (Array.isArray(wolofDictionary?.entries) && wolofDictionary.entryCount === wo
     wolofIds.add(entry.id);
     if (!String(entry.source || "").startsWith("https://")) sourceErrors++;
     if (!entry.fr?.word || !entry.wolof?.word) sourceErrors++;
+    if (entry.sourceExamples?.length) {
+      if (entry.fr?.example || entry.wolof?.example) sourceErrors++;
+      if (entry.sourceExamples.some(example => example.languageAssignmentStatus !== "needs-review")) sourceErrors++;
+    }
   }
+  if (!wolofDictionary.entries.some(entry => entry.grammar_category === "verb") || !wolofDictionary.entries.some(entry => entry.grammar_category === "noun")) sourceErrors++;
   if (!sourceErrors) pass(`dictionnaire Jàngileen importé : ${wolofDictionary.entryCount} fiches sourcées et identifiants uniques`);
   else fail(`dictionnaire Jàngileen : ${sourceErrors} anomalies dans les sources, mots ou identifiants`);
 } else fail("dictionnaire Jàngileen incomplet : au moins 500 fiches et un compteur cohérent sont attendus");
