@@ -72,3 +72,7 @@ Une page de dictionnaire externe n’est pas un corpus audio. Une voix de synth�
 - **Mayoiga/Soninke-dataset (Hugging Face)** : environ 1 310 lignes soninké–français provenant notamment de textes Calaméo, mais la licence du dataset et les droits sur les textes sous-jacents n’étaient pas clairement indiqués dans la fiche examinée. Aucune importation avant clarification.
 
 Ces ressources sont enregistrées dans `data/language-sources.json`. La présence d’un lien ou d’un nombre d’entrées dans le catalogue ne signifie pas que les données ont été intégrées ni que leur licence autorise la copie.
+
+
+## Ressource anglais–français en examen
+[Panlexia](https://github.com/barumau/panlexia) relie des mots à des concepts communs et propose des listes anglais/français. Le dépôt indique CC BY 4.0 pour son contenu, mais réutilise aussi Concepticon (CC BY 4.0), NorthEuraLex (CC BY-SA 4.0), WOLD (CC BY 3.0 Allemagne) et d’autres sources. Il ne faut donc pas importer ses fichiers eng/fra comme si chaque ligne avait une licence uniforme : la provenance et les droits de chaque source amont doivent être conservés. Pour l’instant, Panlexia reste une référence de recherche, pas une importation dans le lexique utilisateur.
