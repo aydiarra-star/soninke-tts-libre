@@ -1,0 +1,35 @@
+name: Wolof lexicon coverage audit
+
+on:
+  push:
+    branches:
+      - feat/wolof-lexicon-audio-batches
+    paths:
+      - "wolof_tts/audit_lexicon_coverage.py"
+      - "data/wolof-fr-dictionary.json"
+      - ".github/workflows/wolof-lexicon-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout isolated Wolof work branch
+        uses: actions/checkout@v4
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Audit lexicon without modifying source data
+        run: python wolof_tts/audit_lexicon_coverage.py --report wolof-lexicon-audit.json
+      - name: Publish audit report
+        uses: actions/upload-artifact@v4
+        with:
+          name: wolof-lexicon-coverage-audit
+          path: wolof-lexicon-audit.json
+          if-no-files-found: error
+          retention-days: 14
