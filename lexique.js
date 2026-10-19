@@ -91,7 +91,7 @@
     fetch("data/audio-manifest.json").then(response => { if (!response.ok) throw new Error("Manifeste audio HTTP " + response.status); return response.json(); })
   ])
     .then(([text, audioData]) => {
-      entries = text.split(/\\r?\\n/).filter(line => line.trim()).map(line => JSON.parse(line));
+      entries = text.split(/\r?\n/).filter(line => line.trim()).map(line => JSON.parse(line));
       if (!entries.length) throw new Error("lexique vide");
       audioById = new Map((audioData.entries || []).map(item => [item.id, item]));
       render();
