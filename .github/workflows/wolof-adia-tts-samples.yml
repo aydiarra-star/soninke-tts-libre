@@ -1,0 +1,50 @@
+name: Wolof — échantillons de base ADIA_TTS
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feat/wolof-tts-reader-evaluation
+    paths:
+      - ".github/workflows/wolof-adia-tts-samples.yml"
+      - "scripts/generate_wolof_adia_samples.py"
+
+permissions:
+  contents: read
+
+jobs:
+  generate-wolof-baseline:
+    name: Générer 3 WAV wolof sans audio privé
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Récupérer la branche de travail
+        uses: actions/checkout@v4
+
+      - name: Installer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Installer PyTorch CPU et les dépendances ADIA_TTS
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install "transformers==4.46.3" accelerate soundfile "git+https://github.com/huggingface/parler-tts.git"
+          python -c "import torch, transformers, soundfile; print('torch', torch.__version__, 'CUDA available:', torch.cuda.is_available()); print('transformers', transformers.__version__)"
+
+      - name: Générer les trois WAV de référence synthétique
+        env:
+          HF_HUB_DISABLE_TELEMETRY: "1"
+          TOKENIZERS_PARALLELISM: "false"
+          PYTHONUNBUFFERED: "1"
+        run: python scripts/generate_wolof_adia_samples.py
+
+      - name: Publier les échantillons à écouter
+        uses: actions/upload-artifact@v4
+        with:
+          name: wolof-adia-baseline-samples
+          path: wolof-adia-samples/
+          if-no-files-found: error
+          retention-days: 7
