@@ -80,3 +80,7 @@ Ces ressources sont enregistrées dans `data/language-sources.json`. La présenc
 
 ## Rapport de couverture de l’import wolof
 L’importateur conserve maintenant le nombre de têtes d’entrée source, celles qui ont au moins une traduction exploitable, et une liste sourcée des têtes d’entrée sans traduction exploitable. Le contrôle CI exige que ces compteurs concordent avant de considérer l’instantané comme importé. Cette liste permet de compléter la couverture sans inventer les traductions absentes.
+
+
+### Instantané Jàngileen actuellement versionné
+L’instantané versionné contient 750 fiches de sens sourcées, regroupées autour de 709 têtes d’entrée françaises : 707 têtes ont au moins une traduction wolof exploitable et 2 sont explicitement listées sans traduction exploitable. Ces chiffres décrivent l’extraction, pas la totalité du dictionnaire. Le compteur public de 911 mots wolof est une mesure distincte et n’est pas présenté comme équivalent au nombre de têtes françaises ni au nombre de fiches de sens.
