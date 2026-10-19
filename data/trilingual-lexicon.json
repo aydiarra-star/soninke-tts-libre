@@ -4,22 +4,26 @@
     {
       "code": "soninke",
       "name": "Soninké",
-      "audioPolicy": "prefer-community-recordings"
+      "audioPolicy": "prefer-community-recordings",
+      "speechLocale": ""
     },
     {
       "code": "wolof",
       "name": "Wolof",
-      "audioPolicy": "community-recordings-or-browser-voice"
+      "audioPolicy": "community-recordings-or-browser-voice",
+      "speechLocale": "wo-SN"
     },
     {
       "code": "fr",
       "name": "Français",
-      "audioPolicy": "browser-voice-or-recording"
+      "audioPolicy": "browser-voice-or-recording",
+      "speechLocale": "fr-FR"
     },
     {
       "code": "en",
       "name": "English",
-      "audioPolicy": "browser-voice-or-recording"
+      "audioPolicy": "browser-voice-or-recording",
+      "speechLocale": "en-US"
     }
   ],
   "futureLanguages": [
