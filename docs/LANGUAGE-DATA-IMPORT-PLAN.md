@@ -76,3 +76,7 @@ Ces ressources sont enregistrées dans `data/language-sources.json`. La présenc
 
 ## Ressource anglais–français en examen
 [Panlexia](https://github.com/barumau/panlexia) relie des mots à des concepts communs et propose des listes anglais/français. Le dépôt indique CC BY 4.0 pour son contenu, mais réutilise aussi Concepticon (CC BY 4.0), NorthEuraLex (CC BY-SA 4.0), WOLD (CC BY 3.0 Allemagne) et d’autres sources. Il ne faut donc pas importer ses fichiers eng/fra comme si chaque ligne avait une licence uniforme : la provenance et les droits de chaque source amont doivent être conservés. Pour l’instant, Panlexia reste une référence de recherche, pas une importation dans le lexique utilisateur.
+
+
+## Rapport de couverture de l’import wolof
+L’importateur conserve maintenant le nombre de têtes d’entrée source, celles qui ont au moins une traduction exploitable, et une liste sourcée des têtes d’entrée sans traduction exploitable. Le contrôle CI exige que ces compteurs concordent avant de considérer l’instantané comme importé. Cette liste permet de compléter la couverture sans inventer les traductions absentes.
