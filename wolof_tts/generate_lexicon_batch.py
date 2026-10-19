@@ -41,11 +41,21 @@ def make_entries():
         rows.append({"wolof": seed["wolof"], "french": seed["fr"], "source": seed["source"],
             "source_name": "User-validated reference", "source_status": "user-validated-translation",
             "variant_index": 1, "reference_validation": "user-validated"})
+    # The three speaker-validated references must override a duplicate imported
+    # dictionary row, otherwise their explicit validation status can be lost.
     unique = {}
     for row in rows:
         key = norm(row["wolof"])
-        if key and key not in unique:
+        if not key:
+            continue
+        current = unique.get(key)
+        if current is None or row.get("reference_validation") == "user-validated":
             unique[key] = row
+    # Fail closed if a confirmed reference was accidentally dropped.
+    for seed in SEEDS:
+        item = unique.get(norm(seed["wolof"]))
+        if not item or item.get("reference_validation") != "user-validated":
+            raise RuntimeError(f"Validated reference missing from batch index: {seed['wolof']}")
     return sorted(unique.values(), key=lambda x: (norm(x["wolof"]), x["french"].casefold()))
 
 def main():
