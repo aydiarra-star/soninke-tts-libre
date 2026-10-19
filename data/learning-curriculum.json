@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 1,
+  "designPrinciples": [
+    "short mobile-friendly lessons",
+    "learn in both directions",
+    "audio-first for language practice",
+    "examples in context",
+    "clear distinction between native recording and browser speech",
+    "progress saved locally before optional account sync"
+  ],
+  "languages": [
+    "soninke",
+    "wolof",
+    "fr",
+    "en"
+  ],
+  "learningStages": [
+    {
+      "id": "start",
+      "level": "A0",
+      "title": "Démarrer",
+      "objectives": [
+        "identifier les sons et conventions d’écriture",
+        "apprendre les salutations et formules de politesse",
+        "écouter et répéter des mots courts"
+      ],
+      "modules": [
+        "alphabet-and-sounds",
+        "greetings",
+        "numbers-1-20"
+      ],
+      "sourceIds": [
+        "asawan-literacy-guides",
+        "snk-engine"
+      ]
+    },
+    {
+      "id": "daily",
+      "level": "A1",
+      "title": "Vie quotidienne",
+      "objectives": [
+        "se présenter et poser des questions simples",
+        "parler de la famille, du temps, des repas et des déplacements",
+        "reconnaître les mots dans une phrase"
+      ],
+      "modules": [
+        "introductions",
+        "family",
+        "food",
+        "time",
+        "directions"
+      ],
+      "sourceIds": [
+        "jangileen",
+        "snk-engine"
+      ]
+    },
+    {
+      "id": "build",
+      "level": "A1-A2",
+      "title": "Construire des phrases",
+      "objectives": [
+        "comprendre l’ordre des mots et les marqueurs fréquents",
+        "utiliser les pronoms et formes verbales selon les ressources documentées",
+        "comparer des exemples et variantes"
+      ],
+      "modules": [
+        "pronouns",
+        "sentence-patterns",
+        "negation",
+        "questions",
+        "verbs-in-context"
+      ],
+      "sourceIds": [
+        "snk-engine",
+        "asawan-soninke-lexicon"
+      ]
+    },
+    {
+      "id": "listen",
+      "level": "A1-A2",
+      "title": "Écouter et comprendre",
+      "objectives": [
+        "associer un audio à une transcription",
+        "réécouter à vitesse normale et comparer",
+        "distinguer les enregistrements natifs des voix de synthèse"
+      ],
+      "modules": [
+        "slow-listening",
+        "word-to-audio",
+        "short-dialogues"
+      ],
+      "sourceIds": [
+        "snk-engine"
+      ]
+    },
+    {
+      "id": "read",
+      "level": "A1-A2",
+      "title": "Lire et écrire",
+      "objectives": [
+        "lire les graphies utilisées par la ressource",
+        "écrire un mot et comparer l’orthographe",
+        "découvrir les variantes documentées sans les confondre"
+      ],
+      "modules": [
+        "spelling",
+        "reading-practice",
+        "writing-practice"
+      ],
+      "sourceIds": [
+        "asawan-literacy-guides",
+        "snk-engine"
+      ]
+    },
+    {
+      "id": "review",
+      "level": "all",
+      "title": "Réviser durablement",
+      "objectives": [
+        "revoir les mots difficiles",
+        "retrouver un mot depuis n’importe quelle langue connue",
+        "réviser avec des cartes et des quiz"
+      ],
+      "modules": [
+        "flashcards",
+        "recall-quiz",
+        "spaced-review"
+      ],
+      "sourceIds": [
+        "snk-engine",
+        "jangileen"
+      ]
+    }
+  ],
+  "lessonTemplate": {
+    "id": "stable-id",
+    "language": "language-code",
+    "level": "A0-A2",
+    "title": "",
+    "objectives": [],
+    "vocabularyEntryIds": [],
+    "explanations": [],
+    "examples": [],
+    "audioAssets": [],
+    "exercises": [],
+    "sourceIds": [],
+    "authoringStatus": "draft",
+    "linguisticReviewStatus": "unreviewed",
+    "translationReviewStatus": "unreviewed"
+  }
+}

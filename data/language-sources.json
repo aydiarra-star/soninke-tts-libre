@@ -1,0 +1,191 @@
+{
+  "schemaVersion": 1,
+  "policy": "Do not ingest dictionary entries until data licensing is verified; keep provenance on every imported entry.",
+  "sources": [
+    {
+      "id": "asawan-soninke-lexicon",
+      "name": "Asawan — Lexique Soninké-Français-Anglais",
+      "languages": [
+        "soninke",
+        "fr",
+        "en"
+      ],
+      "url": "https://www.asawan.org/fr/lexique_soninke",
+      "kind": "dictionary",
+      "licenseStatus": "not_confirmed_for_bulk_reuse",
+      "action": "Use as a lookup/reference source; ask rights holder or locate explicit dataset licence before bulk extraction."
+    },
+    {
+      "id": "asawan-literacy-guides",
+      "name": "Asawan — guides de lecture et d’écriture",
+      "languages": [
+        "soninke",
+        "fr"
+      ],
+      "url": "https://www.asawan.org/fr/apprendre-soninké-ajami",
+      "kind": "learning-material",
+      "licenseStatus": "per-resource-check-required",
+      "action": "Link to guides; do not copy book pages or illustrations into the app without explicit rights."
+    },
+    {
+      "id": "snk-engine",
+      "name": "snk_engine — soninké structuré, règles et corpus",
+      "languages": [
+        "soninke",
+        "fr"
+      ],
+      "url": "https://oscarmedra.github.io/snk_engine/",
+      "repository": "https://github.com/oscarmedra/snk_engine",
+      "kind": "grammar-corpus",
+      "licenseStatus": "CC-BY-4.0-declared-for-data-and-docs",
+      "attribution": "noah-medra (ORCID 0009-0003-6018-9802), snk_engine (2026)",
+      "action": "Use the pinned speaker-translated corpus for sentence practice with attribution. Preserve original spelling and source; distinguish source-validated from revalidated by this app.",
+      "importedCorpusRecords": 106,
+      "importedCorpusRevision": "49f50a939ded51c5ffe7db404c45f40fc75a3c88",
+      "importedCorpusLicense": "CC-BY-4.0"
+    },
+    {
+      "id": "jangileen",
+      "name": "Jàngileen — dictionnaire wolof",
+      "languages": [
+        "wolof",
+        "fr"
+      ],
+      "url": "https://jangileen.kalam-alami.net/special/apropos",
+      "kind": "dictionary-and-learning",
+      "licenseStatus": "site-states-dictionary-data-can-be-redistributed; verify-individual-resources",
+      "action": "Maintain the sourced snapshot with the importer workflow. Audit variants, part of speech, and examples; do not describe this as the complete dictionary until the remaining source coverage is reconciled.",
+      "observedOn": "2026-10-19",
+      "reportedWolofWordCount": 911,
+      "importedRecordCount": 750,
+      "importedFromAlphabetPages": 26,
+      "importNotes": "L’import automatisé produit 750 fiches de sens à partir de 709 têtes d’entrée françaises ; 707 têtes d’entrée ont au moins une traduction et 2 n’en ont pas. Jàngileen annonce 911 mots wolof : ce compteur de mots wolof n’est pas comparable directement au nombre de têtes d’entrée françaises ou de fiches de sens. Les 58 exemples restent bruts et leur attribution linguistique nécessite une revue.",
+      "sourceHeadwordCount": 709,
+      "translatedHeadwordCount": 707,
+      "untranslatedHeadwordCount": 2
+    },
+    {
+      "id": "baatukaay",
+      "name": "Baatukaay — dictionnaire Wolof-Français",
+      "languages": [
+        "wolof",
+        "fr"
+      ],
+      "url": "https://github.com/alphajoop/baatukaay",
+      "kind": "dictionary-and-app",
+      "licenseStatus": "MIT-repository-license-reported; dictionary-data-licence-needs-separate-verification",
+      "action": "Inspect repository licence and data provenance separately before importing entries."
+    },
+    {
+      "id": "kaikki-wolof",
+      "name": "Kaikki / Wiktionary — dictionnaire wolof structuré",
+      "languages": [
+        "wolof",
+        "en",
+        "fr"
+      ],
+      "url": "https://kaikki.org/frwiktionary/Wolof/index.html",
+      "kind": "machine-readable-dictionary",
+      "licenseStatus": "Wiktionary-attribution-and-applicable-licence-required",
+      "action": "Potential source for headwords, part of speech, senses and forms; keep source page and attribution."
+    },
+    {
+      "id": "wolof-english-github",
+      "name": "Wolof-English dictionary / phrase resources",
+      "languages": [
+        "wolof",
+        "en"
+      ],
+      "url": "https://github.com/wolof/wolof-english-dictionary",
+      "kind": "dictionary-and-phrasebook",
+      "licenseStatus": "verify-repository-and-data-licence-before-import",
+      "action": "Review repository README, licence and source provenance before copying vocabulary."
+    },
+    {
+      "id": "wiktionary-english",
+      "name": "Wiktionary English",
+      "languages": [
+        "en"
+      ],
+      "url": "https://en.wiktionary.org/",
+      "kind": "dictionary",
+      "licenseStatus": "CC-BY-SA-and-attribution-terms-may-apply",
+      "action": "Use as a reference or import only through a licence-compliant process."
+    },
+    {
+      "id": "french-machine-readable",
+      "name": "French machine-readable dictionary",
+      "languages": [
+        "fr"
+      ],
+      "url": "https://kaikki.org/frwiktionary/French/index.html",
+      "kind": "machine-readable-dictionary",
+      "licenseStatus": "Wiktionary-attribution-and-applicable-licence-required",
+      "action": "Use for definitions, inflections and parts of speech; do not treat generated examples as verified language pedagogy."
+    },
+    {
+      "id": "diagana-soninke-fr-2011",
+      "name": "Ousmane Moussa Diagana — Dictionnaire soninké-français (Mauritanie), Karthala 2011",
+      "languages": [
+        "soninke",
+        "fr"
+      ],
+      "url": "https://www.furet.com/ebooks/dictionnaire-soninke-francais-mauritanie-ousmane-moussa-diagana-9782811133856_9782811133856_4.html",
+      "kind": "published-dictionary",
+      "reportedEntryCount": 5800,
+      "licenseStatus": "copyrighted; no bulk-reuse-without-permission",
+      "action": "Use as a linguistic reference for editorial comparison. Do not copy entries into the app without explicit permission or a separate open licence."
+    },
+    {
+      "id": "monteil-soninke-vocabulary-1966",
+      "name": "Ch. Monteil / V. Monteil — Vocabulaire soninké I–II",
+      "languages": [
+        "soninke",
+        "fr"
+      ],
+      "url": "https://www.africabib.org/rec.php?RID=186594224",
+      "kind": "historical-dictionary",
+      "reportedEntryCount": 7000,
+      "licenseStatus": "historical-publication; rights-and-transcription-check-required",
+      "action": "Bibliographic reference only. Historical western Soninke data and transcription require careful dialect and orthography notes; no bulk import until rights and source text are confirmed."
+    },
+    {
+      "id": "asjp-soninke-wordlists",
+      "name": "ASJP — listes comparatives Soninke",
+      "languages": [
+        "soninke",
+        "en"
+      ],
+      "url": "https://asjp.clld.org/languages/SONINKE_4",
+      "kind": "comparative-wordlist",
+      "licenseStatus": "CC-BY-4.0",
+      "action": "Potential source for a small comparative vocabulary; preserve the original transcription, gloss, variety/source and CC BY 4.0 attribution; do not silently normalize into the core lexicon."
+    },
+    {
+      "id": "mayoiga-soninke-dataset",
+      "name": "Mayoiga — Soninke-dataset (Hugging Face)",
+      "languages": [
+        "soninke",
+        "fr"
+      ],
+      "url": "https://huggingface.co/datasets/Mayoiga/Soninke-dataset",
+      "kind": "parallel-text-corpus",
+      "reportedEntryCount": 1310,
+      "licenseStatus": "dataset-card-license-not-found; underlying-text-rights-unverified",
+      "action": "Do not import until the dataset owner and underlying Calaméo text rights are clarified; use as a lead for research only."
+    },
+    {
+      "id": "panlexia-english-french",
+      "name": "Panlexia — dictionnaire multilingue fondé sur des concepts",
+      "languages": [
+        "en",
+        "fr"
+      ],
+      "url": "https://github.com/barumau/panlexia",
+      "kind": "multilingual-concept-lexicon",
+      "licenseStatus": "repository-content-CC-BY-4.0-but-underlying-source-licences-vary",
+      "action": "Useful candidate for English–French concept-linked vocabulary. Do not import the complete generated files as one uniform licence: trace each concept/source to Concepticon, NorthEuraLex, ULD, WOLD and other upstream datasets, and preserve the strictest applicable terms."
+    }
+  ],
+  "reviewStatus": "research-started; licence review and dataset extraction not yet complete"
+}

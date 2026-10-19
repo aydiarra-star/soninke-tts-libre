@@ -1,0 +1,50 @@
+name: Importer le dictionnaire wolof Jàngileen
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [feat/multilingual-learning-app]
+    paths:
+      - "scripts/import_jangileen_dictionary.py"
+      - ".github/workflows/import-jangileen.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: jangileen-dictionary-import
+  cancel-in-progress: false
+
+jobs:
+  import-dictionary:
+    name: Importer et versionner le dictionnaire public
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+        with:
+          ref: feat/multilingual-learning-app
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Installer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Importer les entrées Jàngileen avec leurs sources
+        run: python scripts/import_jangileen_dictionary.py --output data/wolof-fr-dictionary.json
+      - name: Contrôler le JSON produit
+        run: python -c "import json; d=json.load(open('data/wolof-fr-dictionary.json', encoding='utf-8')); assert d['entryCount'] >= 500; assert d['entryCount'] == len(d['entries']); assert d['translatedHeadwordCount'] + d['untranslatedHeadwordCount'] == d['sourceHeadwordCount']; assert d['untranslatedHeadwordCount'] == len(d['untranslatedHeadwords']); assert all(e.get('source','').startswith('https://') for e in d['entries']); print('OK:', d['entryCount'], 'fiches; tête d’entrée traduite/non traduite:', d['translatedHeadwordCount'], d['untranslatedHeadwordCount'])"
+      - name: Enregistrer l’instantané sur la branche de développement
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cp data/wolof-fr-dictionary.json /tmp/wolof-fr-dictionary.json
+          git fetch origin feat/multilingual-learning-app
+          git reset --hard origin/feat/multilingual-learning-app
+          cp /tmp/wolof-fr-dictionary.json data/wolof-fr-dictionary.json
+          git add data/wolof-fr-dictionary.json
+          if git diff --cached --quiet; then
+            echo "Aucune modification du dictionnaire."
+          else
+            git commit -m "data(wolof): importer le dictionnaire Jàngileen sourcé"
+            git push origin HEAD:feat/multilingual-learning-app
+          fi
