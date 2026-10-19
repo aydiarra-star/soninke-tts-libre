@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "languages": [
+    {
+      "code": "soninke",
+      "name": "Soninké",
+      "audioPolicy": "prefer-community-recordings"
+    },
+    {
+      "code": "wolof",
+      "name": "Wolof",
+      "audioPolicy": "community-recordings-or-browser-voice"
+    },
+    {
+      "code": "fr",
+      "name": "Français",
+      "audioPolicy": "browser-voice-or-recording"
+    },
+    {
+      "code": "en",
+      "name": "English",
+      "audioPolicy": "browser-voice-or-recording"
+    }
+  ],
+  "futureLanguages": [
+    "pulaar",
+    "bambara",
+    "serere"
+  ],
+  "entries": []
+}
