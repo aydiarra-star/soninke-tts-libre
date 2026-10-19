@@ -1,0 +1,113 @@
+#!/usr/bin/env python3
+"""Generate a deterministic, technically checked batch of Wolof dictionary audio."""
+import argparse, csv, hashlib, json, re, zipfile
+from datetime import datetime, timezone
+from pathlib import Path
+import numpy as np
+import soundfile as sf
+import torch
+from parler_tts import ParlerTTSForConditionalGeneration
+from transformers import AutoTokenizer
+
+ROOT = Path(__file__).resolve().parents[1]
+LEXICON = ROOT / "data" / "wolof-fr-dictionary.json"
+MODEL_ID = "CONCREE/Adia_TTS"
+SEEDS = [
+    {"wolof": "Jërëjëf", "fr": "Merci", "source": "user-validated-reference"},
+    {"wolof": "Kër", "fr": "Maison", "source": "user-validated-reference"},
+    {"wolof": "Ñëw", "fr": "Venir", "source": "user-validated-reference"},
+]
+
+def norm(value):
+    return re.sub(r"\s+", " ", value.strip()).casefold()
+
+def make_entries():
+    payload = json.loads(LEXICON.read_text(encoding="utf-8"))
+    rows = []
+    for entry in payload.get("entries", []):
+        word = str((entry.get("wolof") or {}).get("word") or "").strip()
+        french = str((entry.get("fr") or {}).get("word") or "").strip()
+        if not word or not french:
+            continue
+        variants = [v.strip() for v in re.split(r"\s*/\s*", word) if v.strip()]
+        for variant_index, variant in enumerate(variants, 1):
+            rows.append({
+                "wolof": variant, "french": french, "source": entry.get("source", ""),
+                "source_name": entry.get("sourceName", payload.get("source", "")),
+                "source_status": entry.get("translationStatus", "source-documented"),
+                "variant_index": variant_index, "reference_validation": "pending",
+            })
+    for seed in SEEDS:
+        rows.append({"wolof": seed["wolof"], "french": seed["fr"], "source": seed["source"],
+            "source_name": "User-validated reference", "source_status": "user-validated-translation",
+            "variant_index": 1, "reference_validation": "user-validated"})
+    unique = {}
+    for row in rows:
+        key = norm(row["wolof"])
+        if key and key not in unique:
+            unique[key] = row
+    return sorted(unique.values(), key=lambda x: (norm(x["wolof"]), x["french"].casefold()))
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--start-index", type=int, default=0)
+    parser.add_argument("--batch-size", type=int, default=10)
+    args = parser.parse_args()
+    if args.start_index < 0 or not 1 <= args.batch_size <= 20:
+        raise SystemExit("start-index must be >= 0 and batch-size must be 1..20")
+    all_entries = make_entries()
+    batch = all_entries[args.start_index:args.start_index + args.batch_size]
+    if not batch:
+        raise SystemExit(f"No entries at start index {args.start_index}; total={len(all_entries)}")
+    out = Path("wolof_lexicon_outputs")
+    out.mkdir(parents=True, exist_ok=True)
+    device = "cuda:0" if torch.cuda.is_available() else "cpu"
+    print(f"Lexicon candidates={len(all_entries)}; selected={len(batch)}; range={args.start_index}:{args.start_index + len(batch)}; model={MODEL_ID}; device={device}")
+    model = ParlerTTSForConditionalGeneration.from_pretrained(MODEL_ID).to(device)
+    tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
+    description_ids = tokenizer("A clear, natural Wolof-speaking voice for language learning.", return_tensors="pt").input_ids.to(device)
+    manifest = []
+    for index, item in enumerate(batch, start=args.start_index):
+        safe_id = f"{index:05d}-" + re.sub(r"[^a-z0-9]+", "-", norm(item["wolof"])).strip("-")[:48]
+        prompt_ids = tokenizer(item["wolof"], return_tensors="pt").input_ids.to(device)
+        with torch.inference_mode():
+            audio = model.generate(input_ids=description_ids, prompt_input_ids=prompt_ids)
+        audio_np = audio.detach().cpu().numpy().squeeze()
+        if audio_np.ndim != 1 or audio_np.size == 0 or not np.isfinite(audio_np).all():
+            raise RuntimeError(f"Invalid audio returned for {item['wolof']!r}")
+        rate = int(getattr(model.config, "sampling_rate", 24000))
+        path = out / f"{safe_id}.wav"
+        sf.write(str(path), audio_np, rate, subtype="PCM_16")
+        with sf.SoundFile(path) as wav:
+            frames, rate, channels, subtype = len(wav), wav.samplerate, wav.channels, wav.subtype
+            duration, samples = frames / rate, wav.read(dtype="float32")
+        peak = float(np.max(np.abs(samples))) if samples.size else 0.0
+        if rate < 8000 or channels != 1 or frames <= 0 or not (0.15 <= duration <= 15) or not np.isfinite(samples).all() or peak <= 0.0001:
+            raise RuntimeError(f"Technical WAV validation failed: {path}")
+        manifest.append({
+            "id": safe_id, "wolof": item["wolof"], "french": item["french"], "file": path.name,
+            "model": MODEL_ID, "sample_rate_hz": rate, "channels": channels, "subtype": subtype,
+            "duration_seconds": round(duration, 3), "peak_amplitude": round(peak, 6),
+            "sha256": hashlib.sha256(path.read_bytes()).hexdigest(), "source": item["source"],
+            "source_name": item["source_name"], "source_translation_status": item["source_status"],
+            "reference_validation": item["reference_validation"], "human_pronunciation_validation": "pending",
+            "technical_validation": "passed", "generated_at_utc": datetime.now(timezone.utc).isoformat(),
+        })
+        print(f"VERIFIED {index}: {item['wolof']} — {item['french']} ({duration:.2f}s)")
+    (out / "manifest.json").write_text(json.dumps({
+        "source_lexicon": str(LEXICON.relative_to(ROOT)), "model": MODEL_ID,
+        "candidate_count": len(all_entries), "start_index": args.start_index,
+        "batch_size": len(batch), "entries": manifest,
+    }, ensure_ascii=False, indent=2), encoding="utf-8")
+    with (out / "manifest.csv").open("w", newline="", encoding="utf-8-sig") as f:
+        writer = csv.DictWriter(f, fieldnames=list(manifest[0].keys()))
+        writer.writeheader()
+        writer.writerows(manifest)
+    archive = Path("wolof-lexicon-audio-batch.zip")
+    with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED) as z:
+        for file in sorted(out.iterdir()):
+            z.write(file, arcname=file.name)
+    print(f"SUCCESS: {len(manifest)} technically verified WAVs; archive={archive}")
+
+if __name__ == "__main__":
+    main()
