@@ -34,8 +34,21 @@ for (const code of ["pulaar", "bambara", "serere"]) {
   if (schema?.futureLanguages?.includes(code)) pass(`langue future prévue : ${code}`);
   else fail(`langue future manquante : ${code}`);
 }
-if (Array.isArray(schema?.entries)) pass("liste de fiches multilingues initialisée");
-else fail("schema.entries doit être un tableau");
+if (Array.isArray(schema?.entries)) {
+  const ids = new Set();
+  for (const [index, entry] of schema.entries.entries()) {
+    if (!entry.id || ids.has(entry.id)) fail(`fiche multilingue ${index + 1}: identifiant absent ou dupliqué`);
+    ids.add(entry.id);
+    for (const lang of languageCodes) {
+      if (!entry[lang] || typeof entry[lang] !== "object") fail(`fiche ${entry.id}: bloc de langue manquant ${lang}`);
+      else if (typeof entry[lang].word !== "string") fail(`fiche ${entry.id}: champ word absent pour ${lang}`);
+    }
+    if (!/^https:\\/\\//.test(entry.source || "")) fail(`fiche ${entry.id}: source URL obligatoire`);
+    if (!entry.status || !entry.pronunciationStatus || !entry.translationStatus) fail(`fiche ${entry.id}: statuts distincts obligatoires`);
+  }
+  if (ids.size === schema.entries.length) pass(`${schema.entries.length} fiches multilingues sourcées, identifiants uniques`);
+} else fail("schema.entries doit être un tableau");
+
 if (Array.isArray(sources?.sources) && sources.sources.length >= 5) pass("catalogue des sources documenté");
 else fail("catalogue des sources absent ou incomplet");
 if (sources?.policy?.includes("licensing")) pass("règle de licence avant import présente");
