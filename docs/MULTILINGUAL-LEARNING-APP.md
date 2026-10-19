@@ -42,3 +42,7 @@ La page propose maintenant des entrées guidées par niveau : salutations, vie q
 
 ## Vérification automatique
 Le workflow de validation contrôle désormais la syntaxe de `apprendre.js`, la structure des JSON, les quatre langues de lancement, les futures langues, les 577 entrées et la présence des 576 fichiers WAV déclarés disponibles. Ces tests statiques ne remplacent pas une vérification manuelle sur iPhone ni une écoute de tous les fichiers.
+
+
+## Ajouter une langue sans refaire l’interface
+Ajouter la langue à `languages` dans `data/trilingual-lexicon.json` avec un code stable, un nom et éventuellement `speechLocale`; déplacer son code depuis `futureLanguages` vers `languages`. Les sélecteurs de langue, les champs de contribution et les colonnes d’export sont construits à partir de cette liste. Pour chaque nouvelle entrée, ajouter les champs de cette langue et conserver les sources/statuts. Une locale de synthèse n’active un bouton que si une voix correspondante est réellement installée dans le navigateur.
