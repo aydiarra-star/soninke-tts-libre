@@ -16,7 +16,7 @@ for (const path of ["apprendre.html", "apprendre.css", "apprendre.js", "data/tri
   else fail(`fichier requis manquant : ${path}`);
 }
 const html = read("apprendre.html");
-const manifest = parseJSON("manifest.webmanifest");
+const pwaManifest = parseJSON("manifest.webmanifest");
 const contributionTemplate = read(".github/ISSUE_TEMPLATE/language_contribution.yml");
 const js = read("apprendre.js");
 const schema = parseJSON("data/trilingual-lexicon.json");
@@ -92,7 +92,7 @@ for (const required of ['id="from"', 'id="to"', 'id="search"', 'id="results"', '
   if (html.includes(required)) pass(`interface contient ${required}`);
   else fail(`interface ne contient pas ${required}`);
 }
-if (manifest?.start_url === "./apprendre.html" && manifest?.display === "standalone" && Array.isArray(manifest?.icons) && manifest.icons.some(icon => icon.src === "assets/app-icon.svg")) pass("manifeste PWA et icône présents");
+if (pwaManifest?.start_url === "./apprendre.html" && pwaManifest?.display === "standalone" && Array.isArray(pwaManifest?.icons) && pwaManifest.icons.some(icon => icon.src === "assets/app-icon.svg")) pass("manifeste PWA et icône présents");
 else fail("manifeste PWA incomplet");
 if (contributionTemplate.includes("CC BY 4.0") && contributionTemplate.includes("consentement") && contributionTemplate.includes("avant intégration")) pass("formulaire de contribution et consentement de licence présents");
 else fail("formulaire de contribution : consentement/licence ou revue avant intégration manquant");
