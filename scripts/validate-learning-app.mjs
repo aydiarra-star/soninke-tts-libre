@@ -42,11 +42,11 @@ if (sources?.policy?.includes("licensing")) pass("règle de licence avant import
 else fail("la politique de licence avant import doit être documentée");
 if (Array.isArray(curriculum?.learningStages) && curriculum.learningStages.length >= 5) pass("parcours pédagogique structuré");
 else fail("parcours pédagogique trop incomplet");
-for (const required of ['id="from"', 'id="to"', 'id="search"', 'id="results"', 'id="entry-form"', 'id="export-json"', 'id="export-csv"', 'id="ressources"']) {
+for (const required of ['id="from"', 'id="to"', 'id="search"', 'id="results"', 'id="entry-form"', 'id="export-json"', 'id="export-csv"', 'id="ressources"', 'id="parcours"']) {
   if (html.includes(required)) pass(`interface contient ${required}`);
   else fail(`interface ne contient pas ${required}`);
 }
-for (const required of ["speechSynthesis", "data/soninke-lexicon.jsonl", "data/audio-manifest.json", "data/trilingual-lexicon.json", "localStorage", "pronunciationStatus", "translationStatus"]) {
+for (const required of ["speechSynthesis", "data/soninke-lexicon.jsonl", "data/audio-manifest.json", "data/trilingual-lexicon.json", "localStorage", "pronunciationStatus", "translationStatus", "path-action"]) {
   if (js.includes(required)) pass(`comportement attendu présent : ${required}`);
   else fail(`comportement attendu absent : ${required}`);
 }
