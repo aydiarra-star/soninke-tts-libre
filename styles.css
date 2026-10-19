@@ -45,4 +45,4 @@ h1 span{color:var(--green)}
 footer{display:flex;justify-content:space-between;gap:12px;max-width:1120px;margin:auto;padding:20px;border-top:1px solid var(--line);color:var(--muted);font-size:11px}
 @media(max-width:850px){.phrase-list{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.site-header{align-items:flex-start;padding:14px 16px}main{padding:25px 14px 40px}.status-pill{font-size:0;padding:9px}.status-dot{width:8px;height:8px}.brand-mark{width:38px;height:38px}.hero{text-align:left}.hero .intro{font-size:14px}.toolbar{align-items:flex-start;flex-direction:column;padding:16px}.toolbar-actions{width:100%}.toolbar-actions .button{flex:1}.phrase-list{grid-template-columns:1fr}.phrase-card{padding:18px}.guide{padding:18px}footer{flex-direction:column;padding:18px 14px}}
-@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}.hero-actions{margin-top:20px}.hero-actions .button{display:inline-flex;align-items:center;justify-content:center}
