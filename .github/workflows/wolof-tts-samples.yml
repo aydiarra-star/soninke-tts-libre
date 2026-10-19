@@ -1,4 +1,4 @@
-name: Échantillons TTS wolof — génération CPU
+name: Échantillons TTS wolof — génération CPU (vocabulaire curaté)
 
 on:
   push:
