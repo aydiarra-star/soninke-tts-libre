@@ -219,20 +219,42 @@ def main() -> int:
         print(f"[{index}/{len(paths)}] {path}: {len(page_parser.entries)} entrées", flush=True)
         time.sleep(max(0.0, args.delay))
     normalized: dict[str, dict] = {}
+    translated_paths: set[str] = set()
+    untranslated_by_path: dict[str, dict[str, str]] = {}
+    all_paths: set[str] = set()
     for raw in all_raw:
+        source_path = raw.get("sourcePath") or "/dictionary"
+        source_url = urljoin(BASE, quote(source_path, safe="/%"))
+        all_paths.add(source_path)
+        headword = " ".join(raw.get("headword", "").split())
+        produced = False
         for sense_index in range(max(1, len(raw.get("meanings") or []))):
             entry = normalize_entry(raw, sense_index)
             if entry:
                 normalized[entry["id"]] = entry
+                produced = True
+        if produced:
+            translated_paths.add(source_path)
+        else:
+            untranslated_by_path[source_path] = {"headword": headword, "source": source_url}
     if len(normalized) < 500:
         raise RuntimeError(f"Seulement {len(normalized)} fiches normalisées ; au moins 500 sont attendues pour éviter un import partiel.")
+    source_headword_count = len(all_paths)
+    translated_headword_count = len(translated_paths)
+    untranslated_headwords = sorted(untranslated_by_path.values(), key=lambda item: item["headword"].casefold())
+    if translated_headword_count + len(untranslated_headwords) != source_headword_count:
+        raise RuntimeError("Le bilan des entrées source ne concorde pas ; import interrompu.")
     result = {
         "schemaVersion": 1,
         "source": "Jàngileen — dictionnaire français/wolof",
         "sourceUrl": urljoin(BASE, "/dictionary"),
         "sourceLegalUrl": urljoin(BASE, "/special/apropos"),
         "sourceLicenseNote": "Le site indique que les données du dictionnaire (mots, traductions et exemples) peuvent être redistribuées et modifiées.",
-        "observedSourceCount": 911,
+        "reportedWolofWordCount": 911,
+        "sourceHeadwordCount": source_headword_count,
+        "translatedHeadwordCount": translated_headword_count,
+        "untranslatedHeadwordCount": len(untranslated_headwords),
+        "untranslatedHeadwords": untranslated_headwords,
         "extractedAt": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "entryCount": len(normalized),
         "entries": sorted(normalized.values(), key=lambda entry: (entry["fr"]["word"].casefold(), entry["id"]))
