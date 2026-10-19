@@ -59,7 +59,10 @@
       "reportedWolofWordCount": 911,
       "importedRecordCount": 750,
       "importedFromAlphabetPages": 26,
-      "importNotes": "The automated snapshot currently contains 750 French–Wolof records with per-entry source URLs. Jàngileen reports 911 Wolof words; this count is not directly comparable to the number of extracted French headword/sense records. Source examples are preserved without assigning a language because the site's example labels are inconsistent and need review."
+      "importNotes": "L’import automatisé produit 750 fiches de sens à partir de 709 têtes d’entrée françaises ; 707 têtes d’entrée ont au moins une traduction et 2 n’en ont pas. Jàngileen annonce 911 mots wolof : ce compteur de mots wolof n’est pas comparable directement au nombre de têtes d’entrée françaises ou de fiches de sens. Les 58 exemples restent bruts et leur attribution linguistique nécessite une revue.",
+      "sourceHeadwordCount": 709,
+      "translatedHeadwordCount": 707,
+      "untranslatedHeadwordCount": 2
     },
     {
       "id": "baatukaay",
