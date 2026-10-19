@@ -1,4 +1,4 @@
 id,wolof,francais,part_of_speech,definition_fr,source,source_url,source_license,linguistic_status,translation_status,audio_file,audio_status
-wolof-jerejef,Jërëjëf,Merci,interjection,Expression de remerciement,validation_utilisateur,,,"validated_by_native_speaker","validated","audio/Jerejef.wav","pending"
-wolof-ker,Kër,Maison,nom,Maison ou foyer selon le contexte,validation_utilisateur,,,"validated_by_native_speaker","validated","audio/Ker.wav","pending"
-wolof-ngew,Ñëw,Venir,verbe,Verbe « venir »,validation_utilisateur,,,"validated_by_native_speaker","validated","audio/Ngew.wav","pending"
+wolof-jerejef,Jërëjëf,Merci,interjection,Expression de remerciement,validation_utilisateur,,,"validated_by_native_speaker","validated","wolof-adia-samples/00000_jerejef.wav","pending"
+wolof-ker,Kër,Maison,nom,Maison ou foyer selon le contexte,validation_utilisateur,,,"validated_by_native_speaker","validated","wolof-adia-samples/00001_ker.wav","pending"
+wolof-ngew,Ñëw,Venir,verbe,Verbe « venir »,validation_utilisateur,,,"validated_by_native_speaker","validated","wolof-adia-samples/00002_ngew.wav","pending"
