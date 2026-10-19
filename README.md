@@ -34,6 +34,7 @@ Une branche de travail prépare un espace mobile-first pour apprendre **soninké
 - [Catalogue des dictionnaires et licences](data/language-sources.json) ;
 - [Plan d’import des dictionnaires](docs/LANGUAGE-DATA-IMPORT-PLAN.md) ;
 - [Formulaire de contribution communautaire](.github/ISSUE_TEMPLATE/language_contribution.yml) ;
+- [Manifeste PWA installable](manifest.webmanifest) et [service worker hors connexion](sw.js) ;
 - [Parcours pédagogique A0–A2](data/learning-curriculum.json).
 
 Le dépôt conserve les 577 entrées soninké et le lot audio proposé dans la PR #14. Le prototype multilingue comprend 750 fiches de sens français–wolof sourcées issues de 26 pages alphabétiques de Jàngileen (709 têtes d’entrée françaises : 707 avec traduction exploitable, 2 sans traduction), et 106 phrases/paragraphes soninké–français issus d’un corpus CC BY 4.0 épinglé. Jàngileen annonce 911 mots wolof, compteur différent des têtes d’entrée et fiches de sens extraites ; la couverture n’est pas déclarée complète. Les 58 exemples wolof dont la langue ne peut pas être attribuée avec certitude restent signalés comme à vérifier. Le corpus soninké conserve sa graphie d’origine et n’inclut pas d’audio natif dans ce lot. Aucune traduction soninké ou anglaise n’est inventée pour remplir les champs manquants.
