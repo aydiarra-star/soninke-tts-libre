@@ -27,5 +27,330 @@
     "bambara",
     "serere"
   ],
-  "entries": []
+  "entries": [
+    {
+      "id": "wo-jangileen-0001",
+      "soninke": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "wolof": {
+        "word": "egg",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "fr": {
+        "word": "arriver",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "en": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "grammar_category": "verb",
+      "category": "grammar",
+      "source": "https://jangileen.kalam-alami.net/dictionary/word/fr/arriver",
+      "sourceName": "Jàngileen — dictionnaire français/wolof",
+      "license": "Données du dictionnaire annoncées réutilisables par Jàngileen ; respecter les conditions applicables",
+      "status": "draft",
+      "origin": "external-dictionary",
+      "pronunciationStatus": "unverified",
+      "translationStatus": "source-documented"
+    },
+    {
+      "id": "wo-jangileen-0002",
+      "soninke": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "wolof": {
+        "word": "xaar",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "fr": {
+        "word": "attendre",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "en": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "grammar_category": "verb",
+      "category": "grammar",
+      "source": "https://jangileen.kalam-alami.net/dictionary/word/fr/attendre",
+      "sourceName": "Jàngileen — dictionnaire français/wolof",
+      "license": "Données du dictionnaire annoncées réutilisables par Jàngileen ; respecter les conditions applicables",
+      "status": "draft",
+      "origin": "external-dictionary",
+      "pronunciationStatus": "unverified",
+      "translationStatus": "source-documented"
+    },
+    {
+      "id": "wo-jangileen-0003",
+      "soninke": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "wolof": {
+        "word": "ci suufu",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "fr": {
+        "word": "dessous",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "en": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "grammar_category": "preposition",
+      "category": "grammar",
+      "source": "https://jangileen.kalam-alami.net/dictionary/word/fr/dessous",
+      "sourceName": "Jàngileen — dictionnaire français/wolof",
+      "license": "Données du dictionnaire annoncées réutilisables par Jàngileen ; respecter les conditions applicables",
+      "status": "draft",
+      "origin": "external-dictionary",
+      "pronunciationStatus": "unverified",
+      "translationStatus": "source-documented"
+    },
+    {
+      "id": "wo-jangileen-0004",
+      "soninke": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "wolof": {
+        "word": "tas",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "fr": {
+        "word": "dispersé",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "en": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "grammar_category": "adjective",
+      "category": "grammar",
+      "source": "https://jangileen.kalam-alami.net/dictionary/word/fr/dispersé",
+      "sourceName": "Jàngileen — dictionnaire français/wolof",
+      "license": "Données du dictionnaire annoncées réutilisables par Jàngileen ; respecter les conditions applicables",
+      "status": "draft",
+      "origin": "external-dictionary",
+      "pronunciationStatus": "unverified",
+      "translationStatus": "source-documented"
+    },
+    {
+      "id": "wo-jangileen-0005",
+      "soninke": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "wolof": {
+        "word": "daara",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "fr": {
+        "word": "école",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "en": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "grammar_category": "noun",
+      "category": "daily-life",
+      "source": "https://jangileen.kalam-alami.net/dictionary/word/fr/école",
+      "sourceName": "Jàngileen — dictionnaire français/wolof",
+      "license": "Données du dictionnaire annoncées réutilisables par Jàngileen ; respecter les conditions applicables",
+      "status": "draft",
+      "origin": "external-dictionary",
+      "pronunciationStatus": "unverified",
+      "translationStatus": "source-documented"
+    },
+    {
+      "id": "wo-jangileen-0006",
+      "soninke": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "wolof": {
+        "word": "moom",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "fr": {
+        "word": "elle",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "en": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "grammar_category": "pronoun",
+      "category": "grammar",
+      "source": "https://jangileen.kalam-alami.net/dictionary/word/fr/elle",
+      "sourceName": "Jàngileen — dictionnaire français/wolof",
+      "license": "Données du dictionnaire annoncées réutilisables par Jàngileen ; respecter les conditions applicables",
+      "status": "draft",
+      "origin": "external-dictionary",
+      "pronunciationStatus": "unverified",
+      "translationStatus": "source-documented"
+    },
+    {
+      "id": "wo-jangileen-0007",
+      "soninke": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "wolof": {
+        "word": "tas",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "fr": {
+        "word": "éparpillé",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "en": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "grammar_category": "adjective",
+      "category": "grammar",
+      "source": "https://jangileen.kalam-alami.net/dictionary/word/fr/éparpillé",
+      "sourceName": "Jàngileen — dictionnaire français/wolof",
+      "license": "Données du dictionnaire annoncées réutilisables par Jàngileen ; respecter les conditions applicables",
+      "status": "draft",
+      "origin": "external-dictionary",
+      "pronunciationStatus": "unverified",
+      "translationStatus": "source-documented"
+    },
+    {
+      "id": "wo-jangileen-0008",
+      "soninke": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "wolof": {
+        "word": "gan",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "fr": {
+        "word": "invité",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "en": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "grammar_category": "noun",
+      "category": "daily-life",
+      "source": "https://jangileen.kalam-alami.net/dictionary/word/fr/invité",
+      "sourceName": "Jàngileen — dictionnaire français/wolof",
+      "license": "Données du dictionnaire annoncées réutilisables par Jàngileen ; respecter les conditions applicables",
+      "status": "draft",
+      "origin": "external-dictionary",
+      "pronunciationStatus": "unverified",
+      "translationStatus": "source-documented"
+    },
+    {
+      "id": "wo-jangileen-0009",
+      "soninke": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "wolof": {
+        "word": "làkk",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "fr": {
+        "word": "langue",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "en": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "grammar_category": "noun",
+      "category": "daily-life",
+      "source": "https://jangileen.kalam-alami.net/dictionary/word/fr/langue",
+      "sourceName": "Jàngileen — dictionnaire français/wolof",
+      "license": "Données du dictionnaire annoncées réutilisables par Jàngileen ; respecter les conditions applicables",
+      "status": "draft",
+      "origin": "external-dictionary",
+      "pronunciationStatus": "unverified",
+      "translationStatus": "source-documented"
+    }
+  ]
 }
