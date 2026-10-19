@@ -64,7 +64,7 @@ if (Array.isArray(sentenceCorpus?.entries) && sentenceCorpus.entryCount === sent
   if (!corpusErrors) pass(`corpus soninké–français : ${sentenceCorpus.entryCount} entrées sourcées et attribuées`);
   else fail(`corpus soninké–français : ${corpusErrors} anomalies de source, licence ou contenu`);
 } else fail("corpus soninké–français absent ou incomplet");
-if (Array.isArray(wolofDictionary?.entries) && wolofDictionary.entryCount === wolofDictionary.entries.length && wolofDictionary.entryCount >= 500) {
+if (Array.isArray(wolofDictionary?.entries) && wolofDictionary.entryCount === wolofDictionary.entries.length && wolofDictionary.entryCount >= 500 && wolofDictionary.translatedHeadwordCount + wolofDictionary.untranslatedHeadwordCount === wolofDictionary.sourceHeadwordCount && wolofDictionary.untranslatedHeadwordCount === (wolofDictionary.untranslatedHeadwords||[]).length) {
   const wolofIds = new Set();
   let sourceErrors = 0;
   for (const entry of wolofDictionary.entries) {
