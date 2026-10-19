@@ -35,3 +35,10 @@ Soninké, wolof, français et anglais. Le format est extensible pour le pulaar, 
 - Kaikki / Wiktionary Wolof : https://kaikki.org/frwiktionary/Wolof/index.html (données extraites de Wiktionary ; conserver l’attribution et la licence applicable)
 
 Ces liens sont ajoutés à l’interface comme références externes. Aucun dictionnaire propriétaire ou corpus tiers n’est copié dans le dépôt sans vérification de licence. La prochaine étape de recherche est d’établir une fiche de provenance par source, de confirmer les droits des données lexicales, puis d’importer seulement les corpus autorisés avec leurs champs de citation.
+
+
+## Parcours d’apprentissage
+La page propose maintenant des entrées guidées par niveau : salutations, vie quotidienne, famille, déplacement, grammaire, puis écoute et révision. Les boutons appliquent les filtres correspondants au lexique ; ils ne prétendent pas encore représenter un cours complet. Le programme pédagogique est décrit dans `data/learning-curriculum.json` afin de construire les leçons à partir d’entrées documentées et de contenus validés.
+
+## Vérification automatique
+Le workflow de validation contrôle désormais la syntaxe de `apprendre.js`, la structure des JSON, les quatre langues de lancement, les futures langues, les 577 entrées et la présence des 576 fichiers WAV déclarés disponibles. Ces tests statiques ne remplacent pas une vérification manuelle sur iPhone ni une écoute de tous les fichiers.
