@@ -46,3 +46,7 @@ Le workflow de validation contrôle désormais la syntaxe de `apprendre.js`, la 
 
 ## Ajouter une langue sans refaire l’interface
 Ajouter la langue à `languages` dans `data/trilingual-lexicon.json` avec un code stable, un nom et éventuellement `speechLocale`; déplacer son code depuis `futureLanguages` vers `languages`. Les sélecteurs de langue, les champs de contribution et les colonnes d’export sont construits à partir de cette liste. Pour chaque nouvelle entrée, ajouter les champs de cette langue et conserver les sources/statuts. Une locale de synthèse n’active un bouton que si une voix correspondante est réellement installée dans le navigateur.
+
+
+## Exercices
+La page propose deux modes de quiz : vocabulaire dans les langues choisies, quand les deux formes existent, et phrases soninké–français tirées du corpus sourcé. Le score est limité à la session courante ; aucun progrès durable ni synchronisation entre appareils n’est revendiqué à ce stade. Les réponses sont comparées après normalisation Unicode et casse, sans supprimer les diacritiques linguistiquement importants.
