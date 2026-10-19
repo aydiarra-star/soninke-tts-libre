@@ -20,7 +20,7 @@ def download_archive(file_id, confirmed, destination):
     if not re.fullmatch(r"[A-Za-z0-9_-]{10,}", file_id):
         fail("Identifiant Google Drive invalide. Fournis uniquement l'ID du fichier.")
     output = destination / "soninke_audio_export.zip"
-    result = gdown.download(id=file_id, output=str(output), quiet=False, fuzzy=True)
+    result = gdown.download(id=file_id, output=str(output), quiet=False)
     if not result or not output.is_file() or output.stat().st_size < 1000:
         fail("Téléchargement impossible. Vérifie le partage du ZIP et son ID.")
     print("ZIP téléchargé:", output.stat().st_size, "octets")
