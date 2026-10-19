@@ -22,6 +22,7 @@ const sources = parseJSON("data/language-sources.json");
 const curriculum = parseJSON("data/learning-curriculum.json");
 const manifest = parseJSON("data/audio-manifest.json");
 const wolofDictionary = parseJSON("data/wolof-fr-dictionary.json");
+const sentenceCorpus = parseJSON("data/soninke-learning-corpus.json");
 const lines = read("data/soninke-lexicon.jsonl").split(/\r?\n/).filter((line) => line.trim());
 const languageCodes = ["soninke", "wolof", "fr", "en"];
 
@@ -50,6 +51,18 @@ if (Array.isArray(schema?.entries)) {
   if (ids.size === schema.entries.length) pass(`${schema.entries.length} fiches multilingues sourcées, identifiants uniques`);
 } else fail("schema.entries doit être un tableau");
 
+if (Array.isArray(sentenceCorpus?.entries) && sentenceCorpus.entryCount === sentenceCorpus.entries.length && sentenceCorpus.entryCount >= 100) {
+  const sentenceIds = new Set();
+  let corpusErrors = 0;
+  for (const entry of sentenceCorpus.entries) {
+    if (!entry.id || sentenceIds.has(entry.id)) corpusErrors++;
+    sentenceIds.add(entry.id);
+    if (!entry.snk || !entry.fr || !String(entry.sourceUrl || "").startsWith("https://")) corpusErrors++;
+    if (entry.license !== "CC-BY-4.0" || !entry.attribution) corpusErrors++;
+  }
+  if (!corpusErrors) pass(`corpus soninké–français : ${sentenceCorpus.entryCount} entrées sourcées et attribuées`);
+  else fail(`corpus soninké–français : ${corpusErrors} anomalies de source, licence ou contenu`);
+} else fail("corpus soninké–français absent ou incomplet");
 if (Array.isArray(wolofDictionary?.entries) && wolofDictionary.entryCount === wolofDictionary.entries.length && wolofDictionary.entryCount >= 500) {
   const wolofIds = new Set();
   let sourceErrors = 0;
