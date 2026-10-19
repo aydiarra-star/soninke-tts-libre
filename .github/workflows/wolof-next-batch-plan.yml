@@ -19,6 +19,16 @@ on:
         required: true
         default: "0"
         type: string
+      candidate_snapshot_path:
+        description: "Chemin du snapshot Kaikki figé dans la branche (vide = téléchargement live)"
+        required: false
+        default: ""
+        type: string
+      previous_manifest_paths:
+        description: "Chemins des manifestes antérieurs versionnés, séparés par des virgules"
+        required: false
+        default: ""
+        type: string
 
 permissions:
   contents: read
@@ -36,11 +46,21 @@ jobs:
         env:
           PLAN_BATCH_SIZE: ${{ github.event_name == 'workflow_dispatch' && inputs.batch_size || '10' }}
           PLAN_START_OFFSET: ${{ github.event_name == 'workflow_dispatch' && inputs.start_offset || '0' }}
+          CANDIDATE_SNAPSHOT_PATH: ${{ inputs.candidate_snapshot_path || '' }}
+          PREVIOUS_MANIFEST_PATHS: ${{ inputs.previous_manifest_paths || '' }}
         run: |
-          python wolof_tts/plan_next_audio_batch.py \
-            --batch-size "$PLAN_BATCH_SIZE" \
-            --start-offset "$PLAN_START_OFFSET" \
-            --output wolof-next-audio-batch-plan.json
+          args=(--batch-size "$PLAN_BATCH_SIZE" --start-offset "$PLAN_START_OFFSET" --output wolof-next-audio-batch-plan.json)
+          if [ -n "$CANDIDATE_SNAPSHOT_PATH" ]; then
+            args+=(--input-candidates "$CANDIDATE_SNAPSHOT_PATH")
+          fi
+          if [ -n "$PREVIOUS_MANIFEST_PATHS" ]; then
+            IFS=',' read -r -a manifests <<< "$PREVIOUS_MANIFEST_PATHS"
+            for manifest in "${manifests[@]}"; do
+              manifest="$(printf '%s' "$manifest" | xargs)"
+              [ -z "$manifest" ] || args+=(--previous-manifest "$manifest")
+            done
+          fi
+          python wolof_tts/plan_next_audio_batch.py "${args[@]}"
       - name: Upload review-only plan
         uses: actions/upload-artifact@v4
         with:
