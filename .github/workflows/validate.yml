@@ -25,6 +25,7 @@ jobs:
           node --check app.js
           node --check corpus.js
           node --check lexique.js
+          node --check apprendre.js
       - name: Vérifier la syntaxe Python du script STT expérimental
         run: python -m py_compile experiments/stt_transcribe.py experiments/evaluate_stt.py experiments/stt_metrics.py
       - name: Tester les métriques WER/CER
@@ -33,3 +34,5 @@ jobs:
         run: node scripts/validate-project.mjs
       - name: Vérifier les 577 entrées du lexique et les statuts de validation
         run: node scripts/validate-lexicon.mjs
+      - name: Vérifier l’application multilingue, ses ressources et ses données
+        run: node scripts/validate-learning-app.mjs
