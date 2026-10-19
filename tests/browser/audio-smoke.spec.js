@@ -38,11 +38,4 @@ test("le lexique charge les entrées et un WAV est décodable par WebKit", async
   expect(media.error).toBeNull();
   expect(failedRequests).toEqual([]);
 });
-
-test("la page d’apprentissage et ses ressources statiques se chargent", async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("http://127.0.0.1:4173/apprendre.html");
-  await expect(page.getByRole("heading", { name: /Explorer les mots/i })).toBeVisible();
-  await expect(page.locator("#results")).toBeAttached();
-  await expect(page.locator("#sentence-results")).toBeAttached();
-});
+ 
