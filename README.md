@@ -33,7 +33,7 @@ Une branche de travail prépare un espace mobile-first pour apprendre **soninké
 - [Plan d’import des dictionnaires](docs/LANGUAGE-DATA-IMPORT-PLAN.md) ;
 - [Parcours pédagogique A0–A2](data/learning-curriculum.json).
 
-Le dépôt conserve les 577 entrées soninké et le lot audio proposé dans la PR #14. Le prototype multilingue comprend neuf entrées wolof-français initiales sourcées et un import automatisé du dictionnaire Jàngileen en cours de vérification. Les données ne seront déclarées complètes qu’après une extraction réussie, des contrôles de couverture et une vérification de l’affichage. Aucune traduction soninké ou anglaise n’est inventée pour remplir les champs manquants.
+Le dépôt conserve les 577 entrées soninké et le lot audio proposé dans la PR #14. Le prototype multilingue comprend un instantané de 750 fiches français–wolof issues de 26 pages alphabétiques du dictionnaire Jàngileen, avec une URL source par fiche. Le site indique 911 mots wolof ; les deux compteurs ne sont pas directement comparables, et l’import n’est pas déclaré complet. Les exemples dont la langue ne peut pas être attribuée avec certitude restent signalés comme à vérifier. Aucune traduction soninké ou anglaise n’est inventée pour remplir les champs manquants.
 
 ## Ressources de langue
 
