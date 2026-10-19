@@ -62,3 +62,7 @@ Chaque fiche peut être ajoutée à une liste « Mes révisions », conservée d
 
 ## Compléter les lacunes du dictionnaire wolof
 Les têtes d’entrée françaises sans traduction exploitable sont listées dans l’instantané d’import et affichées dans la section « Entrées à compléter ». Un bouton préremplit le formulaire local pour proposer une traduction wolof. La proposition reste locale et ne modifie pas la source ; l’utilisateur doit exporter les données ou soumettre une contribution communautaire pour demander une revue.
+
+
+## Application installable et accès hors connexion
+Le manifeste et le service worker préparent une PWA gratuite. Après publication HTTPS et un premier chargement, les pages et données textuelles essentielles sont mises en cache. Les audios ne sont pas préchargés ; un fichier audio demandé en ligne peut être conservé dans le cache après lecture. Les essais réels d’installation iPhone/Android et d’usage hors connexion restent à faire sur appareil.
