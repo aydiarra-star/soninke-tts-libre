@@ -23,6 +23,18 @@ Le workflow GitHub Actions de publication a terminé avec succès sur le commit 
 - [État du déploiement GitHub Actions](https://github.com/aydiarra-star/soninke-tts-libre/actions/runs/38982991503)
 - [Guide de publication et de dépannage](docs/DEPLOYMENT-GITHUB-PAGES.md)
 
+## Espace d’apprentissage multilingue — en développement
+
+Une branche de travail prépare un espace mobile-first pour apprendre **soninké, wolof, français et anglais** :
+
+- [Ouvrir le prototype source](apprendre.html) (la branche doit être publiée pour être consultable comme page web) ;
+- [PR #15 — application multilingue](https://github.com/aydiarra-star/soninke-tts-libre/pull/15) ;
+- [Catalogue des dictionnaires et licences](data/language-sources.json) ;
+- [Plan d’import des dictionnaires](docs/LANGUAGE-DATA-IMPORT-PLAN.md) ;
+- [Parcours pédagogique A0–A2](data/learning-curriculum.json).
+
+Le dépôt conserve les 577 entrées soninké et le lot audio proposé dans la PR #14. Le prototype multilingue comprend neuf entrées wolof-français initiales sourcées et un import automatisé du dictionnaire Jàngileen en cours de vérification. Les données ne seront déclarées complètes qu’après une extraction réussie, des contrôles de couverture et une vérification de l’affichage. Aucune traduction soninké ou anglaise n’est inventée pour remplir les champs manquants.
+
 ## Ressources de langue
 
 - [Inventaire des dictionnaires, corpus et licences](docs/LEXICAL-RESOURCES.md)
