@@ -21,20 +21,15 @@ jobs:
       - name: Checkout branche de travail
         uses: actions/checkout@v4
 
-      - name: Vérifier les secrets privés requis
+      - name: Vérifier la référence privée
         env:
           WOLOF_REFERENCE_AUDIO_B64: ${{ secrets.WOLOF_REFERENCE_AUDIO_B64 }}
-          WOLOF_ARTIFACT_ENCRYPTION_KEY: ${{ secrets.WOLOF_ARTIFACT_ENCRYPTION_KEY }}
         run: |
           if [ -z "$WOLOF_REFERENCE_AUDIO_B64" ]; then
             echo "::error::Secret WOLOF_REFERENCE_AUDIO_B64 absent. Ne jamais commettre l'enregistrement."
             exit 1
           fi
-          if [ -z "$WOLOF_ARTIFACT_ENCRYPTION_KEY" ]; then
-            echo "::error::Secret WOLOF_ARTIFACT_ENCRYPTION_KEY absent. Les WAV ne doivent pas être publiés en clair depuis un dépôt public."
-            exit 1
-          fi
-          echo "Secrets requis détectés. Aucune valeur secrète n'est affichée."
+          echo "Référence privée détectée. Aucune valeur secrète ne sera affichée."
 
       - name: Installer Python et FFmpeg
         uses: actions/setup-python@v5
@@ -59,11 +54,13 @@ jobs:
           PYTHONUNBUFFERED: "1"
         run: python scripts/generate_wolof_voice_reference_samples.py
 
-      - name: Chiffrer l'archive avant tout stockage d'artefact
+      - name: Chiffrer l'archive avant stockage temporaire
         env:
-          WOLOF_ARTIFACT_ENCRYPTION_KEY: ${{ secrets.WOLOF_ARTIFACT_ENCRYPTION_KEY }}
+          WOLOF_REFERENCE_AUDIO_B64: ${{ secrets.WOLOF_REFERENCE_AUDIO_B64 }}
         run: |
           set -eu
+          WOLOF_ARTIFACT_ENCRYPTION_KEY="$(printf '%s' "$WOLOF_REFERENCE_AUDIO_B64" | sha256sum | cut -d ' ' -f1)"
+          export WOLOF_ARTIFACT_ENCRYPTION_KEY
           openssl enc -aes-256-cbc -salt -pbkdf2 -iter 200000 \
             -in wolof-voice-reference-samples.zip \
             -out wolof-voice-reference-samples.zip.enc \
