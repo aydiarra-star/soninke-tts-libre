@@ -6,6 +6,7 @@ on:
       - feat/wolof-lexicon-audio-batches
     paths:
       - "wolof_tts/generate_lexicon_batch.py"
+      - "wolof_tts/import_kaikki_candidates.py"
       - ".github/workflows/wolof-lexicon-audio-batch.yml"
       - "data/wolof-fr-dictionary.json"
   workflow_dispatch:
@@ -29,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     env:
-      WOLF_BATCH_START: ${{ github.event_name == 'workflow_dispatch' && inputs.start_index || '0' }}
+      WOLF_BATCH_START: ${{ github.event_name == 'workflow_dispatch' && inputs.start_index || '10' }}
       WOLF_BATCH_SIZE: ${{ github.event_name == 'workflow_dispatch' && inputs.batch_size || '10' }}
     steps:
       - uses: actions/checkout@v4
@@ -43,6 +44,8 @@ jobs:
           python -m pip install 'git+https://github.com/huggingface/parler-tts.git' transformers accelerate soundfile numpy
           python -m pip install --force-reinstall --no-deps torch torchaudio --index-url https://download.pytorch.org/whl/cpu
           python -c "import torch, torchaudio; print('torch', torch.__version__, 'cuda?', torch.cuda.is_available()); print('torchaudio', torchaudio.__version__)"
+      - name: Import Kaikki review-only candidates
+        run: python wolof_tts/import_kaikki_candidates.py --output data/kaikki-wolof-candidates.json
       - name: Generate and validate dictionary batch
         env:
           HF_HUB_DISABLE_TELEMETRY: "1"
