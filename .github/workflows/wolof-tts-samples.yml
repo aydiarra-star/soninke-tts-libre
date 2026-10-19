@@ -36,6 +36,8 @@ jobs:
       - name: Générer les échantillons
         env:
           HF_HUB_DISABLE_TELEMETRY: "1"
+          TOKENIZERS_PARALLELISM: "false"
+          PYTHONUNBUFFERED: "1"
         run: python scripts/generate_wolof_tts_samples.py
       - name: Publier l’archive comme artefact de workflow
         uses: actions/upload-artifact@v4
