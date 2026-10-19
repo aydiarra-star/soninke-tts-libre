@@ -58,3 +58,7 @@ L’ajout local dans la page ne publie rien sur le dépôt. Pour proposer une en
 
 ## Révisions locales
 Chaque fiche peut être ajoutée à une liste « Mes révisions », conservée dans le navigateur avec `localStorage`. Le filtre permet de retrouver les mots choisis à la prochaine visite sur le même navigateur. Cette liste n’est ni synchronisée entre appareils ni envoyée au serveur.
+
+
+## Compléter les lacunes du dictionnaire wolof
+Les têtes d’entrée françaises sans traduction exploitable sont listées dans l’instantané d’import et affichées dans la section « Entrées à compléter ». Un bouton préremplit le formulaire local pour proposer une traduction wolof. La proposition reste locale et ne modifie pas la source ; l’utilisateur doit exporter les données ou soumettre une contribution communautaire pour demander une revue.
