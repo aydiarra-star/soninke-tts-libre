@@ -52,3 +52,32 @@ test("le quiz de phrases propose une question et active la réponse", async ({ p
   await expect(page.locator("#quiz-answer")).toBeEnabled();
   await expect(page.locator("#quiz-check")).toBeEnabled();
 });
+
+test("les révisions persistent et les exports JSON/CSV sont proposés", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("http://127.0.0.1:4173/apprendre.html");
+  const firstCard = page.locator("#results .word-card").first();
+  await expect(firstCard).toBeVisible({ timeout: 20000 });
+  const word = await firstCard.locator("h3").innerText();
+  await firstCard.getByRole("button", { name: /Ajouter aux révisions/ }).click();
+  await expect(firstCard.getByRole("button", { name: /Dans mes révisions/ })).toBeVisible();
+
+  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("soninke-tts-libre-review-v1") || "[]"));
+  expect(saved.length).toBeGreaterThan(0);
+
+  await page.reload();
+  await expect(page.locator("#entry-count")).toContainText("fiches", { timeout: 20000 });
+  await page.locator("#review-only").check();
+  await expect(page.locator("#results .word-card")).toHaveCount(saved.length);
+  await expect(page.locator("#results .word-card h3").filter({ hasText: word })).toBeVisible();
+
+  const jsonDownloadPromise = page.waitForEvent("download");
+  await page.locator("#export-json").click();
+  const jsonDownload = await jsonDownloadPromise;
+  expect(jsonDownload.suggestedFilename()).toBe("langues-en-partage.json");
+
+  const csvDownloadPromise = page.waitForEvent("download");
+  await page.locator("#export-csv").click();
+  const csvDownload = await csvDownloadPromise;
+  expect(csvDownload.suggestedFilename()).toBe("langues-en-partage.csv");
+});
