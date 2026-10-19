@@ -68,7 +68,7 @@ if (sources?.policy?.includes("licensing")) pass("règle de licence avant import
 else fail("la politique de licence avant import doit être documentée");
 if (Array.isArray(curriculum?.learningStages) && curriculum.learningStages.length >= 5) pass("parcours pédagogique structuré");
 else fail("parcours pédagogique trop incomplet");
-for (const required of ['id="from"', 'id="to"', 'id="search"', 'id="results"', 'id="entry-form"', 'id="export-json"', 'id="export-csv"', 'id="ressources"', 'id="parcours"']) {
+for (const required of ['id="from"', 'id="to"', 'id="search"', 'id="results"', 'id="entry-form"', 'id="export-json"', 'id="export-csv"', 'id="grammar-filter"', 'id="ressources"', 'id="parcours"']) {
   if (html.includes(required)) pass(`interface contient ${required}`);
   else fail(`interface ne contient pas ${required}`);
 }
