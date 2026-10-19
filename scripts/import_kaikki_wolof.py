@@ -69,7 +69,7 @@ def main():
                 "source_license": "Wiktionary data: CC BY-SA; verify upstream terms and attribution",
                 "linguistic_status": "imported_not_native_validated",
                 "translation_status": "candidate_translation_review_required",
-                "audio_file": f"audio/{slug(word)}.wav",
+                "audio_file": f"wolof-adia-samples/{len(rows):05d}_{slug(word)}.wav",
                 "audio_status": "pending",
             })
             seen.add(word.casefold())
