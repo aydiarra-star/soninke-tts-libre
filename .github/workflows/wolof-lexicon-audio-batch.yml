@@ -9,6 +9,7 @@ on:
       - "wolof_tts/plan_next_audio_batch.py"
       - "wolof_tts/validate_wolof_batch_plan.py"
       - "wolof_tts/manifests/historical-audio-headwords.json"
+      - "data/wolof-audio-manifest.json"
       - "data/wolof-fr-dictionary.json"
       - "data/kaikki-wolof-candidates.json"
       - ".github/workflows/wolof-lexicon-audio-batch.yml"
@@ -30,7 +31,6 @@ permissions:
 
 jobs:
   generate:
-    # Pushes run this expensive job only when explicitly marked for generation.
     if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[generate-wolof-audio]')
     runs-on: ubuntu-latest
     timeout-minutes: 45
@@ -42,11 +42,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Build plan from pinned sources and all known prior audio
+      - name: Build plan excluding current and historical audio
         run: |
           python wolof_tts/plan_next_audio_batch.py \
             --input-candidates data/kaikki-wolof-candidates.json \
             --previous-manifest wolof_tts/manifests/historical-audio-headwords.json \
+            --previous-manifest data/wolof-audio-manifest.json \
             --batch-size "$WOLF_BATCH_SIZE" \
             --start-offset "$WOLF_START_OFFSET" \
             --output wolof-next-audio-batch-plan.json
