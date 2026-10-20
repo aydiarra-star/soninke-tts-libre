@@ -19,8 +19,14 @@ class WolofBatchPlanValidationTests(unittest.TestCase):
             "python", str(ROOT / "wolof_tts" / "plan_next_audio_batch.py"),
             "--input-candidates", "data/kaikki-wolof-candidates.json",
             "--previous-manifest", "wolof_tts/manifests/historical-audio-headwords.json",
+            "--previous-manifest", "data/wolof-audio-manifest.json",
             "--batch-size", "10", "--start-offset", "0", "--output", str(path),
         ], cwd=ROOT, check=True, capture_output=True, text=True)
+
+    def test_validator_normalization_collapses_whitespace_and_preserves_diacritics(self):
+        self.assertEqual(VALIDATOR.norm("  Kër   bu   mag "), "kër bu mag")
+        self.assertEqual(VALIDATOR.norm("Kër"), "kër")
+        self.assertNotEqual(VALIDATOR.norm("Kër"), VALIDATOR.norm("Ker"))
 
     def test_real_planner_output_validates_without_tts_imports(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -31,6 +37,9 @@ class WolofBatchPlanValidationTests(unittest.TestCase):
             self.assertEqual(result["selected_count"], 10)
             self.assertFalse(result["audio_generated"])
             self.assertFalse(result["tts_model_loaded"])
+            self.assertTrue(set(["abal", "adarees"]).isdisjoint(
+                {word.casefold() for word in result["selected_headwords"]}
+            ))
             generator_check = subprocess.run([
                 "python", str(ROOT / "wolof_tts" / "generate_lexicon_batch.py"),
                 "--plan-json", str(plan), "--validate-plan-only",

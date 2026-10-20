@@ -10,11 +10,12 @@ ROOT = Path(__file__).resolve().parents[1]
 LEXICON = ROOT / "data" / "wolof-fr-dictionary.json"
 CANDIDATES = ROOT / "data" / "kaikki-wolof-candidates.json"
 HISTORICAL = ROOT / "wolof_tts" / "manifests" / "historical-audio-headwords.json"
+CURRENT_WOLOF_MANIFEST = ROOT / "data" / "wolof-audio-manifest.json"
 SEEDS = {"jërëjëf", "kër", "ñëw"}
 
 
 def norm(value):
-    return re.sub(r"\\s+", " ", str(value or "").strip()).casefold()
+    return re.sub(r"\s+", " ", str(value or "").strip()).casefold()
 
 
 def sha256(path):
@@ -37,7 +38,7 @@ def _merged_sources():
         french = str((entry.get("fr") or {}).get("word") or "").strip()
         if not word or not french:
             continue
-        for variant_no, variant in enumerate([v.strip() for v in re.split(r"\\s*/\\s*", word) if v.strip()], 1):
+        for variant_no, variant in enumerate([v.strip() for v in re.split(r"\s*/\s*", word) if v.strip()], 1):
             merged.setdefault(norm(variant), {
                 "wolof": variant, "french": french, "source": entry.get("source", ""),
                 "source_name": entry.get("sourceName", lexicon.get("source", "Jàngileen")),
@@ -84,6 +85,8 @@ def validate_plan(plan_path, root=ROOT):
     historical = json.loads(HISTORICAL.read_text(encoding="utf-8"))
     excluded = {planner.norm(w) for w in planner.KNOWN_AUDIO_HEADWORDS}
     excluded.update(planner.norm(row.get("wolof")) for row in historical.get("entries", []))
+    current_words, _ = planner.manifest_words(CURRENT_WOLOF_MANIFEST)
+    excluded.update(current_words)
     excluded.update(SEEDS)
     merged = _merged_sources()
     seen = set()

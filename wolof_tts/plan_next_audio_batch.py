@@ -9,21 +9,20 @@ import argparse
 import hashlib
 import json
 import re
-import subprocess
-import sys
-import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 LEXICON = ROOT / "data" / "wolof-fr-dictionary.json"
+CURRENT_WOLOF_MANIFEST = ROOT / "data" / "wolof-audio-manifest.json"
+KAIKKI_CANDIDATES = ROOT / "data" / "kaikki-wolof-candidates.json"
 IMPORTER = ROOT / "wolof_tts" / "import_kaikki_candidates.py"
 KAIKKI_URL = "https://kaikki.org/frwiktionary/Wolof/kaikki.org-dictionary-Wolof.jsonl"
 KAIKKI_PAGE = "https://kaikki.org/frwiktionary/Wolof/index.html"
 LICENSE_NOTE = "Wiktionary-derived data; retain attribution and comply with applicable CC BY-SA/GFDL terms."
 KNOWN_AUDIO_HEADWORDS = {
-    "aada", "aay", "aaye", "ab", "abb", "ag", "ak", "alal", "alkaati", "altine",
-    "agsil ak jàmm ci sa kër", "aksidaa", "alarba", "albaani", "alemaañ", "all",
+    "aada", "aay", "aaye", "ab", "abb", "ag", "agsil ak jàmm ci sa kër", "ak", "alal", "alkaati", "altine",
+    "aksidaa", "alarba", "albaani", "alemaañ", "all",
 }
 VALIDATED_REFERENCES = {"jërëjëf", "kër", "ñëw"}
 
@@ -83,6 +82,12 @@ def main():
 
     previous_words = {norm(w) for w in KNOWN_AUDIO_HEADWORDS}
     manifest_hashes = []
+    # Always exclude the currently published Wolof batch, even if a workflow caller
+    # forgets to pass it. Additional historical manifests remain additive.
+    if CURRENT_WOLOF_MANIFEST.exists():
+        words, digest = manifest_words(CURRENT_WOLOF_MANIFEST)
+        previous_words.update(words)
+        manifest_hashes.append({"path": str(CURRENT_WOLOF_MANIFEST), "sha256": digest, "unique_headwords": len(words)})
     for manifest_path in args.previous_manifest:
         path = manifest_path if manifest_path.is_absolute() else ROOT / manifest_path
         words, digest = manifest_words(path)
@@ -144,7 +149,7 @@ def main():
         "important": [
             "Use --input-candidates with a saved candidate JSON to reproduce the same lexical source snapshot.",
             "Supply every available prior audio manifest with repeated --previous-manifest arguments to prevent cross-batch repeats.",
-            "Only the manifests supplied to this run can be checked; absent or expired artifacts cannot be inferred.",
+            "The current published Wolof manifest is always excluded automatically; other absent or expired artifacts cannot be inferred.",
             "Review translations and licences before publication.",
             "A planned word is not proof that an audio file exists.",
             "All generated pronunciation validation remains pending until a human listens to the actual WAV.",
