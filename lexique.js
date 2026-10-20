@@ -15,10 +15,10 @@
   let audioById = new Map();
   let translationsByWord = new Map();
   function normalizeWord(value) {
-    return String(value || "").normalize("NFC").trim().toLocaleLowerCase("fr").replace(/\\s+/g, " ");
+    return String(value || "").normalize("NFC").trim().toLocaleLowerCase("fr").replace(/\s+/g, " ");
   }
   function parseTranslations(csvText) {
-    const lines = csvText.split(/\\r?\\n/).filter(line => line.trim());
+    const lines = csvText.split(/\r?\n/).filter(line => line.trim());
     const map = new Map();
     lines.slice(1).forEach(line => {
       const fields = line.split(";");
