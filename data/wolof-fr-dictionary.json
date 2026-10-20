@@ -6,20 +6,11 @@
   "sourceLicenseNote": "Le site indique que les données du dictionnaire (mots, traductions et exemples) peuvent être redistribuées et modifiées.",
   "reportedWolofWordCount": 911,
   "sourceHeadwordCount": 709,
-  "translatedHeadwordCount": 707,
-  "untranslatedHeadwordCount": 2,
-  "untranslatedHeadwords": [
-    {
-      "headword": "instant",
-      "source": "https://jangileen.kalam-alami.net/dictionary/word/fr/instant"
-    },
-    {
-      "headword": "longtemps",
-      "source": "https://jangileen.kalam-alami.net/dictionary/word/fr/longtemps"
-    }
-  ],
+  "translatedHeadwordCount": 709,
+  "untranslatedHeadwordCount": 0,
+  "untranslatedHeadwords": [],
   "extractedAt": "2026-10-19T08:00:45Z",
-  "entryCount": 765,
+  "entryCount": 767,
   "entries": [
     {
       "id": "jangileen-absolument-1-57cbd0ef",
@@ -28481,6 +28472,88 @@
       "translationStatus": "unverified-candidate",
       "audioStatus": "generated-unvalidated",
       "audioManifest": "data/wolof-audio-manifest.json"
+    },
+    {
+      "soninke": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "wolof": {
+        "word": "saŋx",
+        "definition": "expression temporelle : il y a un instant",
+        "example": "",
+        "audio_url": ""
+      },
+      "fr": {
+        "word": "instant",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "en": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "sourceExamples": [],
+      "grammar_category": "adverb",
+      "category": "other",
+      "license": "Jàngileen indique que les données du dictionnaire peuvent être redistribuées et modifiées",
+      "status": "draft",
+      "origin": "external-dictionary",
+      "pronunciationStatus": "unverified",
+      "translationStatus": "source-documented-candidate-human-review",
+      "id": "jangileen-instant-candidate-saŋx-20261020",
+      "source": "https://fsi-languages.yojik.eu/languages/PeaceCorps/Wolof/ED226616.pdf",
+      "sourceName": "Peace Corps / FSI — Wolof language manual",
+      "additionalSources": [
+        "https://jangileen.kalam-alami.net/dictionary/word/fr/instant"
+      ],
+      "sourceNote": "Candidat appuyé par l'exemple « demna saŋx » (« il est parti il y a un instant ») ; à valider par un locuteur."
+    },
+    {
+      "soninke": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "wolof": {
+        "word": "yàgg",
+        "definition": "durer longtemps ; selon le contexte, il y a longtemps",
+        "example": "",
+        "audio_url": ""
+      },
+      "fr": {
+        "word": "longtemps",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "en": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "sourceExamples": [],
+      "grammar_category": "adverb",
+      "category": "other",
+      "license": "Jàngileen indique que les données du dictionnaire peuvent être redistribuées et modifiées",
+      "status": "draft",
+      "origin": "external-dictionary",
+      "pronunciationStatus": "unverified",
+      "translationStatus": "source-documented-candidate-human-review",
+      "id": "jangileen-longtemps-candidate-yagg-20261020",
+      "source": "https://jangileen.kalam-alami.net/dictionary/word/wo/y%C3%A0gg",
+      "sourceName": "Jàngileen — dictionnaire français/wolof",
+      "additionalSources": [
+        "https://www.cours-langues-audio.com/duree-frequence-wolof/"
+      ],
+      "sourceNote": "Candidat lexical ; yàgg fonctionne comme verbe, la formulation exacte dépend du contexte. À valider par un locuteur."
     },
     {
       "id": "wolof-audio-candidate-00000-ambasaad",
