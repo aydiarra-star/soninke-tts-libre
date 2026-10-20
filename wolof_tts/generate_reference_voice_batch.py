@@ -189,7 +189,8 @@ def main() -> int:
             if not selected:
                 raise SystemExit("Aucune entrée admissible dans cette plage du dictionnaire.")
         else:
-            selected = [{"wolof": args.poc_text, "french": VALIDATED_SEEDS.get(norm(args.poc_text), ""),
+            selected = [{"entry_id": "proof-of-concept", "dictionary_index": -1,
+                         "wolof": args.poc_text, "french": VALIDATED_SEEDS.get(norm(args.poc_text), ""),
                          "translation_status": "user-validated-reference" if norm(args.poc_text) in VALIDATED_SEEDS else "needs-review"}]
 
         records = []
