@@ -1,4 +1,5 @@
 name: Wolof lexicon audio batch
+# Generation uses the validated plan and excludes both historical and already-published audio.
 
 on:
   push:
