@@ -24,6 +24,9 @@ ROOT = Path(__file__).resolve().parents[1]
 LEXICON = ROOT / "data" / "wolof-fr-dictionary.json"
 AUDIO_MANIFEST = ROOT / "data" / "wolof-audio-manifest.json"
 MODEL_ID = "k2-fsa/OmniVoice"
+# OmniVoice examples write generated samples at 24 kHz. Some package versions
+# do not expose model.sampling_rate, so use the documented rate when absent.
+DEFAULT_SAMPLE_RATE = 24000
 VALIDATED_SEEDS = {"jërëjëf": "Merci", "kër": "Maison", "ñëw": "Venir"}
 
 
@@ -135,6 +138,7 @@ def select_entries(
     rows.sort(key=lambda row: (norm(row["wolof"]), row["french"].casefold(), row["entry_id"]))
     return rows[start:start + size]
 
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--reference-audio", help="Chemin local privé vers l'enregistrement de référence.")
@@ -181,7 +185,7 @@ def main() -> int:
             MODEL_ID, device_map=device,
             dtype=torch.float16 if device.startswith("cuda") else torch.float32,
         )
-        sample_rate = int(getattr(model, "sampling_rate", 0) or 0)
+        sample_rate = int(getattr(model, "sampling_rate", DEFAULT_SAMPLE_RATE) or DEFAULT_SAMPLE_RATE)
         if sample_rate <= 0:
             raise SystemExit("BLOQUÉ : le moteur n'a pas fourni une fréquence d'échantillonnage valide.")
         if args.batch:
