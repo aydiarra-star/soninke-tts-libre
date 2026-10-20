@@ -1,6 +1,10 @@
 {
   "schemaVersion": 1,
-  "batchSource": "GitHub Actions artifact run 39367190221",
+  "batchSource": "GitHub Actions artifact run 39376554797",
+  "batchSources": [
+    "GitHub Actions artifact run 39376554797",
+    "GitHub Actions artifact run 39367190221"
+  ],
   "model": "CONCREE/Adia_TTS",
   "technicalValidation": "passed by generator; WAV archive rechecked; publication checks pending",
   "humanPronunciationValidation": "pending",
@@ -246,7 +250,7 @@
       "technical_validation": "passed",
       "generated_at_utc": "2026-10-20T05:46:52.817603+00:00",
       "audio_url": "audio/wolof/00000-ambasaad.wav",
-      "translation_validation": "pending"
+      "translation_validation": "unverified-candidate"
     },
     {
       "id": "00001-ampuul",
@@ -268,7 +272,7 @@
       "technical_validation": "passed",
       "generated_at_utc": "2026-10-20T05:46:59.391282+00:00",
       "audio_url": "audio/wolof/00001-ampuul.wav",
-      "translation_validation": "pending"
+      "translation_validation": "unverified-candidate"
     },
     {
       "id": "00002-amul",
@@ -290,7 +294,7 @@
       "technical_validation": "passed",
       "generated_at_utc": "2026-10-20T05:47:05.478486+00:00",
       "audio_url": "audio/wolof/00002-amul.wav",
-      "translation_validation": "pending"
+      "translation_validation": "unverified-candidate"
     },
     {
       "id": "00003-amule",
@@ -312,7 +316,7 @@
       "technical_validation": "passed",
       "generated_at_utc": "2026-10-20T05:47:13.249602+00:00",
       "audio_url": "audio/wolof/00003-amule.wav",
-      "translation_validation": "pending"
+      "translation_validation": "unverified-candidate"
     },
     {
       "id": "00004-amuma",
@@ -334,7 +338,7 @@
       "technical_validation": "passed",
       "generated_at_utc": "2026-10-20T05:47:20.468897+00:00",
       "audio_url": "audio/wolof/00004-amuma.wav",
-      "translation_validation": "pending"
+      "translation_validation": "unverified-candidate"
     },
     {
       "id": "00005-ana",
@@ -422,7 +426,7 @@
       "technical_validation": "passed",
       "generated_at_utc": "2026-10-20T05:47:51.410675+00:00",
       "audio_url": "audio/wolof/00008-andandoo.wav",
-      "translation_validation": "pending"
+      "translation_validation": "unverified-candidate"
     },
     {
       "id": "00009-andoor",
@@ -444,10 +448,7 @@
       "technical_validation": "passed",
       "generated_at_utc": "2026-10-20T05:47:57.730730+00:00",
       "audio_url": "audio/wolof/00009-andoor.wav",
-      "translation_validation": "pending"
+      "translation_validation": "unverified-candidate"
     }
-  ],
-  "batchSources": [
-    "GitHub Actions artifact run 39376554797"
   ]
 }
