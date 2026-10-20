@@ -28,7 +28,7 @@
       const key = normalizeWord(word);
       if (!map.has(key)) map.set(key, []);
       const items = map.get(key);
-      if (!items.some(item => item.fr === fr && item.category === category)) items.push({ id, fr, category, source, status });
+      if (!items.some(item => item.fr === fr && item.category === category)) items.push({ id, word, fr, category, source, status });
     });
     return map;
   }
@@ -92,11 +92,13 @@
       } else {
         card.append(el("p", "corpus-caveat", "Audio indisponible pour cette entrée ; aucun fichier n’a été inventé."));
       }
-      const details = entry.audioStatus === "audio_present_reused"
-        ? "Statut audio du manifeste : audio existant réutilisé"
-        : entry.audioStatus === "generated"
-          ? "Statut audio du manifeste : audio généré"
-          : "Statut audio du manifeste : génération en erreur";
+      const details = entry.technicalStatus === "translation_only_no_audio" || entry.audioStatus === "not_generated"
+        ? "Entrée de traduction uniquement — aucun audio associé pour le moment"
+        : entry.audioStatus === "audio_present_reused"
+          ? "Statut audio du manifeste : audio existant réutilisé"
+          : entry.audioStatus === "generated"
+            ? "Statut audio du manifeste : audio généré"
+            : "Statut audio du manifeste : génération en erreur";
       card.append(el("p", "corpus-field-label", details));
       if (entry.validationNote) card.append(el("p", "corpus-caveat", entry.validationNote));
       const source = el("p", "corpus-source");
@@ -128,6 +130,24 @@
       if (!entries.length) throw new Error("lexique vide");
       audioById = new Map((audioData.entries || []).map(item => [item.id, item]));
       translationsByWord = parseTranslations(translationsText);
+      const knownWords = new Set(entries.map(entry => normalizeWord(entry.word)));
+      translationsByWord.forEach((items, key) => {
+        if (knownWords.has(key) || !items.length) return;
+        const first = items[0];
+        entries.push({
+          id: first.id,
+          word: first.word,
+          source: first.source || "liste_referent",
+          license: "Données fournies par le référent linguistique du projet",
+          attribution: "Référent linguistique du projet",
+          technicalStatus: "translation_only_no_audio",
+          audioStatus: "not_generated",
+          pronunciationValidated: false,
+          validationStatus: "translation_candidate",
+          validationNote: "Entrée issue de la base Soninké–français ; elle n'est pas encore raccordée au lexique audio et sa prononciation reste à vérifier."
+        });
+        knownWords.add(key);
+      });
       render();
     })
     .catch(error => {
