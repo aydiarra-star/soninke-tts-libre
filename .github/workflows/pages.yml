@@ -1,4 +1,4 @@
-name: Publier le prototype sur GitHub Pages
+name: Publier Xam Xam Xara et préserver le laboratoire Soninké
 
 on:
   workflow_dispatch:
@@ -21,6 +21,7 @@ jobs:
     steps:
       - name: Récupérer le dépôt
         uses: actions/checkout@v4
+
       - name: Vérifier les fichiers nécessaires
         run: |
           test -f index.html
@@ -30,10 +31,21 @@ jobs:
           test -f corpus.css
           test -f corpus.js
           test -f data/soninke-samples.jsonl
+          test -f maquette-xam-xam-xara/index.html
+          test -f maquette-xam-xam-xara/styles.css
+          test -f maquette-xam-xam-xara/app.js
+
+      - name: Préparer les deux interfaces sans écraser les sources
+        run: |
+          mkdir -p dist/soninke-lab
+          find . -maxdepth 1 -type f \\( -name '*.html' -o -name '*.css' -o -name '*.js' \\) -exec cp {} dist/soninke-lab/ \\;
+          cp -R data dist/soninke-lab/data
+          cp -R maquette-xam-xam-xara/. dist/
+
       - name: Préparer l’artefact Pages
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: dist
 
   deploy:
     name: Déployer le site
