@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 import base64, csv, getpass, io, json, os, shutil, subprocess, tempfile, wave, zipfile
 import requests
 
-REPO = "aydiarra-star/soninke-tts-libre"
+REPO = "aydiarra-star/xamxam-xara"
 ARCHIVE_DEFAULT = Path("/content/drive/MyDrive/SONINKE_TTS_LIBRE/soninke_audio_export.zip")
 
 def run(args, **kwargs):
