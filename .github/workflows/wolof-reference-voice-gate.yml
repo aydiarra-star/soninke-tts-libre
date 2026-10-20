@@ -1,0 +1,26 @@
+name: Wolof reference voice gate
+
+on:
+  pull_request:
+    paths:
+      - "wolof_tts/generate_reference_voice_batch.py"
+      - "wolof_tts/REFERENCE_VOICE_PIPELINE.md"
+      - "tests/test_reference_voice_gate.py"
+      - ".github/workflows/wolof-reference-voice-gate.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fail-closed-smoke-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile the reference-conditioned generator
+        run: python -m py_compile wolof_tts/generate_reference_voice_batch.py
+      - name: Verify no reference means no generation
+        run: python -m unittest tests/test_reference_voice_gate.py -v
