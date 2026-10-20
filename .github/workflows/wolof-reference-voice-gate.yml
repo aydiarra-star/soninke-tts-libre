@@ -1,0 +1,37 @@
+name: Wolof reference voice gate
+
+on:
+  pull_request:
+    paths:
+      - "wolof_tts/generate_reference_voice_batch.py"
+      - "wolof_tts/REFERENCE_VOICE_PIPELINE.md"
+      - "wolof_tts/audit_reference_voice_readiness.py"
+      - "tests/test_reference_voice_gate.py"
+      - "wolof_tts/audit_wolof_audio_coverage.py"
+      - "tests/test_wolof_audio_coverage_audit.py"
+      - ".github/workflows/wolof-reference-voice-gate.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fail-closed-smoke-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile the reference-conditioned generator
+        run: python -m py_compile wolof_tts/generate_reference_voice_batch.py
+      - name: Verify no reference means no generation
+        run: python tests/test_reference_voice_gate.py -v
+      - name: Test dictionary/audio coverage audit
+        run: python tests/test_wolof_audio_coverage_audit.py -v
+      - name: Run read-only coverage audit against current lexicon
+        run: python wolof_tts/audit_wolof_audio_coverage.py
+      - name: Audit reference readiness without exposing private audio
+        env:
+          WOLOF_REFERENCE_AUDIO_B64: ${{ secrets.WOLOF_REFERENCE_AUDIO_B64 }}
+        run: python wolof_tts/audit_reference_voice_readiness.py
