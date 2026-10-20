@@ -1,6 +1,14 @@
 name: Wolof next-batch planning audit
 
 on:
+  push:
+    branches:
+      - feat/wolof-lexicon-audio-batches
+    paths:
+      - "data/kaikki-wolof-candidates.json"
+      - "wolof_tts/manifests/**"
+      - "wolof_tts/plan_next_audio_batch.py"
+      - ".github/workflows/wolof-next-batch-plan.yml"
   workflow_dispatch:
     inputs:
       batch_size:
@@ -14,14 +22,14 @@ on:
         default: "0"
         type: string
       candidate_snapshot_path:
-        description: "Chemin du snapshot Kaikki figé dans la branche (vide = téléchargement live)"
+        description: "Chemin du snapshot Kaikki figé dans la branche"
         required: false
-        default: ""
+        default: "data/kaikki-wolof-candidates.json"
         type: string
       previous_manifest_paths:
         description: "Chemins des manifestes antérieurs versionnés, séparés par des virgules"
         required: false
-        default: ""
+        default: "wolof_tts/manifests/historical-audio-headwords.json"
         type: string
 
 permissions:
@@ -40,8 +48,8 @@ jobs:
         env:
           PLAN_BATCH_SIZE: ${{ github.event_name == 'workflow_dispatch' && inputs.batch_size || '10' }}
           PLAN_START_OFFSET: ${{ github.event_name == 'workflow_dispatch' && inputs.start_offset || '0' }}
-          CANDIDATE_SNAPSHOT_PATH: ${{ inputs.candidate_snapshot_path || '' }}
-          PREVIOUS_MANIFEST_PATHS: ${{ inputs.previous_manifest_paths || '' }}
+          CANDIDATE_SNAPSHOT_PATH: ${{ github.event_name == 'workflow_dispatch' && inputs.candidate_snapshot_path || 'data/kaikki-wolof-candidates.json' }}
+          PREVIOUS_MANIFEST_PATHS: ${{ github.event_name == 'workflow_dispatch' && inputs.previous_manifest_paths || 'wolof_tts/manifests/historical-audio-headwords.json' }}
         run: |
           args=(--batch-size "$PLAN_BATCH_SIZE" --start-offset "$PLAN_START_OFFSET" --output wolof-next-audio-batch-plan.json)
           if [ -n "$CANDIDATE_SNAPSHOT_PATH" ]; then
