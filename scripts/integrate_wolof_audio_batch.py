@@ -109,6 +109,7 @@ def main() -> int:
                 })
 
             dictionary["entries"] = entries
+            dictionary["entryCount"] = len(entries)
             dictionary["audioBatchNote"] = "Les fichiers Wolof générés automatiquement restent des candidats : écouter et valider humainement chaque prononciation avant de la déclarer correcte."
             dictionary_path.write_text(json.dumps(dictionary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
             (root / "data/wolof-audio-manifest.json").write_text(
