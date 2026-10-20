@@ -34,6 +34,8 @@ jobs:
           test -f maquette-xam-xam-xara/index.html
           test -f maquette-xam-xam-xara/styles.css
           test -f maquette-xam-xam-xara/app.js
+          test -f audio/snk-00001.wav
+          test -f audio/wolof/00000-abal.wav
 
       - name: Préparer les deux interfaces sans écraser les sources
         run: |
@@ -42,6 +44,7 @@ jobs:
             if [ -f "$file" ]; then cp "$file" dist/soninke-lab/; fi
           done
           cp -R data dist/soninke-lab/data
+          cp -R audio dist/soninke-lab/audio
           cp -R maquette-xam-xam-xara/. dist/
 
       - name: Préparer l’artefact Pages
