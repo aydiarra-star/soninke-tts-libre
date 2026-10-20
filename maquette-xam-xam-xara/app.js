@@ -49,10 +49,10 @@
   });
 
   document.getElementById('lessonButton')?.addEventListener('click', () => {
-    notify('Leçon « Saluer avec le sourire » sélectionnée. Audio et exercices seront ajoutés avec les ressources validées.');
+    window.location.href = './soninke-lab/apprendre.html';
   });
   document.getElementById('audioButton')?.addEventListener('click', () => {
-    notify('Aucun fichier audio n’est encore relié à cette maquette.', 'error');
+    window.location.href = './soninke-lab/apprendre.html';
   });
   document.getElementById('coachButton')?.addEventListener('click', () => {
     notify('Le coach IA est une maquette visuelle : aucune conversation n’est encore connectée.');
