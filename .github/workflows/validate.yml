@@ -2,9 +2,9 @@ name: Validation statique
 
 on:
   pull_request:
-    branches: [main]
+    branches: [main, audio/integrate-lexicon-wav]
   push:
-    branches: [main]
+    branches: [main, feat/multilingual-learning-app]
 
 permissions:
   contents: read
@@ -25,11 +25,15 @@ jobs:
           node --check app.js
           node --check corpus.js
           node --check lexique.js
+          node --check apprendre.js
+          node --check sw.js
       - name: Vérifier la syntaxe Python du script STT expérimental
-        run: python -m py_compile experiments/stt_transcribe.py experiments/evaluate_stt.py experiments/stt_metrics.py scripts/publish_audio_bundle_colab.py
+        run: python -m py_compile experiments/stt_transcribe.py experiments/evaluate_stt.py experiments/stt_metrics.py scripts/import_jangileen_dictionary.py scripts/publish_audio_bundle_colab.py
       - name: Tester les métriques WER/CER
         run: python -m unittest discover -s tests -v
       - name: Vérifier le corpus, les phrases initiales et les liens documentaires
         run: node scripts/validate-project.mjs
       - name: Vérifier les 577 entrées du lexique et les statuts de validation
         run: node scripts/validate-lexicon.mjs
+      - name: Vérifier l’application multilingue, ses ressources et ses données
+        run: node scripts/validate-learning-app.mjs
