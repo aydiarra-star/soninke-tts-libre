@@ -46,6 +46,15 @@ jobs:
           cp -R data dist/soninke-lab/data
           cp -R audio dist/soninke-lab/audio
           cp -R maquette-xam-xam-xara/. dist/
+          # Make the intended Xam Xam Xara dashboard the Pages root explicitly.
+          cp maquette-xam-xam-xara/index.html dist/index.html
+          test -f dist/index.html
+          grep -q 'Xam Xam Xara' dist/index.html
+          grep -q 'id="languageGrid"' dist/index.html
+          if grep -qi 'Oh hello! Nice to see you' dist/index.html; then
+            echo "::error::Generic placeholder page detected at the Pages root."
+            exit 1
+          fi
 
       - name: Préparer l’artefact Pages
         uses: actions/upload-pages-artifact@v3
