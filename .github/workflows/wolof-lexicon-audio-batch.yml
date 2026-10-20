@@ -6,20 +6,23 @@ on:
       - feat/wolof-lexicon-audio-batches
     paths:
       - "wolof_tts/generate_lexicon_batch.py"
-      - "wolof_tts/import_kaikki_candidates.py"
-      - ".github/workflows/wolof-lexicon-audio-batch.yml"
+      - "wolof_tts/plan_next_audio_batch.py"
+      - "wolof_tts/validate_wolof_batch_plan.py"
+      - "wolof_tts/manifests/historical-audio-headwords.json"
       - "data/wolof-fr-dictionary.json"
+      - "data/kaikki-wolof-candidates.json"
+      - ".github/workflows/wolof-lexicon-audio-batch.yml"
   workflow_dispatch:
     inputs:
-      start_index:
-        description: "Index de départ dans le lexique trié (0, 10, 20...)"
-        required: true
-        default: "0"
-        type: string
       batch_size:
         description: "Nombre de mots à générer (1 à 20)"
         required: true
         default: "10"
+        type: string
+      start_offset:
+        description: "Décalage dans la liste filtrée et dédoublonnée"
+        required: true
+        default: "0"
         type: string
 
 permissions:
@@ -27,16 +30,28 @@ permissions:
 
 jobs:
   generate:
+    # Pushes run this expensive job only when explicitly marked for generation.
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[generate-wolof-audio]')
     runs-on: ubuntu-latest
     timeout-minutes: 45
     env:
-      WOLF_BATCH_START: ${{ github.event_name == 'workflow_dispatch' && inputs.start_index || '10' }}
       WOLF_BATCH_SIZE: ${{ github.event_name == 'workflow_dispatch' && inputs.batch_size || '10' }}
+      WOLF_START_OFFSET: ${{ github.event_name == 'workflow_dispatch' && inputs.start_offset || '0' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - name: Build plan from pinned sources and all known prior audio
+        run: |
+          python wolof_tts/plan_next_audio_batch.py \
+            --input-candidates data/kaikki-wolof-candidates.json \
+            --previous-manifest wolof_tts/manifests/historical-audio-headwords.json \
+            --batch-size "$WOLF_BATCH_SIZE" \
+            --start-offset "$WOLF_START_OFFSET" \
+            --output wolof-next-audio-batch-plan.json
+      - name: Validate plan through generator without TTS or WAV generation
+        run: python wolof_tts/generate_lexicon_batch.py --plan-json wolof-next-audio-batch-plan.json --validate-plan-only
       - name: Install CPU-only dependencies
         run: |
           python -m pip install --upgrade pip
@@ -44,16 +59,16 @@ jobs:
           python -m pip install 'git+https://github.com/huggingface/parler-tts.git' transformers accelerate soundfile numpy
           python -m pip install --force-reinstall --no-deps torch torchaudio --index-url https://download.pytorch.org/whl/cpu
           python -c "import torch, torchaudio; print('torch', torch.__version__, 'cuda?', torch.cuda.is_available()); print('torchaudio', torchaudio.__version__)"
-      - name: Import Kaikki review-only candidates
-        run: python wolof_tts/import_kaikki_candidates.py --output data/kaikki-wolof-candidates.json
-      - name: Generate and validate dictionary batch
+      - name: Generate selected batch from validated plan
         env:
           HF_HUB_DISABLE_TELEMETRY: "1"
-        run: python wolof_tts/generate_lexicon_batch.py --start-index "$WOLF_BATCH_START" --batch-size "$WOLF_BATCH_SIZE"
-      - name: Upload WAVs and manifest
+        run: python wolof_tts/generate_lexicon_batch.py --plan-json wolof-next-audio-batch-plan.json
+      - name: Upload audio, manifests and reproducible plan
         uses: actions/upload-artifact@v4
         with:
-          name: wolof-lexicon-audio-batch-${{ env.WOLF_BATCH_START }}
-          path: wolof-lexicon-audio-batch.zip
+          name: wolof-lexicon-audio-batch-${{ env.WOLF_START_OFFSET }}
+          path: |
+            wolof-lexicon-audio-batch.zip
+            wolof-next-audio-batch-plan.json
           if-no-files-found: error
           retention-days: 14
