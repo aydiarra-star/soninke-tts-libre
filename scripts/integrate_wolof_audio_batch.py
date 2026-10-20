@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import shutil
 import tempfile
 import zipfile
@@ -112,15 +113,35 @@ def main() -> int:
             dictionary["entryCount"] = len(entries)
             dictionary["audioBatchNote"] = "Les fichiers Wolof générés automatiquement restent des candidats : écouter et valider humainement chaque prononciation avant de la déclarer correcte."
             dictionary_path.write_text(json.dumps(dictionary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-            (root / "data/wolof-audio-manifest.json").write_text(
+            manifest_out_path = root / "data/wolof-audio-manifest.json"
+            previous_manifest = {}
+            if manifest_out_path.is_file():
+                previous_manifest = json.loads(manifest_out_path.read_text(encoding="utf-8"))
+            previous_entries = previous_manifest.get("entries", [])
+            merged_by_id = {}
+            for item in previous_entries:
+                if isinstance(item, dict) and item.get("id"):
+                    merged_by_id[item["id"]] = item
+            for item in imported:
+                merged_by_id[item["id"]] = item
+            current_run = os.environ.get("AUDIO_RUN_ID", "unknown")
+            prior_sources = previous_manifest.get("batchSources", [])
+            if not isinstance(prior_sources, list):
+                prior_sources = []
+            if previous_manifest.get("batchSource"):
+                prior_sources.append(previous_manifest["batchSource"])
+            current_source = "GitHub Actions artifact run " + current_run
+            all_sources = list(dict.fromkeys([*prior_sources, current_source]))
+            manifest_out_path.write_text(
                 json.dumps({
                     "schemaVersion": 1,
-                    "batchSource": "GitHub Actions artifact run 39367190221",
-                    "model": manifest.get("model", "CONCREE/Adia_TTS"),
-                    "technicalValidation": "passed by generator; recheck required after publication",
+                    "batchSource": current_source,
+                    "batchSources": all_sources,
+                    "model": manifest.get("model", previous_manifest.get("model", "CONCREE/Adia_TTS")),
+                    "technicalValidation": "passed by generator; WAV archive rechecked; publication checks pending",
                     "humanPronunciationValidation": "pending",
                     "translationValidation": "pending for external candidates",
-                    "entries": imported,
+                    "entries": list(merged_by_id.values()),
                 }, ensure_ascii=False, indent=2) + "\n",
                 encoding="utf-8",
             )
