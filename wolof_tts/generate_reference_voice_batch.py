@@ -212,7 +212,17 @@ def main() -> int:
                 samples = samples.detach().cpu().numpy()
             samples = np.asarray(samples).squeeze()
             if samples.ndim != 1 or samples.size == 0 or not np.isfinite(samples).all():
-                raise SystemExit(f"BLOQUÉ : audio invalide pour {item['wolof']!r}.")
+                print(f"ÉCHEC ISOLÉ : audio invalide pour {item['wolof']!r}; poursuite du lot.")
+                records.append({
+                    "id": safe_id, "entry_id": item["entry_id"], "dictionary_index": item["dictionary_index"],
+                    "wolof": item["wolof"], "french": item["french"], "file": None,
+                    "model": MODEL_ID, "language_id": "wo", "reference_audio_sha256": reference_sha256,
+                    "voice_engine": MODEL_ID, "generation_status": "failed",
+                    "technical_validation": "failed", "voice_identity_validation": "pending",
+                    "pronunciation_validation": "pending", "translation_validation": item["translation_status"],
+                    "generated_at_utc": datetime.now(timezone.utc).isoformat(),
+                })
+                continue
             sf.write(str(output_path), samples, sample_rate, subtype="PCM_16")
             with sf.SoundFile(output_path) as wav:
                 check = wav.read(dtype="float32")
