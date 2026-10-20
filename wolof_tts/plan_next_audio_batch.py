@@ -72,18 +72,14 @@ def main():
         raise SystemExit("batch-size must be 1..20 and start-offset must be >= 0")
 
     lexicon, lexicon_bytes = load_json(LEXICON)
-    if args.input_candidates:
-        candidate_path = args.input_candidates if args.input_candidates.is_absolute() else ROOT / args.input_candidates
-        candidate_payload, candidate_bytes = load_json(candidate_path)
-        candidate_mode = "pinned-input-snapshot"
-    else:
-        with tempfile.TemporaryDirectory(prefix="wolof-plan-") as tmp:
-            candidate_path = Path(tmp) / "kaikki-wolof-candidates.json"
-            subprocess.run([sys.executable, str(IMPORTER), "--output", str(candidate_path)],
-                           cwd=ROOT, check=True)
-            candidate_bytes = candidate_path.read_bytes()
-            candidate_payload = json.loads(candidate_bytes.decode("utf-8"))
-        candidate_mode = "live-upstream-download"
+    if not args.input_candidates:
+        raise SystemExit(
+            "Refusing non-reproducible planning: provide --input-candidates with a saved, "
+            "versioned Kaikki candidate JSON snapshot. No live download fallback is allowed."
+        )
+    candidate_path = args.input_candidates if args.input_candidates.is_absolute() else ROOT / args.input_candidates
+    candidate_payload, candidate_bytes = load_json(candidate_path)
+    candidate_mode = "pinned-input-snapshot"
 
     previous_words = {norm(w) for w in KNOWN_AUDIO_HEADWORDS}
     manifest_hashes = []
