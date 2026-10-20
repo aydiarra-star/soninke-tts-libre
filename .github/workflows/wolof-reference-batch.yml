@@ -13,10 +13,11 @@ on:
         required: true
         type: choice
         options:
-          - "1"
           - "5"
           - "10"
-        default: "10"
+          - "25"
+          - "50"
+        default: "50"
       voice_identity_approved:
         description: "Confirmer que le test de référence exact a été écouté et reconnu comme votre voix"
         required: true
@@ -30,7 +31,7 @@ jobs:
   generate-private-batch:
     if: ${{ inputs.voice_identity_approved == true }}
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 360
     steps:
       - uses: actions/checkout@v4
 
