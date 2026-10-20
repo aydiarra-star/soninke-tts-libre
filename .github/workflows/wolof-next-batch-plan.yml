@@ -1,12 +1,6 @@
 name: Wolof next-batch planning audit
 
 on:
-  push:
-    branches:
-      - feat/wolof-lexicon-audio-batches
-    paths:
-      - "wolof_tts/plan_next_audio_batch.py"
-      - ".github/workflows/wolof-next-batch-plan.yml"
   workflow_dispatch:
     inputs:
       batch_size:
