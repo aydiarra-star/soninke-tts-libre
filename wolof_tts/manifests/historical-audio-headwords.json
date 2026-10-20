@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "purpose": "Cross-batch exclusion manifest reconstructed from five preserved GitHub Actions artifacts. The 50 WAV instances are retained in the preservation archive; these 16 normalized headwords must be excluded from future batches.",
+  "artifact_count": 5,
+  "wav_instance_count": 50,
+  "unique_normalized_headword_count": 16,
+  "entries": [
+    {"wolof":"aada","audio_instances":4,"human_pronunciation_validation":"pending"},
+    {"wolof":"aay","audio_instances":4,"human_pronunciation_validation":"pending"},
+    {"wolof":"aaye","audio_instances":4,"human_pronunciation_validation":"pending"},
+    {"wolof":"ab","audio_instances":4,"human_pronunciation_validation":"pending"},
+    {"wolof":"abb","audio_instances":4,"human_pronunciation_validation":"pending"},
+    {"wolof":"ag","audio_instances":5,"human_pronunciation_validation":"pending"},
+    {"wolof":"agsil ak jàmm ci sa kër","audio_instances":1,"human_pronunciation_validation":"pending"},
+    {"wolof":"ak","audio_instances":5,"human_pronunciation_validation":"pending"},
+    {"wolof":"aksidaa","audio_instances":1,"human_pronunciation_validation":"pending"},
+    {"wolof":"alal","audio_instances":5,"human_pronunciation_validation":"pending"},
+    {"wolof":"alarba","audio_instances":1,"human_pronunciation_validation":"pending"},
+    {"wolof":"albaani","audio_instances":1,"human_pronunciation_validation":"pending"},
+    {"wolof":"alemaañ","audio_instances":1,"human_pronunciation_validation":"pending"},
+    {"wolof":"alkaati","audio_instances":5,"human_pronunciation_validation":"pending"},
+    {"wolof":"all","audio_instances":1,"human_pronunciation_validation":"pending"},
+    {"wolof":"altine","audio_instances":4,"human_pronunciation_validation":"pending"}
+  ]
+}
