@@ -1,0 +1,47 @@
+name: Wolof voice proof of concept
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  generate-private-poc:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require private voice reference
+        env:
+          WOLOF_REFERENCE_AUDIO_B64: ${{ secrets.WOLOF_REFERENCE_AUDIO_B64 }}
+        run: |
+          if [ -z "$WOLOF_REFERENCE_AUDIO_B64" ]; then
+            echo "::error::Secret WOLOF_REFERENCE_AUDIO_B64 is missing. No fallback voice will be used."
+            exit 1
+          fi
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install audio system dependency
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+      - name: Install reference-conditioned voice engine
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install omnivoice soundfile
+      - name: Generate one proof-of-concept word using the private reference
+        env:
+          WOLOF_REFERENCE_AUDIO_B64: ${{ secrets.WOLOF_REFERENCE_AUDIO_B64 }}
+        run: |
+          python wolof_tts/generate_reference_voice_batch.py \
+            --poc-text 'Jërëjëf' \
+            --output-dir wolof_reference_voice_outputs
+      - name: Upload private proof-of-concept for owner review
+        uses: actions/upload-artifact@v4
+        with:
+          name: wolof-voice-poc-private
+          path: wolof_reference_voice_outputs/
+          if-no-files-found: error
+          retention-days: 1
