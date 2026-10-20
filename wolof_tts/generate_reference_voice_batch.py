@@ -151,8 +151,8 @@ def main() -> int:
     parser.add_argument("--output-dir", type=Path, default=Path("wolof_reference_voice_outputs"))
     args = parser.parse_args()
 
-    if args.batch_size < 1 or args.batch_size > 10 or args.start_index < 0:
-        raise SystemExit("BLOQUÉ : batch-size doit être compris entre 1 et 10 et start-index >= 0.")
+    if args.batch_size < 1 or args.batch_size > 50 or args.start_index < 0:
+        raise SystemExit("BLOQUÉ : batch-size doit être compris entre 1 et 50 et start-index >= 0.")
     if args.batch and not args.voice_identity_approved:
         raise SystemExit(
             "BLOQUÉ : les lots du dictionnaire restent désactivés jusqu'à la validation humaine "
