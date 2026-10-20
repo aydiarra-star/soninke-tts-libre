@@ -25,17 +25,12 @@ def main() -> int:
     if not outer_zip.is_file():
         raise SystemExit(f"Missing workflow artifact archive: {outer_zip}")
 
-    with zipfile.ZipFile(outer_zip) as outer:
-        with tempfile.TemporaryDirectory() as temp:
-            outer.extractall(temp)
-            temp_path = Path(temp)
-            inner_candidates = list(temp_path.glob("*.zip"))
-            if len(inner_candidates) != 1:
-                raise SystemExit(f"Expected one inner audio ZIP, found {len(inner_candidates)}")
-            with zipfile.ZipFile(inner_candidates[0]) as batch:
-                batch.extractall(temp_path / "batch")
-
-            batch_dir = temp_path / "batch"
+    with tempfile.TemporaryDirectory() as temp:
+        batch_dir = Path(temp)
+        # The workflow artifact download action already unpacks the outer artifact;
+        # this remaining ZIP contains the WAVs and their manifests.
+        with zipfile.ZipFile(outer_zip) as batch:
+            batch.extractall(batch_dir)
             manifest_path = batch_dir / "manifest.json"
             if not manifest_path.is_file():
                 raise SystemExit("Audio manifest is missing")
