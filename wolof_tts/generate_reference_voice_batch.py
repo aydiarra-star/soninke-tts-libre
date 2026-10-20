@@ -149,7 +149,7 @@ def main() -> int:
         for offset, item in enumerate(selected, start=args.start_index if args.batch else 0):
             safe_id = f"{offset:05d}-" + re.sub(r"[^a-z0-9]+", "-", norm(item["wolof"])).strip("-")[:40]
             output_path = args.output_dir / f"{safe_id}.wav"
-            kwargs = {"text": item["wolof"], "ref_audio": str(reference), "language_id": "wo"}
+            kwargs = {"text": item["wolof"], "ref_audio": str(reference), "language": "wo"}
             reference_transcript = os.environ.get("WOLOF_REFERENCE_TRANSCRIPT", "").strip()
             if reference_transcript:
                 kwargs["ref_text"] = reference_transcript
