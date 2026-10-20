@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#123b2b">
+  <meta name="description" content="Xam Xam Xara — apprendre les langues du Sénégal et du monde. Nos langues, notre héritage.">
+  <title>Xam Xam Xara — Nos langues, notre héritage</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#accueil" aria-label="Xam Xam Xara, accueil">
+        <span class="brand-mark"><span>XX</span><i></i></span>
+        <span class="brand-copy"><strong>Xam Xam <em>Xara</em></strong><small>Nos langues, notre héritage.</small></span>
+      </a>
+      <div class="nav-label">ESPACE APPRENTISSAGE</div>
+      <nav class="main-nav" aria-label="Navigation principale">
+        <a class="nav-link active" href="#accueil"><span class="nav-icon">⌂</span> Tableau de bord</a>
+        <a class="nav-link" href="#langues"><span class="nav-icon">文</span> Mes langues <span class="nav-count">4</span></a>
+        <a class="nav-link" href="#parcours"><span class="nav-icon">◷</span> Mon parcours</a>
+        <a class="nav-link" href="#lecon"><span class="nav-icon">▤</span> Leçon du jour <span class="nav-dot"></span></a>
+        <a class="nav-link" href="#defis"><span class="nav-icon">✧</span> Défis</a>
+      </nav>
+      <div class="nav-label explore-label">DÉCOUVRIR</div>
+      <nav class="main-nav" aria-label="Découvrir">
+        <a class="nav-link" href="#culture"><span class="nav-icon">◉</span> Culture & traditions</a>
+        <a class="nav-link" href="#communaute"><span class="nav-icon">♧</span> Communauté</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="streak-card"><span class="streak-flame">♨</span><div><strong>15 jours</strong><small>Ta belle régularité !</small></div><span class="streak-spark">✦</span></div>
+        <div class="sidebar-user"><div class="avatar avatar-small">GF</div><div class="user-copy"><strong>Mon espace</strong><small>Apprenant · Niveau A1</small></div><span class="more">•••</span></div>
+      </div>
+    </aside>
+
+    <main class="main-content" id="accueil">
+      <header class="topbar">
+        <button class="mobile-menu" id="menuToggle" aria-label="Ouvrir le menu">☰</button>
+        <div class="breadcrumb">Mon espace <span>/</span> <strong>Tableau de bord</strong></div>
+        <div class="top-actions">
+          <label class="search-box"><span>⌕</span><input id="globalSearch" type="search" placeholder="Rechercher une langue, une leçon…" aria-label="Rechercher"><kbd>⌘ K</kbd></label>
+          <button class="icon-button notification" aria-label="Notifications" id="notifyButton">♧<i></i></button>
+          <div class="top-avatar avatar">GF</div>
+        </div>
+      </header>
+
+      <div class="content-wrap">
+        <section class="welcome-row">
+          <div><p class="eyebrow"><span class="eyebrow-line"></span> NIO FAR — BIENVENUE</p><h1>Jàmm rekk, <span>Ganda !</span> <span class="wave">✦</span></h1><p class="welcome-sub">Chaque mot appris te rapproche de nouvelles cultures.</p></div>
+          <div class="date-chip"><span>◷</span> Mardi 20 octobre 2026</div>
+        </section>
+
+        <section class="hero-banner" aria-label="Présentation de Xam Xam Xara">
+          <div class="hero-text">
+            <span class="hero-kicker"><span class="kicker-dot"></span> TON VOYAGE COMMENCE ICI</span>
+            <h2>Les langues nous<br>rapprochent. <span>Apprenons<br>ensemble.</span></h2>
+            <p>Du Wolof au Soninké, du français à l'anglais, découvre la richesse des langues et la beauté de nos cultures.</p>
+            <a class="primary-button" href="#langues">Commencer mon apprentissage <span>↗</span></a>
+            <div class="hero-proof"><div class="proof-avatars"><span>🌍</span><span>🌿</span><span>✦</span></div><span><strong>Une langue à la fois.</strong> Un monde à découvrir.</span></div>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="sun-disc"></div><div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+            <div class="art-person person-back"><div class="person-head"></div><div class="person-body"></div></div>
+            <div class="art-person person-front"><div class="person-head"></div><div class="person-body"></div></div>
+            <div class="art-leaf leaf-one">❧</div><div class="art-leaf leaf-two">❧</div>
+            <div class="floating-word word-wolof">Nanga def ? <small>Wolof · Bonjour</small></div>
+            <div class="floating-word word-soninke">I ni ce <small>Soninké · Merci</small></div>
+            <div class="pattern-stamp">N<br><span>✦</span><br>H</div>
+          </div>
+          <div class="hero-decoration">XAM · XARA · JÀNG</div>
+        </section>
+
+        <section class="section-block" id="langues">
+          <div class="section-heading"><div><p class="eyebrow">TON UNIVERS</p><h2>Continue à apprendre <span class="heading-spark">✳</span></h2><p class="section-subtitle">Choisis une langue et avance à ton rythme.</p></div><a class="text-link" href="#langues">Toutes mes langues <span>→</span></a></div>
+          <div class="language-grid" id="languageGrid">
+            <article class="language-card wolof" data-search="wolof sénégal langue nationale">
+              <div class="language-top"><span class="language-symbol">W</span><span class="level-pill">NIVEAU A1</span></div><div class="language-flag flag-sn"><i></i></div>
+              <h3>Wolof</h3><p class="native-name">Làkk bu réew mi</p><p class="language-desc">La langue du quotidien, du partage et de la teranga.</p>
+              <div class="progress-meta"><span>Progression</span><strong>68%</strong></div><div class="progress-track"><span style="width:68%"></span></div>
+              <div class="card-bottom"><span>12 leçons terminées</span><button class="round-arrow" data-start="Wolof" aria-label="Continuer le wolof">↗</button></div>
+            </article>
+            <article class="language-card soninke" data-search="soninké soninke langue patrimoine">
+              <div class="language-top"><span class="language-symbol">S</span><span class="level-pill">NIVEAU A1</span></div><div class="language-flag flag-soninke"><i></i></div>
+              <h3>Soninké</h3><p class="native-name">Sooninkanxanne</p><p class="language-desc">Une langue de mémoire, de transmission et d'histoire.</p>
+              <div class="progress-meta"><span>Progression</span><strong>42%</strong></div><div class="progress-track"><span style="width:42%"></span></div>
+              <div class="card-bottom"><span>8 leçons terminées</span><button class="round-arrow" data-start="Soninké" aria-label="Continuer le soninké">↗</button></div>
+            </article>
+            <article class="language-card french" data-search="français français langue">
+              <div class="language-top"><span class="language-symbol">F</span><span class="level-pill">NIVEAU A2</span></div><div class="language-flag flag-fr"><i></i></div>
+              <h3>Français</h3><p class="native-name">Langue de liaison</p><p class="language-desc">Affirme tes idées et exprime toutes tes nuances.</p>
+              <div class="progress-meta"><span>Progression</span><strong>76%</strong></div><div class="progress-track"><span style="width:76%"></span></div>
+              <div class="card-bottom"><span>21 leçons terminées</span><button class="round-arrow" data-start="Français" aria-label="Continuer le français">↗</button></div>
+            </article>
+            <article class="language-card english" data-search="anglais english langue internationale">
+              <div class="language-top"><span class="language-symbol">E</span><span class="level-pill">NIVEAU A1</span></div><div class="language-flag flag-en"><i>✦</i></div>
+              <h3>Anglais</h3><p class="native-name">A world of possibilities</p><p class="language-desc">Ouvre de nouvelles portes, ici et partout ailleurs.</p>
+              <div class="progress-meta"><span>Progression</span><strong>25%</strong></div><div class="progress-track"><span style="width:25%"></span></div>
+              <div class="card-bottom"><span>5 leçons terminées</span><button class="round-arrow" data-start="Anglais" aria-label="Continuer l'anglais">↗</button></div>
+            </article>
+          </div>
+          <p class="empty-search" id="emptySearch" hidden>Aucune langue ne correspond à ta recherche.</p>
+        </section>
+
+        <section class="dashboard-grid" id="parcours">
+          <article class="panel progress-panel"><div class="panel-heading"><div><p class="eyebrow">TES EFFORTS COMPTENT</p><h2>Mon parcours</h2></div><button class="subtle-button" id="periodButton">Cette semaine⌄</button></div>
+            <div class="progress-summary"><div class="progress-ring" aria-label="52 pour cent de progression"><div><strong>52<span>%</span></strong><small>OBJECTIF GLOBAL</small></div></div><div class="summary-copy"><h3>Tu avances bien ! <span>✦</span></h3><p>Encore un petit effort et tu atteindras ton prochain palier.</p><div class="mini-stats"><div><strong>42</strong><small>Leçons suivies</small></div><div><strong>8</strong><small>Badges gagnés</small></div><div><strong>15 <i>🔥</i></strong><small>Jours d'affilée</small></div></div></div></div>
+            <div class="weekly-chart"><div class="chart-label"><span>Activité quotidienne</span><span class="chart-legend"><i></i> Minutes apprises</span></div><div class="chart-bars" aria-label="Activité de lundi à dimanche"><div class="bar-day"><span class="bar" style="height:45%"></span><small>Lun</small></div><div class="bar-day"><span class="bar" style="height:72%"></span><small>Mar</small></div><div class="bar-day"><span class="bar today" style="height:58%"></span><small>Mer</small></div><div class="bar-day"><span class="bar" style="height:32%"></span><small>Jeu</small></div><div class="bar-day"><span class="bar" style="height:88%"></span><small>Ven</small></div><div class="bar-day"><span class="bar" style="height:63%"></span><small>Sam</small></div><div class="bar-day"><span class="bar future" style="height:16%"></span><small>Dim</small></div></div></div>
+          </article>
+
+          <article class="panel daily-panel" id="lecon"><div class="panel-heading"><div><p class="eyebrow">5 MINUTES POUR TOI</p><h2>Leçon du jour</h2></div><span class="daily-icon">✦</span></div>
+            <div class="lesson-art"><div class="lesson-sun"></div><div class="lesson-land land-back"></div><div class="lesson-land land-front"></div><span class="lesson-letter">N</span><span class="lesson-word">Nanga def ?</span><span class="lesson-translation">Comment vas-tu ?</span><button class="audio-play" id="audioButton" aria-label="Écouter la prononciation">▶</button></div>
+            <div class="lesson-info"><div><span class="lesson-language">WOLOF · LES BASES</span><span class="lesson-time">◷ 5 min</span></div><h3>Saluer avec le sourire</h3><p>Apprends les expressions essentielles pour engager une conversation.</p><button class="primary-button full-button" id="lessonButton">Démarrer la leçon <span>→</span></button></div>
+          </article>
+        </section>
+
+        <section class="lower-grid">
+          <article class="coach-card" id="communaute"><div class="coach-orb">✧</div><div class="coach-copy"><p class="eyebrow">TON COMPAGNON DE ROUTE</p><h2>Une question ? <span>Jàppale la.</span></h2><p>Entraîne-toi à parler, pose tes questions et progresse avec un accompagnement adapté.</p><button class="coach-button" id="coachButton">Découvrir mon coach IA <span>↗</span></button></div><div class="coach-spark">✳</div></article>
+          <article class="panel challenges-panel" id="defis"><div class="panel-heading"><div><p class="eyebrow">PETITS PAS, GRANDES VICTOIRES</p><h2>Mes défis</h2></div><a class="text-link" href="#defis">Voir tout →</a></div>
+            <div class="challenge-row"><span class="challenge-icon orange-icon">◷</span><div class="challenge-copy"><strong>15 minutes par jour</strong><small>Objectif quotidien</small><div class="challenge-progress"><span style="width:67%"></span></div></div><b>10/15 min</b></div>
+            <div class="challenge-row"><span class="challenge-icon green-icon">文</span><div class="challenge-copy"><strong>5 nouveaux mots</strong><small>Enrichis ton vocabulaire</small><div class="challenge-progress"><span style="width:40%"></span></div></div><b>2/5 mots</b></div>
+            <div class="challenge-row"><span class="challenge-icon purple-icon">♧</span><div class="challenge-copy"><strong>Une culture à découvrir</strong><small>Le savais-tu ?</small><div class="challenge-progress"><span style="width:0%"></span></div></div><b>À venir</b></div>
+          </article>
+        </section>
+
+        <section class="culture-strip" id="culture"><div class="culture-icon">✺</div><div><p class="eyebrow">AU-DELÀ DES MOTS</p><h2>Une langue, c'est tout un monde.</h2><p>Découvre les expressions, les histoires et les traditions qui donnent vie à chaque langue.</p></div><a href="#culture" class="culture-link">Explorer les cultures <span>→</span></a><span class="culture-pattern">✳ ✳ ✳</span></section>
+        <footer class="footer"><a class="footer-brand" href="#accueil">Xam Xam <em>Xara</em></a><span>Nos langues, notre héritage.</span><span>Fait avec ♥ pour la transmission.</span></footer>
+      </div>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="./app.js"></script>
+</body>
+</html>
