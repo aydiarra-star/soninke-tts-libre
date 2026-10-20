@@ -22,6 +22,11 @@ class WolofBatchPlanValidationTests(unittest.TestCase):
             "--batch-size", "10", "--start-offset", "0", "--output", str(path),
         ], cwd=ROOT, check=True, capture_output=True, text=True)
 
+    def test_validator_normalization_collapses_whitespace_and_preserves_diacritics(self):
+        self.assertEqual(VALIDATOR.norm("  Kër   bu   mag "), "kër bu mag")
+        self.assertEqual(VALIDATOR.norm("Kër"), "kër")
+        self.assertNotEqual(VALIDATOR.norm("Kër"), VALIDATOR.norm("Ker"))
+
     def test_real_planner_output_validates_without_tts_imports(self):
         with tempfile.TemporaryDirectory() as tmp:
             plan = Path(tmp) / "plan.json"
