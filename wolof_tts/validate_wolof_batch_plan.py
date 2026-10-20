@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 LEXICON = ROOT / "data" / "wolof-fr-dictionary.json"
 CANDIDATES = ROOT / "data" / "kaikki-wolof-candidates.json"
 HISTORICAL = ROOT / "wolof_tts" / "manifests" / "historical-audio-headwords.json"
+CURRENT_WOLOF_MANIFEST = ROOT / "data" / "wolof-audio-manifest.json"
 SEEDS = {"jërëjëf", "kër", "ñëw"}
 
 
@@ -84,6 +85,8 @@ def validate_plan(plan_path, root=ROOT):
     historical = json.loads(HISTORICAL.read_text(encoding="utf-8"))
     excluded = {planner.norm(w) for w in planner.KNOWN_AUDIO_HEADWORDS}
     excluded.update(planner.norm(row.get("wolof")) for row in historical.get("entries", []))
+    current_words, _ = planner.manifest_words(CURRENT_WOLOF_MANIFEST)
+    excluded.update(current_words)
     excluded.update(SEEDS)
     merged = _merged_sources()
     seen = set()
