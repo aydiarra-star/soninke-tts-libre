@@ -14,11 +14,28 @@ Les audios Soninké précédemment produits peuvent être évalués comme ressou
 
 La preuve de concept doit être écoutée et validée avant toute production à grande échelle. Les entrées générées ne sont conformes que si la référence a réellement été utilisée et que l'identité vocale a été contrôlée.
 
-## État technique
+## État technique et moteur de référence
 
-Le générateur actuel `wolof_tts/generate_lexicon_batch.py` sélectionne `CONCREE/Adia_TTS`. Le manifeste des lots existants ne contient ni empreinte de la référence utilisée, ni statut de vérification d'identité vocale. Les WAV sont donc des candidats techniques, **pas des audios certifiés comme étant la voix de l'utilisateur**.
+Le générateur historique `wolof_tts/generate_lexicon_batch.py` sélectionne `CONCREE/Adia_TTS` sans lui passer la référence. Ses WAV restent des candidats techniques, **pas des audios certifiés comme étant la voix de l'utilisateur**.
 
-Il faut choisir explicitement un moteur réellement conditionné par une référence vocale avant de générer les 767 entrées. Valider d'abord une petite preuve de concept (chargement de la référence, génération, comparaison/écoute), puis lancer les lots. Ne pas présenter Adia_TTS comme du clonage vocal sans preuve.
+Une nouvelle voie isolée est ajoutée dans `wolof_tts/generate_reference_voice_batch.py`, fondée sur `k2-fsa/OmniVoice` (licence Apache-2.0). Sa documentation amont décrit le clonage zéro-shot avec `ref_audio` et liste le wolof parmi les 646 langues (ID de langue `wo`). Cela justifie un test contrôlé, mais ne prouve ni la qualité du wolof produit ni l'identité vocale du résultat. Références : [dépôt OmniVoice](https://github.com/k2-fsa/OmniVoice) et [table des langues](https://huggingface.co/spaces/phinam112/OmniVoice-Studio/blob/main/docs/languages.md).
+
+### Preuve de concept — un seul mot
+
+Installer dans un environnement Python adapté : `pip install omnivoice soundfile` (PyTorch doit être installé selon le matériel) et rendre `ffmpeg` disponible. Puis fournir le fichier privé localement avec `--reference-audio`, ou définir le secret d'environnement `WOLOF_REFERENCE_AUDIO_B64` sans l'afficher dans les logs.
+
+```bash
+python wolof_tts/generate_reference_voice_batch.py \\
+  --reference-audio /chemin/prive/reference.ogg \\
+  --poc-text 'Jërëjëf' \\
+  --output-dir wolof_reference_voice_outputs
+```
+
+Si le texte exact de la référence est connu et validé, il peut être fourni via `WOLOF_REFERENCE_TRANSCRIPT`. Sinon, OmniVoice peut tenter sa transcription automatique ; elle doit être considérée comme incertaine tant qu'elle n'est pas vérifiée. Le script convertit la référence en WAV mono 24 kHz, vérifie sa durée (3–10 s), transmet explicitement `ref_audio` et `language_id='wo'`, et arrête le traitement si une dépendance ou la référence manque. Il n'a aucun fallback vers une voix prédéfinie.
+
+Le manifeste garde l'empreinte de la référence effectivement transmise, mais **ne déclare jamais l'identité vocale comme vérifiée**. L'utilisateur doit écouter le WAV et confirmer la ressemblance avant d'autoriser le mode lot. Après cette confirmation uniquement, un lot limité peut être lancé avec `--batch --voice-identity-approved`; la taille est limitée à 10 par exécution. Les traductions marquées incertaines sont exclues du lot.
+
+Cette nouvelle voie n'a pas encore été exécutée dans un environnement doté des dépendances/modèle, et aucun WAV de test n'a été produit ou validé à ce stade.
 
 ## Statuts par entrée
 
