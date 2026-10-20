@@ -26,7 +26,7 @@ VALIDATED_SEEDS = {"jërëjëf": "Merci", "kër": "Maison", "ñëw": "Venir"}
 
 
 def norm(value: str) -> str:
-    return re.sub(r"\\s+", " ", value.strip()).casefold()
+    return re.sub(r"\s+", " ", value.strip()).casefold()
 
 
 def prepare_reference(args: argparse.Namespace, tempdir: Path) -> Path:
