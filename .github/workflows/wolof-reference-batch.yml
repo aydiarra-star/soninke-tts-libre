@@ -61,10 +61,18 @@ jobs:
         env:
           WOLOF_REFERENCE_AUDIO_B64: ${{ secrets.WOLOF_REFERENCE_AUDIO_B64 }}
           WOLOF_REFERENCE_TRANSCRIPT: ${{ secrets.WOLOF_REFERENCE_TRANSCRIPT }}
+          START_INDEX_INPUT: ${{ inputs.start_index }}
         run: |
+          # GitHub's numeric input may arrive as "0.0"; argparse expects an integer.
+          if [[ "$START_INDEX_INPUT" =~ ^[0-9]+([.]0+)?$ ]]; then
+            START_INDEX="${START_INDEX_INPUT%%.*}"
+          else
+            echo "::error::start_index must be a non-negative integer."
+            exit 1
+          fi
           python wolof_tts/generate_reference_voice_batch.py \
             --batch \
-            --start-index "${{ inputs.start_index }}" \
+            --start-index "$START_INDEX" \
             --batch-size "${{ inputs.batch_size }}" \
             --voice-identity-approved \
             --output-dir wolof_reference_voice_outputs
