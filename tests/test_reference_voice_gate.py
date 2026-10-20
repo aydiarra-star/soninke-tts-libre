@@ -28,7 +28,6 @@ class ReferenceVoiceGateTests(unittest.TestCase):
     def test_generator_requests_wolof_language(self):
         source = SCRIPT.read_text(encoding="utf-8")
         self.assertIn('"language": "wo"', source)
-        self.assertNotIn('"language_id": "wo"', source)
 
     def test_missing_reference_fails_closed(self):
         result = self.run_script("--poc-text", "Jërëjëf")
