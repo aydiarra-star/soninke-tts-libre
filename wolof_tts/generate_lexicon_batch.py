@@ -89,12 +89,12 @@ def main():
     out = Path("wolof_lexicon_outputs")
     out.mkdir(parents=True, exist_ok=True)
     device = "cuda:0" if torch.cuda.is_available() else "cpu"
-    print(f"Lexicon candidates={len(all_entries)}; selected={len(batch)}; range={args.start_index}:{args.start_index + len(batch)}; model={MODEL_ID}; device={device}")
+    print(f"Lexicon candidates={len(all_entries)}; selected={len(batch)}; range={start_index}:{start_index + len(batch)}; model={MODEL_ID}; device={device}")
     model = ParlerTTSForConditionalGeneration.from_pretrained(MODEL_ID).to(device)
     tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
     description_ids = tokenizer("A clear, natural Wolof-speaking voice for language learning.", return_tensors="pt").input_ids.to(device)
     manifest = []
-    for index, item in enumerate(batch, start=args.start_index):
+    for index, item in enumerate(batch, start=start_index):
         safe_id = f"{index:05d}-" + re.sub(r"[^a-z0-9]+", "-", norm(item["wolof"])).strip("-")[:48]
         prompt_ids = tokenizer(item["wolof"], return_tensors="pt").input_ids.to(device)
         with torch.inference_mode():
@@ -123,7 +123,7 @@ def main():
         print(f"VERIFIED {index}: {item['wolof']} — {item['french']} ({duration:.2f}s)")
     (out / "manifest.json").write_text(json.dumps({
         "source_lexicon": str(LEXICON.relative_to(ROOT)), "supplemental_candidates": str(KAIKKI_CANDIDATES.relative_to(ROOT)) if KAIKKI_CANDIDATES.exists() else None, "model": MODEL_ID,
-        "candidate_count": len(all_entries), "start_index": args.start_index,
+        "candidate_count": len(all_entries), "start_index": start_index, "plan_file": str(args.plan_json) if args.plan_json else None,
         "batch_size": len(batch), "entries": manifest,
     }, ensure_ascii=False, indent=2), encoding="utf-8")
     with (out / "manifest.csv").open("w", newline="", encoding="utf-8-sig") as f:
