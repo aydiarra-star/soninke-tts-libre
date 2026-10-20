@@ -137,6 +137,9 @@ def main() -> int:
             MODEL_ID, device_map=device,
             dtype=torch.float16 if device.startswith("cuda") else torch.float32,
         )
+        sample_rate = int(getattr(model, "sampling_rate", 0) or 0)
+        if sample_rate <= 0:
+            raise SystemExit("BLOQUÉ : le moteur n'a pas fourni une fréquence d'échantillonnage valide.")
         if args.batch:
             selected = select_entries(args.start_index, args.batch_size)
             if not selected:
@@ -161,13 +164,13 @@ def main() -> int:
             samples = np.asarray(samples).squeeze()
             if samples.ndim != 1 or samples.size == 0 or not np.isfinite(samples).all():
                 raise SystemExit(f"BLOQUÉ : audio invalide pour {item['wolof']!r}.")
-            sf.write(str(output_path), samples, 24000, subtype="PCM_16")
+            sf.write(str(output_path), samples, sample_rate, subtype="PCM_16")
             with sf.SoundFile(output_path) as wav:
                 check = wav.read(dtype="float32")
                 rate, channels, subtype = wav.samplerate, wav.channels, wav.subtype
                 duration = len(check) / rate
             peak = float(np.max(np.abs(check))) if check.size else 0.0
-            if rate != 24000 or channels != 1 or not (0.15 <= duration <= 15) or peak <= 0.0001 or not np.isfinite(check).all():
+            if rate != sample_rate or channels != 1 or not (0.15 <= duration <= 15) or peak <= 0.0001 or not np.isfinite(check).all():
                 output_path.unlink(missing_ok=True)
                 raise SystemExit(f"BLOQUÉ : contrôle technique échoué pour {item['wolof']!r}.")
             records.append({
