@@ -231,20 +231,21 @@ def main() -> int:
                 "sha256": hashlib.sha256(output_path.read_bytes()).hexdigest(),
                 "reference_audio_sha256": reference_sha256,
                 "voice_engine": MODEL_ID, "generation_status": "generated",
-                "technical_validation": "passed", "voice_identity_validation": "pending",
-                "pronunciation_validation": "pending",
+                "technical_validation": "passed",
+                "voice_identity_validation": "user-approved-reference; sample-not-individually-reviewed" if args.voice_identity_approved else "pending",
+                "pronunciation_validation": "pending-per-entry",
                 "translation_validation": item["translation_status"],
                 "generated_at_utc": datetime.now(timezone.utc).isoformat(),
             })
         manifest = {
             "model": MODEL_ID, "language_id": "wo", "reference_audio_sha256": reference_sha256,
-            "voice_identity_validation": "pending-user-listening-confirmation",
+            "voice_identity_validation": "user-approved-reference; per-entry-listening-not-completed" if args.voice_identity_approved else "pending-user-listening-confirmation",
             "batch_mode": args.batch, "entries": records,
         }
         (args.output_dir / "manifest.json").write_text(
             json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8"
         )
-        print(f"Génération technique terminée : {len(records)} WAV. Identité vocale : EN ATTENTE.")
+        print(f"Génération technique terminée : {len(records)} WAV. Référence vocale approuvée par l’utilisateur : {args.voice_identity_approved}. Prononciation par entrée : à valider.")
         print(f"Manifeste : {args.output_dir / 'manifest.json'}")
         print("La référence privée n'a pas été copiée dans le manifeste; seule son empreinte est conservée.")
     return 0
