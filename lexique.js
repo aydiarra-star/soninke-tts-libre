@@ -1,6 +1,7 @@
 (() => {
   "use strict";
   const DATA_URL = "data/soninke-lexicon.jsonl";
+  const TRANSLATIONS_URL = "data/lexique-soninke-fr-base.csv";
   const PAGE_SIZE = 50;
   const search = document.getElementById("lexicon-search");
   const filter = document.getElementById("lexicon-filter");
@@ -12,6 +13,25 @@
   const next = document.getElementById("next-page");
   let entries = [];
   let audioById = new Map();
+  let translationsByWord = new Map();
+  function normalizeWord(value) {
+    return String(value || "").normalize("NFC").trim().toLocaleLowerCase("fr").replace(/\s+/g, " ");
+  }
+  function parseTranslations(csvText) {
+    const lines = csvText.split(/\r?\n/).filter(line => line.trim());
+    const map = new Map();
+    lines.slice(1).forEach(line => {
+      const fields = line.split(";");
+      if (fields.length < 6) return;
+      const [id, word, fr, category, source, status] = fields;
+      if (!word || !fr) return;
+      const key = normalizeWord(word);
+      if (!map.has(key)) map.set(key, []);
+      const items = map.get(key);
+      if (!items.some(item => item.fr === fr && item.category === category)) items.push({ id, word, fr, category, source, status });
+    });
+    return map;
+  }
   let page = 0;
 
   function el(tag, className, text) {
@@ -24,7 +44,9 @@
     const term = search.value.trim().toLocaleLowerCase();
     const wanted = filter.value;
     const filtered = entries.filter(entry => {
-      const matchesTerm = !term || [entry.word, entry.id].join(" ").toLocaleLowerCase().includes(term);
+      const translated = translationsByWord.get(normalizeWord(entry.word)) || [];
+      const translationText = translated.map(item => item.fr).join(" ");
+      const matchesTerm = !term || [entry.word, entry.id, translationText].join(" ").toLocaleLowerCase().includes(term);
       const matchesStatus = wanted === "all" || (wanted === "validated" ? entry.pronunciationValidated === true : entry.pronunciationValidated !== true);
       return matchesTerm && matchesStatus;
     });
@@ -48,6 +70,16 @@
         entry.pronunciationValidated === true ? "Prononciation validée" : (entry.technicalStatus === "generation_error" || entry.audioStatus === "generation_error" ? "Erreur technique — validation en attente" : "En attente de validation linguistique")));
       card.append(top);
       card.append(el("h2", "corpus-soninke", entry.word));
+      const translations = translationsByWord.get(normalizeWord(entry.word)) || [];
+      if (translations.length) {
+        const translationLine = el("p", "corpus-translation");
+        translationLine.append(el("strong", "", "Français : "));
+        translationLine.append(document.createTextNode(translations.map(item => item.fr + (item.category ? " (" + item.category.replace(/_/g, " ") + ")" : "")).join(" · ")));
+        card.append(translationLine);
+        card.append(el("p", "corpus-field-label", "Traduction issue de la base fournie par le référent linguistique ; variantes conservées."));
+      } else {
+        card.append(el("p", "corpus-caveat", "Traduction française à compléter ou à vérifier."));
+      }
       const audioInfo = audioById.get(entry.id);
       if (audioInfo && audioInfo.audioAvailable && audioInfo.audioPath) {
         const audio = el("audio", "lexicon-audio-player");
@@ -60,11 +92,13 @@
       } else {
         card.append(el("p", "corpus-caveat", "Audio indisponible pour cette entrée ; aucun fichier n’a été inventé."));
       }
-      const details = entry.audioStatus === "audio_present_reused"
-        ? "Statut audio du manifeste : audio existant réutilisé"
-        : entry.audioStatus === "generated"
-          ? "Statut audio du manifeste : audio généré"
-          : "Statut audio du manifeste : génération en erreur";
+      const details = entry.technicalStatus === "translation_only_no_audio" || entry.audioStatus === "not_generated"
+        ? "Entrée de traduction uniquement — aucun audio associé pour le moment"
+        : entry.audioStatus === "audio_present_reused"
+          ? "Statut audio du manifeste : audio existant réutilisé"
+          : entry.audioStatus === "generated"
+            ? "Statut audio du manifeste : audio généré"
+            : "Statut audio du manifeste : génération en erreur";
       card.append(el("p", "corpus-field-label", details));
       if (entry.validationNote) card.append(el("p", "corpus-caveat", entry.validationNote));
       const source = el("p", "corpus-source");
@@ -88,12 +122,32 @@
   next.addEventListener("click", () => { page++; render(); window.scrollTo({top: 0, behavior: "auto"}); });
   Promise.all([
     fetch(DATA_URL).then(response => { if (!response.ok) throw new Error("Lexique HTTP " + response.status); return response.text(); }),
-    fetch("data/audio-manifest.json").then(response => { if (!response.ok) throw new Error("Manifeste audio HTTP " + response.status); return response.json(); })
+    fetch("data/audio-manifest.json").then(response => { if (!response.ok) throw new Error("Manifeste audio HTTP " + response.status); return response.json(); }),
+    fetch(TRANSLATIONS_URL).then(response => { if (!response.ok) throw new Error("Base de traductions HTTP " + response.status); return response.text(); })
   ])
-    .then(([text, audioData]) => {
+    .then(([text, audioData, translationsText]) => {
       entries = text.split(/\r?\n/).filter(line => line.trim()).map(line => JSON.parse(line));
       if (!entries.length) throw new Error("lexique vide");
       audioById = new Map((audioData.entries || []).map(item => [item.id, item]));
+      translationsByWord = parseTranslations(translationsText);
+      const knownWords = new Set(entries.map(entry => normalizeWord(entry.word)));
+      translationsByWord.forEach((items, key) => {
+        if (knownWords.has(key) || !items.length) return;
+        const first = items[0];
+        entries.push({
+          id: first.id,
+          word: first.word,
+          source: first.source || "liste_referent",
+          license: "Données fournies par le référent linguistique du projet",
+          attribution: "Référent linguistique du projet",
+          technicalStatus: "translation_only_no_audio",
+          audioStatus: "not_generated",
+          pronunciationValidated: false,
+          validationStatus: "translation_candidate",
+          validationNote: "Entrée issue de la base Soninké–français ; elle n'est pas encore raccordée au lexique audio et sa prononciation reste à vérifier."
+        });
+        knownWords.add(key);
+      });
       render();
     })
     .catch(error => {
