@@ -11,7 +11,7 @@ on:
       run_id:
         description: "ID de l’exécution GitHub Actions qui contient le lot audio"
         required: true
-        default: "39367190221"
+        default: "39376554797"
         type: string
       artifact_name:
         description: "Nom de l’artefact audio"
@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
-      AUDIO_RUN_ID: ${{ inputs.run_id || '39367190221' }}
+      AUDIO_RUN_ID: ${{ inputs.run_id || '39376554797' }}
       AUDIO_ARTIFACT_NAME: ${{ inputs.artifact_name || 'wolof-lexicon-audio-batch-0' }}
     steps:
       - name: Récupérer le dépôt

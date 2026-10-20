@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import shutil
 import tempfile
 import zipfile
@@ -115,7 +116,7 @@ def main() -> int:
             (root / "data/wolof-audio-manifest.json").write_text(
                 json.dumps({
                     "schemaVersion": 1,
-                    "batchSource": "GitHub Actions artifact run 39367190221",
+                    "batchSource": "GitHub Actions artifact run " + os.environ.get("AUDIO_RUN_ID", "unknown"),
                     "model": manifest.get("model", "CONCREE/Adia_TTS"),
                     "technicalValidation": "passed by generator; recheck required after publication",
                     "humanPronunciationValidation": "pending",
