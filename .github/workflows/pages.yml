@@ -38,7 +38,9 @@ jobs:
       - name: Préparer les deux interfaces sans écraser les sources
         run: |
           mkdir -p dist/soninke-lab
-          find . -maxdepth 1 -type f \\( -name '*.html' -o -name '*.css' -o -name '*.js' \\) -exec cp {} dist/soninke-lab/ \\;
+          for file in ./*.html ./*.css ./*.js; do
+            if [ -f "$file" ]; then cp "$file" dist/soninke-lab/; fi
+          done
           cp -R data dist/soninke-lab/data
           cp -R maquette-xam-xam-xara/. dist/
 
