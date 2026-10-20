@@ -22,17 +22,17 @@ def build_report(lexicon: dict, manifest: dict) -> dict:
     entries = lexicon.get("entries", [])
     audio_entries = manifest.get("entries", [])
     dictionary_by_word = {}
-    missing_french = []
     for row in entries:
         word = norm((row.get("wolof") or {}).get("word"))
         french = str((row.get("fr") or {}).get("word") or "").strip()
         if not word:
             continue
-        dictionary_by_word.setdefault(word, {"word": (row.get("wolof") or {}).get("word", "").strip(), "has_french": False})
+        dictionary_by_word.setdefault(word, {
+            "word": str((row.get("wolof") or {}).get("word") or "").strip(),
+            "has_french": False,
+        })
         if french:
             dictionary_by_word[word]["has_french"] = True
-        else:
-            missing_french.append((row.get("wolof") or {}).get("word", ""))
 
     audio_by_word = {}
     for row in audio_entries:
@@ -59,12 +59,15 @@ def build_report(lexicon: dict, manifest: dict) -> dict:
         )
     })
     dictionary_words = set(dictionary_by_word)
+    missing_french = sorted(
+        word for word, record in dictionary_by_word.items() if not record["has_french"]
+    )
     return {
         "schema_version": 1,
         "dictionary_entry_rows": len(entries),
         "dictionary_unique_wolof_forms": len(dictionary_words),
         "dictionary_forms_with_french_translation": sum(1 for row in dictionary_by_word.values() if row["has_french"]),
-        "dictionary_forms_missing_french_translation": sorted(set(norm(w) for w in missing_french if norm(w))),
+        "dictionary_forms_missing_french_translation": missing_french,
         "audio_manifest_rows": len(audio_entries),
         "unique_audio_headwords": len(audio_by_word),
         "dictionary_forms_with_audio_manifest": len(matched_audio),
