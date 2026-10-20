@@ -23,4 +23,4 @@ jobs:
       - name: Compile the reference-conditioned generator
         run: python -m py_compile wolof_tts/generate_reference_voice_batch.py
       - name: Verify no reference means no generation
-        run: python -m unittest tests/test_reference_voice_gate.py -v
+        run: python tests/test_reference_voice_gate.py -v
