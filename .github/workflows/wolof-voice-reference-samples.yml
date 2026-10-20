@@ -1,0 +1,77 @@
+name: Wolof — échantillons privés avec référence vocale
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feat/wolof-tts-reader-evaluation
+    paths:
+      - ".github/workflows/wolof-voice-reference-samples.yml"
+      - "scripts/generate_wolof_voice_reference_samples.py"
+
+permissions:
+  contents: read
+
+jobs:
+  generate-private-reference-samples:
+    name: Générer 3 WAV avec Oolel-Voices
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Checkout branche de travail
+        uses: actions/checkout@v4
+
+      - name: Vérifier la référence privée
+        env:
+          WOLOF_REFERENCE_AUDIO_B64: ${{ secrets.WOLOF_REFERENCE_AUDIO_B64 }}
+        run: |
+          if [ -z "$WOLOF_REFERENCE_AUDIO_B64" ]; then
+            echo "::error::Secret WOLOF_REFERENCE_AUDIO_B64 absent. Ne jamais commettre l'enregistrement."
+            exit 1
+          fi
+          echo "Référence privée détectée. Aucune valeur secrète ne sera affichée."
+
+      - name: Installer Python et FFmpeg
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg openssl
+
+      - name: Installer PyTorch CPU et dépendances Oolel-Voices
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch torchaudio --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install "librosa>=0.10.2" "transformers==4.46.3" "diffusers==0.29.0" "conformer==0.3.2" "numpy>=2.0.0" torchcodec s3tokenizer num2words soundfile huggingface_hub
+          python -c "import torch, torchaudio, transformers; print('torch', torch.__version__, 'cuda available:', torch.cuda.is_available()); print('torchaudio', torchaudio.__version__, 'transformers', transformers.__version__)"
+
+      - name: Générer les trois WAV avec la référence privée
+        env:
+          WOLOF_REFERENCE_AUDIO_B64: ${{ secrets.WOLOF_REFERENCE_AUDIO_B64 }}
+          HF_HUB_DISABLE_TELEMETRY: "1"
+          TOKENIZERS_PARALLELISM: "false"
+          PYTHONUNBUFFERED: "1"
+        run: python scripts/generate_wolof_voice_reference_samples.py
+
+      - name: Chiffrer l'archive avant stockage temporaire
+        env:
+          WOLOF_REFERENCE_AUDIO_B64: ${{ secrets.WOLOF_REFERENCE_AUDIO_B64 }}
+        run: |
+          set -eu
+          WOLOF_ARTIFACT_ENCRYPTION_KEY="$(printf '%s' "$WOLOF_REFERENCE_AUDIO_B64" | sha256sum | cut -d ' ' -f1)"
+          export WOLOF_ARTIFACT_ENCRYPTION_KEY
+          openssl enc -aes-256-cbc -salt -pbkdf2 -iter 200000 \
+            -in wolof-voice-reference-samples.zip \
+            -out wolof-voice-reference-samples.zip.enc \
+            -pass env:WOLOF_ARTIFACT_ENCRYPTION_KEY
+          rm -f wolof-voice-reference-samples.zip
+          rm -rf wolof-voice-reference-output
+
+      - name: Publier uniquement l'archive chiffrée temporaire
+        uses: actions/upload-artifact@v4
+        with:
+          name: wolof-voice-reference-samples-encrypted
+          path: wolof-voice-reference-samples.zip.enc
+          if-no-files-found: error
+          retention-days: 7

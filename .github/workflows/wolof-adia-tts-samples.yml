@@ -1,0 +1,74 @@
+name: Wolof — génération audio du lexique ADIA_TTS
+
+on:
+  workflow_dispatch:
+    inputs:
+      offset:
+        description: "Index de départ dans le lexique trié (0 = début)"
+        required: true
+        default: "0"
+        type: string
+      batch_size:
+        description: "Nombre maximum de mots à générer dans ce lot (commencer par 10)"
+        required: true
+        default: "10"
+        type: string
+  push:
+    branches:
+      - feat/wolof-tts-reader-evaluation
+    paths:
+      - "data/wolof/lexicon_seed.csv"
+
+permissions:
+  contents: read
+
+jobs:
+  generate-wolof-baseline:
+    name: Importer le lexique et générer un lot audio
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - name: Récupérer la branche de travail
+        uses: actions/checkout@v4
+
+      - name: Installer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Installer PyTorch CPU et les dépendances ADIA_TTS
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install "transformers==4.46.1" accelerate soundfile "git+https://github.com/huggingface/parler-tts.git"
+          python -c "import torch, transformers, soundfile; print('torch', torch.__version__, 'CUDA available:', torch.cuda.is_available()); print('transformers', transformers.__version__)"
+
+      - name: Télécharger le dictionnaire machine-readable de Wiktionnaire français
+        run: |
+          mkdir -p data/wolof/source
+          curl --fail --location --retry 3 \
+            https://kaikki.org/frwiktionary/Wolof/kaikki.org-dictionary-Wolof.jsonl \
+            --output data/wolof/source/kaikki-frwiktionary-wolof.jsonl
+
+      - name: Construire le lexique Wolof–français
+        run: python scripts/import_kaikki_wolof.py
+
+      - name: Générer un lot d’audios
+        env:
+          HF_HUB_DISABLE_TELEMETRY: "1"
+          TOKENIZERS_PARALLELISM: "false"
+          PYTHONUNBUFFERED: "1"
+          WOLOF_OFFSET: ${{ github.event.inputs.offset || '0' }}
+          WOLOF_BATCH_SIZE: ${{ github.event.inputs.batch_size || '10' }}
+        run: python scripts/generate_wolof_adia_samples.py
+
+      - name: Publier le lot audio et le lexique
+        uses: actions/upload-artifact@v4
+        with:
+          name: wolof-lexicon-audio-batch-${{ github.event.inputs.offset || '0' }}
+          path: |
+            wolof-adia-samples/
+            data/wolof/lexicon.csv
+            data/wolof/source/kaikki-frwiktionary-wolof.jsonl
+          if-no-files-found: error
+          retention-days: 14

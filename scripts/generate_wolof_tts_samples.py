@@ -1,0 +1,133 @@
+#!/usr/bin/env python3
+"""Generate a small, explicitly unvalidated Wolof TTS sample set."""
+import csv
+import json
+import re
+import urllib.request
+import zipfile
+from pathlib import Path
+
+import soundfile as sf
+import torch
+from parler_tts import ParlerTTSForConditionalGeneration
+from transformers import AutoTokenizer
+
+MODEL_ID = "CONCREE/Adia_TTS"
+DATA_URL = "https://raw.githubusercontent.com/aydiarra-star/soninke-tts-libre/main/data/wolof-fr-dictionary.json"
+OUT = Path("wolof-tts-output")
+OUT.mkdir(parents=True, exist_ok=True)
+
+with urllib.request.urlopen(DATA_URL, timeout=60) as response:
+    dictionary = json.load(response)
+
+# Curated beginner vocabulary. Avoid taking the first ten rows of a French-
+# alphabetized dictionary, which selected odd senses and duplicate translations.
+CURATED_IDS = [
+    "jangileen-bonjour-1-db898432",    # salaam aalekum — bonjour
+    "jangileen-merci-1-e6c65d7c",      # jërë jëf — merci
+    "jangileen-maison-1-4deaca74",     # kër — maison
+    "jangileen-manger-1-e1d43652",     # lekk — manger
+    "jangileen-boire-1-6968f155",      # naan — boire
+    "jangileen-venir-1-53cc13fa",      # ñëw — venir
+    "jangileen-partir-1-410e22a5",     # dem — partir
+    "jangileen-enfant-1-2f80ba52",     # doom — enfant
+    "jangileen-ami-1-34c24f6f",        # xarit — ami
+    "jangileen-demander-2-9dea26f6",   # laaj — demander (not French « ail »)
+]
+entries_by_id = {entry.get("id"): entry for entry in dictionary.get("entries", [])}
+samples = []
+missing_ids = []
+for entry_id in CURATED_IDS:
+    entry = entries_by_id.get(entry_id)
+    if entry is None:
+        missing_ids.append(entry_id)
+        continue
+    wolof = (entry.get("wolof") or {}).get("word", "").strip()
+    french = (entry.get("fr") or {}).get("word", "").strip()
+    if not wolof or not french:
+        raise RuntimeError(f"Curated dictionary entry has empty text: {entry_id}")
+    samples.append({
+        "id": entry_id,
+        "wolof_text": wolof,
+        "fr_text": french,
+        "source": entry.get("source", ""),
+        "source_pronunciation_status": entry.get("pronunciationStatus", "unknown"),
+    })
+
+if missing_ids:
+    raise RuntimeError(f"Curated dictionary IDs missing: {', '.join(missing_ids)}")
+if len(samples) != len(CURATED_IDS):
+    raise RuntimeError(f"Expected {len(CURATED_IDS)} curated samples, got {len(samples)}")
+
+device = "cuda:0" if torch.cuda.is_available() else "cpu"
+print(f"Loading {MODEL_ID} on {device}; this downloads a large model.")
+model = ParlerTTSForConditionalGeneration.from_pretrained(MODEL_ID).to(device)
+tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
+sampling_rate = int(model.config.sampling_rate)
+voice_description = "A clear and educational voice, with a flow adapted to language learning."
+
+manifest = []
+for i, item in enumerate(samples, start=1):
+    safe_id = re.sub(r"[^a-zA-Z0-9_-]+", "_", item["id"] or f"word_{i}").strip("_")
+    filename = f"{i:02d}_{safe_id}.wav"
+    description_ids = tokenizer(voice_description, return_tensors="pt").input_ids.to(device)
+    prompt_ids = tokenizer(item["wolof_text"], return_tensors="pt").input_ids.to(device)
+    with torch.inference_mode():
+        audio = model.generate(input_ids=description_ids, prompt_input_ids=prompt_ids)
+    audio_array = audio.detach().cpu().numpy().squeeze()
+    if audio_array.size == 0:
+        raise RuntimeError(f"Empty audio generated for {item['id']}")
+    if audio_array.ndim != 1:
+        raise RuntimeError(
+            f"Expected mono/1-D audio for {item['id']}, got shape {audio_array.shape}"
+        )
+    if not torch.isfinite(torch.as_tensor(audio_array)).all().item():
+        raise RuntimeError(f"Non-finite audio samples generated for {item['id']}")
+    peak_amplitude = float(abs(audio_array).max())
+    if peak_amplitude == 0.0:
+        raise RuntimeError(f"Silent audio generated for {item['id']}")
+    path = OUT / filename
+    sf.write(path, audio_array, sampling_rate, subtype="PCM_16")
+    # Verify the saved WAV, not only the in-memory tensor.
+    saved_info = sf.info(path)
+    if saved_info.channels != 1 or saved_info.samplerate != sampling_rate:
+        raise RuntimeError(
+            f"Unexpected WAV format for {item['id']}: "
+            f"{saved_info.channels} channels at {saved_info.samplerate} Hz"
+        )
+    duration = saved_info.duration
+    duration_status = "duration_review_required" if duration > 5.0 else "duration_plausible_unvalidated"
+    manifest.append({
+        **item,
+        "model_id": MODEL_ID,
+        "sampling_rate": sampling_rate,
+        "audio_file": filename,
+        "duration_seconds": round(duration, 3),
+        "peak_amplitude": round(peak_amplitude, 6),
+        "duration_status": duration_status,
+        "validation_status": "unvalidated",
+    })
+    warning = " — REVIEW: unusually long sample" if duration_status == "duration_review_required" else ""
+    print(f"{i}/{len(samples)}: {item['wolof_text']} — {item['fr_text']} ({duration:.2f}s){warning}")
+
+manifest_path = OUT / "manifest.csv"
+with manifest_path.open("w", newline="", encoding="utf-8") as f:
+    writer = csv.DictWriter(f, fieldnames=list(manifest[0].keys()))
+    writer.writeheader()
+    writer.writerows(manifest)
+
+(OUT / "README.txt").write_text(
+    "Generated by the Soninke TTS Libre Wolof evaluation workflow.\n"
+    "These synthetic audio files are UNVALIDATED candidates, not approved learning material.\n"
+    "Selection: curated beginner vocabulary, not the first ten dictionary rows.\n"
+    "The source dictionary marks the Wolof pronunciations as unverified.\n"
+    f"Model: {MODEL_ID}\n"
+    "Do not publish until pronunciation, source data, model license, and dependencies have been reviewed.\n",
+    encoding="utf-8",
+)
+zip_path = Path("wolof-tts-samples.zip")
+with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
+    for path in OUT.iterdir():
+        if path.is_file():
+            zf.write(path, arcname=path.name)
+print(f"Created {zip_path} with {len(manifest)} unvalidated WAV candidates.")
