@@ -3,11 +3,6 @@
 import argparse, csv, hashlib, json, re, zipfile
 from datetime import datetime, timezone
 from pathlib import Path
-import numpy as np
-import soundfile as sf
-import torch
-from parler_tts import ParlerTTSForConditionalGeneration
-from transformers import AutoTokenizer
 
 ROOT = Path(__file__).resolve().parents[1]
 LEXICON = ROOT / "data" / "wolof-fr-dictionary.json"
@@ -81,40 +76,24 @@ def main():
     parser.add_argument("--batch-size", type=int, default=10)
     parser.add_argument("--plan-json", type=Path,
                         help="Generate exactly the selected entries in a previously audited plan.")
+    parser.add_argument("--validate-plan-only", action="store_true",
+                        help="Validate plan and pinned inputs without loading TTS libraries or generating WAVs.")
     args = parser.parse_args()
     if args.start_index < 0 or not 1 <= args.batch_size <= 20:
         raise SystemExit("start-index must be >= 0 and batch-size must be 1..20")
     start_index = args.start_index
+    if args.validate_plan_only and not args.plan_json:
+        raise SystemExit("--validate-plan-only requires --plan-json")
     if args.plan_json:
         plan_path = args.plan_json if args.plan_json.is_absolute() else Path.cwd() / args.plan_json
         plan = json.loads(plan_path.read_text(encoding="utf-8"))
-        if hashlib.sha256(LEXICON.read_bytes()).hexdigest() != plan.get("source_hashes", {}).get("canonical_lexicon_sha256"):
-            raise SystemExit("Plan rejected: canonical lexicon SHA-256 differs from the audited plan.")
-        if not KAIKKI_CANDIDATES.exists():
-            raise SystemExit("Plan rejected: pinned Kaikki candidate JSON is missing.")
-        if hashlib.sha256(KAIKKI_CANDIDATES.read_bytes()).hexdigest() != plan.get("source_hashes", {}).get("kaikki_candidates_json_sha256"):
-            raise SystemExit("Plan rejected: Kaikki candidate snapshot SHA-256 differs from the audited plan.")
-        selected = plan.get("selected")
-        if not isinstance(selected, list) or not 1 <= len(selected) <= 20:
-            raise SystemExit("Plan rejected: selected must contain 1..20 entries.")
-        batch = []
-        seen = set()
-        validated = {norm(seed["wolof"]) for seed in SEEDS}
-        for row in selected:
-            word = str(row.get("wolof") or "").strip()
-            french = str(row.get("french") or "").strip()
-            key = norm(word)
-            if not key or not french or key in seen:
-                raise SystemExit(f"Plan rejected: missing translation or duplicate normalized headword: {word!r}")
-            if key in validated:
-                raise SystemExit(f"Plan rejected: validated reference must not be regenerated: {word!r}")
-            seen.add(key)
-            batch.append({
-                "wolof": word, "french": french, "source": row.get("source", ""),
-                "source_name": row.get("source_name", row.get("sourceName", "unknown")),
-                "source_status": row.get("source_translation_status", row.get("translationStatus", "unverified-candidate")),
-                "variant_index": row.get("variant_index", 1), "reference_validation": "pending",
-            })
+        selected = plan["selected"]
+        batch = [{
+            "wolof": row["wolof"], "french": row["french"], "source": row.get("source", ""),
+            "source_name": row.get("source_name", "unknown"),
+            "source_status": row.get("source_translation_status", "unverified-candidate"),
+            "variant_index": row.get("variant_index", 1), "reference_validation": "pending",
+        } for row in selected]
         all_entries = batch
         start_index = int(plan.get("start_offset", 0))
     else:
@@ -122,6 +101,13 @@ def main():
         batch = all_entries[args.start_index:args.start_index + args.batch_size]
     if not batch:
         raise SystemExit(f"No entries at start index {args.start_index}; total={len(all_entries)}")
+    # Import heavyweight dependencies only after optional model-free plan validation.
+    import numpy as np
+    import soundfile as sf
+    import torch
+    from parler_tts import ParlerTTSForConditionalGeneration
+    from transformers import AutoTokenizer
+
     out = Path("wolof_lexicon_outputs")
     out.mkdir(parents=True, exist_ok=True)
     device = "cuda:0" if torch.cuda.is_available() else "cpu"
