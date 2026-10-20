@@ -1,0 +1,67 @@
+name: Intégrer un lot audio Wolof dans le site
+
+on:
+  push:
+    branches: [feat/site-dictionaries-audio-entrypoints]
+    paths:
+      - ".github/workflows/integrate-wolof-audio.yml"
+      - "scripts/integrate_wolof_audio_batch.py"
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: "ID de l’exécution GitHub Actions qui contient le lot audio"
+        required: true
+        default: "39367190221"
+        type: string
+      artifact_name:
+        description: "Nom de l’artefact audio"
+        required: true
+        default: "wolof-lexicon-audio-batch-0"
+        type: string
+
+permissions:
+  actions: read
+  contents: write
+
+concurrency:
+  group: integrate-wolof-audio
+  cancel-in-progress: false
+
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      AUDIO_RUN_ID: ${{ inputs.run_id || '39367190221' }}
+      AUDIO_ARTIFACT_NAME: ${{ inputs.artifact_name || 'wolof-lexicon-audio-batch-0' }}
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+        with:
+          ref: feat/site-dictionaries-audio-entrypoints
+          fetch-depth: 0
+
+      - name: Télécharger le lot audio temporaire
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.AUDIO_ARTIFACT_NAME }}
+          run-id: ${{ env.AUDIO_RUN_ID }}
+          repository: ${{ github.repository }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: artifact
+
+      - name: Vérifier puis intégrer les WAV et le manifeste
+        run: |
+          python scripts/integrate_wolof_audio_batch.py --artifact-dir artifact --repo-root .
+
+      - name: Enregistrer les audios et les métadonnées sur la branche de travail
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add audio/wolof data/wolof-fr-dictionary.json data/wolof-audio-manifest.json
+          if git diff --cached --quiet; then
+            echo "Aucun changement à enregistrer."
+            exit 0
+          fi
+          git commit -m "feat(wolof-audio): integrate generated batch as unvalidated candidates"
+          git push origin HEAD:feat/site-dictionaries-audio-entrypoints
