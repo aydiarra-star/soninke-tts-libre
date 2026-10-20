@@ -40,6 +40,19 @@ class WolofAudioCoverageAuditTests(unittest.TestCase):
         )
         self.assertEqual(report["dictionary_forms_with_verified_reference_voice"], 0)
 
+    def test_duplicate_form_is_not_missing_french_if_any_variant_has_translation(self):
+        report = MODULE.build_report(
+            {"entries": [
+                {"wolof": {"word": "Jërëjëf"}, "fr": {"word": ""}},
+                {"wolof": {"word": "JËRËJËF"}, "fr": {"word": "Merci"}},
+            ]},
+            {"entries": []},
+        )
+        self.assertEqual(report["dictionary_entry_rows"], 2)
+        self.assertEqual(report["dictionary_unique_wolof_forms"], 1)
+        self.assertEqual(report["dictionary_forms_with_french_translation"], 1)
+        self.assertEqual(report["dictionary_forms_missing_french_translation"], [])
+
 
 if __name__ == "__main__":
     unittest.main()
