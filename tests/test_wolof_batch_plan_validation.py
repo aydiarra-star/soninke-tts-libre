@@ -35,7 +35,8 @@ class WolofBatchPlanValidationTests(unittest.TestCase):
                 "python", str(ROOT / "wolof_tts" / "generate_lexicon_batch.py"),
                 "--plan-json", str(plan), "--validate-plan-only",
             ], cwd=ROOT, check=True, capture_output=True, text=True)
-            self.assertIn("\\\"tts_model_loaded\\\": false", generator_check.stdout)
+            self.assertFalse(json.loads(generator_check.stdout)["tts_model_loaded"])
+            self.assertFalse(json.loads(generator_check.stdout)["audio_generated"])
 
     def test_changed_source_hash_fails_closed(self):
         with tempfile.TemporaryDirectory() as tmp:
