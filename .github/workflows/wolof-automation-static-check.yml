@@ -1,0 +1,36 @@
+name: Wolof automation static checks
+
+on:
+  push:
+    branches:
+      - feat/wolof-lexicon-audio-batches
+    paths:
+      - "wolof_tts/plan_next_audio_batch.py"
+      - "wolof_tts/generate_lexicon_batch.py"
+      - "tests/test_wolof_planner.py"
+      - ".github/workflows/wolof-automation-static-check.yml"
+  pull_request:
+    branches:
+      - feat/wolof-lexicon-audio-batches
+    paths:
+      - "wolof_tts/plan_next_audio_batch.py"
+      - "wolof_tts/generate_lexicon_batch.py"
+      - "tests/test_wolof_planner.py"
+      - ".github/workflows/wolof-automation-static-check.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  static-checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile scripts without loading TTS model
+        run: python -m py_compile wolof_tts/plan_next_audio_batch.py wolof_tts/generate_lexicon_batch.py tests/test_wolof_planner.py
+      - name: Test planner normalization and manifest handling
+        run: python -m unittest tests/test_wolof_planner.py -v
