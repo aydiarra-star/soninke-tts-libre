@@ -19,7 +19,7 @@
     }
   ],
   "extractedAt": "2026-10-19T08:00:45Z",
-  "entryCount": 758,
+  "entryCount": 765,
   "entries": [
     {
       "id": "jangileen-absolument-1-57cbd0ef",
@@ -721,7 +721,7 @@
         "word": "anaanas",
         "definition": "",
         "example": "",
-        "audio_url": ""
+        "audio_url": "audio/wolof/00006-anaanas.wav"
       },
       "fr": {
         "word": "ananas",
@@ -744,7 +744,9 @@
       "status": "draft",
       "origin": "external-dictionary",
       "pronunciationStatus": "unverified",
-      "translationStatus": "source-documented"
+      "translationStatus": "source-documented",
+      "audioStatus": "generated-unvalidated",
+      "audioManifest": "data/wolof-audio-manifest.json"
     },
     {
       "id": "jangileen-animal-1-ead3be21",
@@ -7552,7 +7554,7 @@
         "word": "and",
         "definition": "",
         "example": "",
-        "audio_url": ""
+        "audio_url": "audio/wolof/00007-and.wav"
       },
       "fr": {
         "word": "encensoir",
@@ -7575,7 +7577,9 @@
       "status": "draft",
       "origin": "external-dictionary",
       "pronunciationStatus": "unverified",
-      "translationStatus": "source-documented"
+      "translationStatus": "source-documented",
+      "audioStatus": "generated-unvalidated",
+      "audioManifest": "data/wolof-audio-manifest.json"
     },
     {
       "id": "jangileen-enfant-1-2f80ba52",
@@ -18498,7 +18502,7 @@
         "word": "ana",
         "definition": "",
         "example": "",
-        "audio_url": ""
+        "audio_url": "audio/wolof/00005-ana.wav"
       },
       "fr": {
         "word": "où",
@@ -18527,7 +18531,9 @@
       "status": "draft",
       "origin": "external-dictionary",
       "pronunciationStatus": "unverified",
-      "translationStatus": "source-documented"
+      "translationStatus": "source-documented",
+      "audioStatus": "generated-unvalidated",
+      "audioManifest": "data/wolof-audio-manifest.json"
     },
     {
       "id": "jangileen-paix-1-fa645254",
@@ -28454,6 +28460,272 @@
       },
       "fr": {
         "word": "Richesse.",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "en": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "sourceExamples": [],
+      "category": "other",
+      "source": "https://kaikki.org/frwiktionary/Wolof/index.html",
+      "sourceName": "Kaikki / Wiktionnaire français",
+      "license": "Données dérivées de Wiktionnaire : conserver l’attribution et respecter les licences applicables CC BY-SA/GFDL.",
+      "status": "draft",
+      "origin": "external-dictionary-candidate",
+      "pronunciationStatus": "unverified",
+      "translationStatus": "unverified-candidate",
+      "audioStatus": "generated-unvalidated",
+      "audioManifest": "data/wolof-audio-manifest.json"
+    },
+    {
+      "id": "wolof-audio-candidate-00000-ambasaad",
+      "soninke": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "wolof": {
+        "word": "ambasaad",
+        "definition": "",
+        "example": "",
+        "audio_url": "audio/wolof/00000-ambasaad.wav"
+      },
+      "fr": {
+        "word": "L’ambassade.",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "en": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "sourceExamples": [],
+      "category": "other",
+      "source": "https://kaikki.org/frwiktionary/Wolof/index.html",
+      "sourceName": "Kaikki / Wiktionnaire français",
+      "license": "Données dérivées de Wiktionnaire : conserver l’attribution et respecter les licences applicables CC BY-SA/GFDL.",
+      "status": "draft",
+      "origin": "external-dictionary-candidate",
+      "pronunciationStatus": "unverified",
+      "translationStatus": "unverified-candidate",
+      "audioStatus": "generated-unvalidated",
+      "audioManifest": "data/wolof-audio-manifest.json"
+    },
+    {
+      "id": "wolof-audio-candidate-00001-ampuul",
+      "soninke": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "wolof": {
+        "word": "ampuul",
+        "definition": "",
+        "example": "",
+        "audio_url": "audio/wolof/00001-ampuul.wav"
+      },
+      "fr": {
+        "word": "L’ampoule.",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "en": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "sourceExamples": [],
+      "category": "other",
+      "source": "https://kaikki.org/frwiktionary/Wolof/index.html",
+      "sourceName": "Kaikki / Wiktionnaire français",
+      "license": "Données dérivées de Wiktionnaire : conserver l’attribution et respecter les licences applicables CC BY-SA/GFDL.",
+      "status": "draft",
+      "origin": "external-dictionary-candidate",
+      "pronunciationStatus": "unverified",
+      "translationStatus": "unverified-candidate",
+      "audioStatus": "generated-unvalidated",
+      "audioManifest": "data/wolof-audio-manifest.json"
+    },
+    {
+      "id": "wolof-audio-candidate-00002-amul",
+      "soninke": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "wolof": {
+        "word": "amul",
+        "definition": "",
+        "example": "",
+        "audio_url": "audio/wolof/00002-amul.wav"
+      },
+      "fr": {
+        "word": "Il n’y a pas.",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "en": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "sourceExamples": [],
+      "category": "other",
+      "source": "https://kaikki.org/frwiktionary/Wolof/index.html",
+      "sourceName": "Kaikki / Wiktionnaire français",
+      "license": "Données dérivées de Wiktionnaire : conserver l’attribution et respecter les licences applicables CC BY-SA/GFDL.",
+      "status": "draft",
+      "origin": "external-dictionary-candidate",
+      "pronunciationStatus": "unverified",
+      "translationStatus": "unverified-candidate",
+      "audioStatus": "generated-unvalidated",
+      "audioManifest": "data/wolof-audio-manifest.json"
+    },
+    {
+      "id": "wolof-audio-candidate-00003-amule",
+      "soninke": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "wolof": {
+        "word": "amule",
+        "definition": "",
+        "example": "",
+        "audio_url": "audio/wolof/00003-amule.wav"
+      },
+      "fr": {
+        "word": "Il n’y a pas.",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "en": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "sourceExamples": [],
+      "category": "other",
+      "source": "https://kaikki.org/frwiktionary/Wolof/index.html",
+      "sourceName": "Kaikki / Wiktionnaire français",
+      "license": "Données dérivées de Wiktionnaire : conserver l’attribution et respecter les licences applicables CC BY-SA/GFDL.",
+      "status": "draft",
+      "origin": "external-dictionary-candidate",
+      "pronunciationStatus": "unverified",
+      "translationStatus": "unverified-candidate",
+      "audioStatus": "generated-unvalidated",
+      "audioManifest": "data/wolof-audio-manifest.json"
+    },
+    {
+      "id": "wolof-audio-candidate-00004-amuma",
+      "soninke": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "wolof": {
+        "word": "amuma",
+        "definition": "",
+        "example": "",
+        "audio_url": "audio/wolof/00004-amuma.wav"
+      },
+      "fr": {
+        "word": "Je n’ai pas….",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "en": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "sourceExamples": [],
+      "category": "other",
+      "source": "https://kaikki.org/frwiktionary/Wolof/index.html",
+      "sourceName": "Kaikki / Wiktionnaire français",
+      "license": "Données dérivées de Wiktionnaire : conserver l’attribution et respecter les licences applicables CC BY-SA/GFDL.",
+      "status": "draft",
+      "origin": "external-dictionary-candidate",
+      "pronunciationStatus": "unverified",
+      "translationStatus": "unverified-candidate",
+      "audioStatus": "generated-unvalidated",
+      "audioManifest": "data/wolof-audio-manifest.json"
+    },
+    {
+      "id": "wolof-audio-candidate-00008-andandoo",
+      "soninke": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "wolof": {
+        "word": "andandoo",
+        "definition": "",
+        "example": "",
+        "audio_url": "audio/wolof/00008-andandoo.wav"
+      },
+      "fr": {
+        "word": "Compagnon.",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "en": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "sourceExamples": [],
+      "category": "other",
+      "source": "https://kaikki.org/frwiktionary/Wolof/index.html",
+      "sourceName": "Kaikki / Wiktionnaire français",
+      "license": "Données dérivées de Wiktionnaire : conserver l’attribution et respecter les licences applicables CC BY-SA/GFDL.",
+      "status": "draft",
+      "origin": "external-dictionary-candidate",
+      "pronunciationStatus": "unverified",
+      "translationStatus": "unverified-candidate",
+      "audioStatus": "generated-unvalidated",
+      "audioManifest": "data/wolof-audio-manifest.json"
+    },
+    {
+      "id": "wolof-audio-candidate-00009-andoor",
+      "soninke": {
+        "word": "",
+        "definition": "",
+        "example": "",
+        "audio_url": ""
+      },
+      "wolof": {
+        "word": "Andoor",
+        "definition": "",
+        "example": "",
+        "audio_url": "audio/wolof/00009-andoor.wav"
+      },
+      "fr": {
+        "word": "Andorre (pays européen).",
         "definition": "",
         "example": "",
         "audio_url": ""
