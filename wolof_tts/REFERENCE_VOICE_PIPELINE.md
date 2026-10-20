@@ -6,6 +6,14 @@ Le fichier de bibliothèque `wolof-reference-private.base64.txt` est une référ
 
 Pour GitHub Actions, la valeur base64 doit être fournie séparément comme secret `WOLOF_REFERENCE_AUDIO_B64`. Le workflow ne doit jamais afficher cette variable. Un secret configuré signifie seulement que la référence est disponible au runner, pas que le moteur sait la cloner.
 
+## Exigence non négociable : la voix de l'utilisateur uniquement
+
+Aucune voix de substitution n'est acceptable pour les mots audio Wolof. Le moteur doit être conditionné par l'enregistrement de référence de l'utilisateur et produire une preuve de son utilisation. Ne pas générer ni publier un lot si le moteur ne prend pas en charge cette référence : marquer les entrées `blocked-no-reference-engine` et arrêter le lot.
+
+Les audios Soninké précédemment produits peuvent être évalués comme ressources complémentaires uniquement si leur identité vocale est vérifiée. Ne pas supposer qu'un audio Soninké est la voix source simplement parce qu'il existe ou qu'une prononciation a été validée. Une validation linguistique confirme le contenu/prononciation, pas à elle seule l'identité du locuteur.
+
+La preuve de concept doit être écoutée et validée avant toute production à grande échelle. Les entrées générées ne sont conformes que si la référence a réellement été utilisée et que l'identité vocale a été contrôlée.
+
 ## État technique
 
 Le générateur actuel `wolof_tts/generate_lexicon_batch.py` sélectionne `CONCREE/Adia_TTS`. Le manifeste des lots existants ne contient ni empreinte de la référence utilisée, ni statut de vérification d'identité vocale. Les WAV sont donc des candidats techniques, **pas des audios certifiés comme étant la voix de l'utilisateur**.
