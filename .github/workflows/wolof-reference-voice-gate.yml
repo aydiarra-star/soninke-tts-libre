@@ -6,6 +6,8 @@ on:
       - "wolof_tts/generate_reference_voice_batch.py"
       - "wolof_tts/REFERENCE_VOICE_PIPELINE.md"
       - "tests/test_reference_voice_gate.py"
+      - "wolof_tts/audit_wolof_audio_coverage.py"
+      - "tests/test_wolof_audio_coverage_audit.py"
       - ".github/workflows/wolof-reference-voice-gate.yml"
   workflow_dispatch:
 
@@ -24,3 +26,7 @@ jobs:
         run: python -m py_compile wolof_tts/generate_reference_voice_batch.py
       - name: Verify no reference means no generation
         run: python tests/test_reference_voice_gate.py -v
+      - name: Test dictionary/audio coverage audit
+        run: python tests/test_wolof_audio_coverage_audit.py -v
+      - name: Run read-only coverage audit against current lexicon
+        run: python wolof_tts/audit_wolof_audio_coverage.py
