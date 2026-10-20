@@ -18,16 +18,16 @@ La preuve de concept doit être écoutée et validée avant toute production à 
 
 Le générateur historique `wolof_tts/generate_lexicon_batch.py` sélectionne `CONCREE/Adia_TTS` sans lui passer la référence. Ses WAV restent des candidats techniques, **pas des audios certifiés comme étant la voix de l'utilisateur**.
 
-Une nouvelle voie isolée est ajoutée dans `wolof_tts/generate_reference_voice_batch.py`, fondée sur `k2-fsa/OmniVoice` (licence Apache-2.0). Sa documentation amont décrit le clonage zéro-shot avec `ref_audio` et liste le wolof parmi les 646 langues (ID de langue `wo`). Cela justifie un test contrôlé, mais ne prouve ni la qualité du wolof produit ni l'identité vocale du résultat. Références : [dépôt OmniVoice](https://github.com/k2-fsa/OmniVoice) et [table des langues](https://huggingface.co/spaces/phinam112/OmniVoice-Studio/blob/main/docs/languages.md).
+Une nouvelle voie isolée est ajoutée dans `wolof_tts/generate_reference_voice_batch.py`, fondée sur `k2-fsa/OmniVoice` (licence Apache-2.0). Sa documentation amont décrit le clonage zéro-shot avec `ref_audio` et liste le wolof parmi les langues prises en charge (ID `wo`). Cela justifie un test contrôlé, mais ne prouve ni la qualité du wolof produit ni l'identité vocale du résultat. Références : [dépôt OmniVoice](https://github.com/k2-fsa/OmniVoice) et [table des langues](https://raw.githubusercontent.com/k2-fsa/OmniVoice/master/docs/languages.md).
 
 ### Preuve de concept — un seul mot
 
 Installer dans un environnement Python adapté : `pip install omnivoice soundfile` (PyTorch doit être installé selon le matériel) et rendre `ffmpeg` disponible. Puis fournir le fichier privé localement avec `--reference-audio`, ou définir le secret d'environnement `WOLOF_REFERENCE_AUDIO_B64` sans l'afficher dans les logs.
 
 ```bash
-python wolof_tts/generate_reference_voice_batch.py \\
-  --reference-audio /chemin/prive/reference.ogg \\
-  --poc-text 'Jërëjëf' \\
+python wolof_tts/generate_reference_voice_batch.py \
+  --reference-audio /chemin/prive/reference.ogg \
+  --poc-text 'Jërëjëf' \
   --output-dir wolof_reference_voice_outputs
 ```
 
@@ -47,10 +47,18 @@ Cette nouvelle voie n'a pas encore été exécutée dans un environnement doté 
 
 Une entrée sans traduction française ne doit pas disparaître silencieusement du plan : elle doit rester visible avec `translation_validation=needs-review` et être bloquée de la génération destinée aux apprenants jusqu'à correction. Une traduction candidate incertaine reste signalée même si elle n'est pas vide.
 
-## Audit en lecture seule
+## Audits en lecture seule
+
+Audit de préparation du pipeline vocal :
 
 ```bash
 python wolof_tts/audit_reference_voice_readiness.py --output wolof-reference-voice-readiness.json
 ```
 
-Le rapport compte les formes distinctes, les entrées sans français, les formes sans audio, les audios dont l'identité vocale n'est pas vérifiée et les traductions à contrôler. Il ne lit ni n'affiche la valeur du secret.
+Audit distinct de couverture réelle du dictionnaire et du manifeste audio :
+
+```bash
+python wolof_tts/audit_wolof_audio_coverage.py --output wolof-audio-coverage.json
+```
+
+Le second rapport compte les lignes du lexique, les formes wolof distinctes, les traductions françaises manquantes, les formes sans entrée de manifeste audio, les entrées dont l'identité vocale est vérifiée, les traductions à réviser et les audios hors dictionnaire. Il est strictement en lecture seule pour les données source : le fichier JSON n'est écrit que si `--output` est fourni. Il ne lit ni n'affiche la valeur du secret et n'écoute pas les WAV ; il ne certifie donc pas la prononciation ni l'identité vocale à lui seul.
