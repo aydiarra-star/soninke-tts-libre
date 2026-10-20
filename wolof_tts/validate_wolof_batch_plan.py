@@ -14,7 +14,7 @@ SEEDS = {"jërëjëf", "kër", "ñëw"}
 
 
 def norm(value):
-    return re.sub(r"\\s+", " ", str(value or "").strip()).casefold()
+    return re.sub(r"\s+", " ", str(value or "").strip()).casefold()
 
 
 def sha256(path):
@@ -37,7 +37,7 @@ def _merged_sources():
         french = str((entry.get("fr") or {}).get("word") or "").strip()
         if not word or not french:
             continue
-        for variant_no, variant in enumerate([v.strip() for v in re.split(r"\\s*/\\s*", word) if v.strip()], 1):
+        for variant_no, variant in enumerate([v.strip() for v in re.split(r"\s*/\s*", word) if v.strip()], 1):
             merged.setdefault(norm(variant), {
                 "wolof": variant, "french": french, "source": entry.get("source", ""),
                 "source_name": entry.get("sourceName", lexicon.get("source", "Jàngileen")),
