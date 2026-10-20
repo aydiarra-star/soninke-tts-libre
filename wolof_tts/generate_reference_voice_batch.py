@@ -16,11 +16,13 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import unicodedata
 from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 LEXICON = ROOT / "data" / "wolof-fr-dictionary.json"
+AUDIO_MANIFEST = ROOT / "data" / "wolof-audio-manifest.json"
 MODEL_ID = "k2-fsa/OmniVoice"
 VALIDATED_SEEDS = {"jërëjëf": "Merci", "kër": "Maison", "ñëw": "Venir"}
 
@@ -74,22 +76,64 @@ def prepare_reference(args: argparse.Namespace, tempdir: Path) -> Path:
     return wav_path
 
 
-def select_entries(start: int, size: int) -> list[dict]:
-    payload = json.loads(LEXICON.read_text(encoding="utf-8"))
-    rows, seen = [], set()
-    for entry in payload.get("entries", []):
+def translation_needs_review(status: object) -> bool:
+    value = str(status or "").strip().casefold()
+    return any(marker in value for marker in (
+        "candidate", "pending", "uncertain", "review", "unverified", "needs-review"
+    ))
+
+
+def select_entries(
+    start: int,
+    size: int,
+    lexicon_payload: dict | None = None,
+    manifest_payload: dict | None = None,
+) -> list[dict]:
+    payload = lexicon_payload
+    if payload is None:
+        payload = json.loads(LEXICON.read_text(encoding="utf-8"))
+    manifest = manifest_payload
+    if manifest is None:
+        manifest = json.loads(AUDIO_MANIFEST.read_text(encoding="utf-8")) if AUDIO_MANIFEST.is_file() else {"entries": []}
+
+    flagged_audio_words = set()
+    for audio_entry in manifest.get("entries", []):
+        word = str(audio_entry.get("wolof") or "").strip()
+        if not word:
+            continue
+        statuses = (
+            audio_entry.get("translation_validation"),
+            audio_entry.get("source_translation_status"),
+        )
+        if any(translation_needs_review(status) for status in statuses):
+            flagged_audio_words.add(norm(word))
+
+    rows = []
+    for index, entry in enumerate(payload.get("entries", [])):
         word = str((entry.get("wolof") or {}).get("word") or "").strip()
         french = str((entry.get("fr") or {}).get("word") or "").strip()
-        status = str(entry.get("translationStatus") or "source-documented")
-        if not word or not french or norm(word) in seen:
+        status = (
+            entry.get("translationStatus")
+            or entry.get("translation_validation")
+            or entry.get("source_translation_status")
+            or "source-documented"
+        )
+        if not word or not french or translation_needs_review(status):
             continue
-        seen.add(norm(word))
-        if status in {"unverified-candidate", "needs-review", "uncertain", "pending-review"}:
+        if norm(word) in flagged_audio_words:
             continue
-        rows.append({"wolof": word, "french": french, "translation_status": status})
-    rows.sort(key=lambda row: (norm(row["wolof"]), row["french"].casefold()))
-    return rows[start:start + size]
+        rows.append({
+            "entry_id": str(entry.get("id") or f"dictionary-row-{index:05d}"),
+            "dictionary_index": index,
+            "wolof": word,
+            "french": french,
+            "translation_status": str(status),
+        })
 
+    # Keep every dictionary entry, including repeated Wolof headwords with
+    # different French senses: the requirement is one audio per entry.
+    rows.sort(key=lambda row: (norm(row["wolof"]), row["french"].casefold(), row["entry_id"]))
+    return rows[start:start + size]
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -174,7 +218,8 @@ def main() -> int:
                 output_path.unlink(missing_ok=True)
                 raise SystemExit(f"BLOQUÉ : contrôle technique échoué pour {item['wolof']!r}.")
             records.append({
-                "id": safe_id, "wolof": item["wolof"], "french": item["french"],
+                "id": safe_id, "entry_id": item["entry_id"], "dictionary_index": item["dictionary_index"],
+                "wolof": item["wolof"], "french": item["french"],
                 "file": output_path.name, "model": MODEL_ID, "language_id": "wo",
                 "sample_rate_hz": rate, "channels": channels, "subtype": subtype,
                 "duration_seconds": round(duration, 3), "peak_amplitude": round(peak, 6),
