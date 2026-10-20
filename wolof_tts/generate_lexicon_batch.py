@@ -85,6 +85,15 @@ def main():
     if args.validate_plan_only and not args.plan_json:
         raise SystemExit("--validate-plan-only requires --plan-json")
     if args.plan_json:
+        from validate_wolof_batch_plan import validate_plan
+        try:
+            validation = validate_plan(args.plan_json)
+        except (ValueError, OSError, json.JSONDecodeError) as exc:
+            raise SystemExit(str(exc))
+        print(json.dumps(validation, ensure_ascii=False, indent=2))
+        if args.validate_plan_only:
+            return
+    if args.plan_json:
         plan_path = args.plan_json if args.plan_json.is_absolute() else Path.cwd() / args.plan_json
         plan = json.loads(plan_path.read_text(encoding="utf-8"))
         selected = plan["selected"]
