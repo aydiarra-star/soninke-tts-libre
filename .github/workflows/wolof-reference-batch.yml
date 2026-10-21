@@ -77,7 +77,6 @@ jobs:
             exit 1
           fi
 
-          # Split the requested batch into five independent workers.
           case "$BATCH_SIZE_INPUT" in
             5)  SHARD_SIZE=1 ;;
             10) SHARD_SIZE=2 ;;
@@ -94,6 +93,8 @@ jobs:
             --batch-size "$SHARD_SIZE" \
             --voice-identity-approved \
             --output-dir "wolof_reference_voice_outputs"
+
+          mv wolof_reference_voice_outputs/manifest.json "wolof_reference_voice_outputs/manifest-shard-$SHARD_INDEX.json"
 
       - name: Upload shard privately for assembly
         uses: actions/upload-artifact@v4
@@ -114,6 +115,39 @@ jobs:
           pattern: wolof-reference-shard-*-start-${{ inputs.start_index }}
           path: wolof_reference_voice_outputs
           merge-multiple: true
+
+      - name: Assemble the manifests without losing entries
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          root = Path("wolof_reference_voice_outputs")
+          manifests = sorted(root.glob("manifest-shard-*.json"))
+          if not manifests:
+              raise SystemExit("No shard manifests were downloaded.")
+          entries = []
+          for path in manifests:
+              payload = json.loads(path.read_text(encoding="utf-8"))
+              entries.extend(payload.get("entries", []))
+          entries.sort(key=lambda row: (row.get("dictionary_index", -1), row.get("id", "")))
+          fingerprints = {json.loads(p.read_text(encoding="utf-8")).get("reference_audio_sha256") for p in manifests}
+          if len(fingerprints) != 1:
+              raise SystemExit("Reference audio fingerprints differ between shards.")
+          manifest = {
+              "model": "k2-fsa/OmniVoice",
+              "language_id": "wo",
+              "reference_audio_sha256": next(iter(fingerprints)),
+              "voice_identity_validation": "pending-user-listening-confirmation",
+              "batch_mode": True,
+              "parallel_shards": len(manifests),
+              "entries": entries,
+          }
+          (root / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
+          for path in manifests:
+              path.unlink()
+          print(f"Assembled {len(entries)} manifest entries from {len(manifests)} parallel shards.")
+          PY
 
       - name: Upload one combined batch for review
         uses: actions/upload-artifact@v4
