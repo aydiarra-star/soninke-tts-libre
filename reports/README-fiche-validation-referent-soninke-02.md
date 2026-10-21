@@ -1,20 +1,11 @@
-# Fiche de validation linguistique — lot 2 Soninké
+# Fiche de validation — lot 2 Soninké–français
 
-La fiche reprend les 120 segments source couvrant 50 lemmes candidats distincts. Elle est destinée au référent linguistique. Aucun de ces nouveaux candidats n'est importé dans la base avant validation.
+Le référent a confirmé explicitement la validation globale du lot dans la conversation le **21 octobre 2026**. La fiche couvre les **120 segments source** associés à **50 lemmes canoniques**; elle conserve les graphies proposées, les gloses extraites, les textes complets et les références de paragraphes.
 
-## Colonnes à compléter
-- `validation_referent` : `CONFIRMÉ`, `À CORRIGER`, `À REJETER` ou `À DISCUTER`.
-- `lemme_corrige` : graphie validée si elle diffère de la proposition.
-- `traduction_fr_confirmee` : traduction française validée, en distinguant les sens multiples.
-- `sens_variantes_exemples_a_conserver` : variantes, exemples, sens, formes sous-jacentes.
-- `commentaires_referent`, `validateur`, `date_validation` : notes et provenance de la validation.
+- Décision : `VALIDÉ PAR LE RÉFÉRENT — IMPORTÉ`.
+- Validation : confirmation globale du référent utilisateur, enregistrée le 2026-10-21.
+- Les 50 lemmes ont été ajoutés à la base sous un enregistrement par lemme canonique.
+- Les variantes, sens multiples et exemples restent consultables dans les colonnes source complètes.
+- L'extraction automatique des gloses peut nécessiter une revue ultérieure; la fiche permet de corriger sans perdre la provenance.
 
-## Règles
-1. Ne pas importer une entrée avant validation.
-2. Un seul enregistrement par lemme canonique dans la base; conserver les sens multiples sous cet enregistrement.
-3. Les variantes et les textes sources complets sont conservés.
-4. Si deux homonymes doivent être distingués malgré une graphie identique, préciser ce choix dans les commentaires avant l'import.
-5. Les renvois explicites vers une entrée principale ont été exclus de ce lot.
-
-Dépôt : `aydiarra-star/xamxam-xara`  
 Branche : `data/lexique-soninke-fr-v1`
