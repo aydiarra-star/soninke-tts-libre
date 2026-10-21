@@ -12,9 +12,9 @@ Ce lot contient **50 lemmes candidats distincts**, choisis parmi les entrées du
 ## Résumé
 
 - Lignes source examinées : 787
-- Lemm es distincts dans la source : 632
-- Lemm es distincts déjà présents dans le projet : 0
-- Lemm es retenus dans ce lot : 50
+- Lemmes distincts dans la source : 632
+- Lemmes distincts déjà présents dans le projet : 6
+- Lemmes retenus dans ce lot : 50
 - Lignes source conservées dans ce lot : 71
 
 Ordre de priorité établi par la présence d’une glose et d’une définition descriptive exploitable; cet ordre est une aide de tri, pas une validation linguistique.
