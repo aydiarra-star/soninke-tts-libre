@@ -5,6 +5,7 @@ on:
     paths:
       - "data/lexique-soninke-fr-base.csv"
       - "scripts/validate_lexique.py"
+      - "tests/test_validate_lexique.py"
       - ".github/workflows/validate-lexique.yml"
   push:
     branches:
@@ -12,6 +13,7 @@ on:
     paths:
       - "data/lexique-soninke-fr-base.csv"
       - "scripts/validate_lexique.py"
+      - "tests/test_validate_lexique.py"
       - ".github/workflows/validate-lexique.yml"
 
 permissions:
@@ -27,5 +29,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.x"
+      - name: Test duplicate-headword protection
+        run: python -m unittest tests/test_validate_lexique.py
       - name: Validate lexical CSV
         run: python scripts/validate_lexique.py data/lexique-soninke-fr-base.csv
