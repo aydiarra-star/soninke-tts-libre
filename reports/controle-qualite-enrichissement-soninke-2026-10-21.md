@@ -9,6 +9,10 @@ Contrôle réalisé à partir de `reports/revue-enrichissement-dictionnaire-soni
 - Segments identifiés comme renvois vers une entrée principale : **236**.
 - Lemmes distincts parmi ces renvois après normalisation simple (casse/espaces) : **192**.
 - Lemmes de renvoi présents plusieurs fois dans la source : **44**.
+- Lemm es de renvoi déjà présents dans la base par correspondance exacte : **5 segments**.
+- Première cible du renvoi trouvée exactement dans la base : **82 segments**.
+- Première cible non trouvée par correspondance exacte : **143 segments** (cela ne prouve pas son absence : chiffres finaux, suffixes et graphies doivent être contrôlés).
+- Segments sans cible extraite par la règle simple : **11**.
 - Groupes de graphies différentes fusionnés par l’ancienne règle qui supprime les chiffres finaux : **38**.
 
 ## Constatations et décisions
