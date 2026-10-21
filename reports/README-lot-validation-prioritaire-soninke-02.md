@@ -1,20 +1,16 @@
-# Lot 2 de validation linguistique — Soninké–français
+# Lot 2 — import validé du lexique Soninké–français
 
-Ce deuxième lot a été préparé depuis le rapport de comparaison avec `Dictionnaire soninké.docx`, après l'import confirmé du lot 1.
+Le référent a confirmé explicitement la validation globale du lot dans la conversation le **21 octobre 2026**. Les données ont été importées dans `data/lexique-soninke-fr-base.csv`.
 
-- **50 lemmes candidats distincts**.
-- **120 segments source** conservés pour préserver les sens multiples et les variantes.
-- Les candidats ont été comparés à la base actuelle et au lot 1.
-- Les renvois explicites `See main entry` ont été exclus de cette sélection pour éviter d'importer des formes dérivées comme entrées autonomes sans examen.
-- **Aucune entrée de ce lot n'a été importée** : la validation du lot 1 ne vaut pas validation des nouveaux candidats.
-- La priorité repose sur la présence d'une définition, d'une catégorie grammaticale, d'exemples ou d'informations de variantes. Ce classement est un outil de tri, pas une validation linguistique.
-- Les gloses automatiques peuvent être imparfaites; consulter le texte source complet avant de confirmer.
-- Les suffixes numériques de la source ont été regroupés dans la colonne `lemme` afin de signaler les sens multiples; si deux homonymes doivent être séparés en linguistique, le référent peut le préciser.
+- **50 lemmes canoniques ajoutés**.
+- **120 segments source conservés** dans les fichiers de revue et de validation.
+- Les variantes repérées sont listées dans la provenance de chaque entrée; les sens et gloses distincts sont regroupés dans le champ français.
+- Les formes avec suffixes numériques ont été regroupées sous un lemme canonique, selon la règle du projet. En cas d'homonymie linguistique réelle, la fiche source reste disponible pour réexamen.
+- La sélection et l'extraction des gloses ont été automatisées; la validation enregistrée correspond à la confirmation globale du référent, et non à une expertise indépendante.
 
-## Colonnes
-- `lemme`, `variante`, `glose_extraite_automatiquement`, `texte_source_complet` et `paragraphe_source` : données et provenance de la source.
-- `decision` : toutes les lignes restent marquées `À VALIDER — NON IMPORTÉ`.
-- `consigne_validation` : contrôles à effectuer avant toute intégration.
+## Fichiers
+- Base : `data/lexique-soninke-fr-base.csv`
+- Lot source : `reports/lot-validation-prioritaire-soninke-02.csv`
+- Fiche de validation : `reports/fiche-validation-referent-soninke-02.csv`
 
-Branche : `data/lexique-soninke-fr-v1`  
-Fichier : `reports/lot-validation-prioritaire-soninke-02.csv`
+Branche : `data/lexique-soninke-fr-v1`
