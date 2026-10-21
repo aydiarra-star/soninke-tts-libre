@@ -212,3 +212,45 @@ SNK-GRM-0028;m';particule devant b, f, m;particule;liste_referent;fourni_par_ref
 SNK-GRM-0029;l';particule devant r;particule;liste_referent;fourni_par_referent
 SNK-GRM-0030;ŋ';particule devant w;particule;liste_referent;fourni_par_referent
 SNK-GRM-0031;n';particule par défaut;particule;liste_referent;fourni_par_referent
+SNK-LEX-0183;baaba;père, papa (nom d'appel familier);nom;"Dictionnaire soninké.docx; segments=4";valide_par_referent
+SNK-LEX-0184;baabo;"mousse, écume ; gardien des circoncis";nom;"Dictionnaire soninké.docx; segments=6,8; variantes=baawo";valide_par_referent
+SNK-LEX-0185;baade;"lieu où l'on reçoit les condoléances ; tombeau, deuil";nom;"Dictionnaire soninké.docx; segments=11,12";valide_par_referent
+SNK-LEX-0186;baafe;battant de porte;nom;"Dictionnaire soninké.docx; segments=13";valide_par_referent
+SNK-LEX-0187;baalixu;pubère, qui a atteint l'âge de la puberté;nom;"Dictionnaire soninké.docx; segments=19";valide_par_referent
+SNK-LEX-0188;baana;"Tabaski, le douzième mois lunaire ; ressembler, être uni, être un";verbe;"Dictionnaire soninké.docx; segments=22,23";valide_par_referent
+SNK-LEX-0189;baara;variété de paille pour faire les toits;nom;"Dictionnaire soninké.docx; segments=42";valide_par_referent
+SNK-LEX-0190;baase;repas d'accueil, plat offert à un hôte;nom;"Dictionnaire soninké.docx; segments=47";valide_par_referent
+SNK-LEX-0191;baasunde;action d'offrir un plat à un hôte;nom;"Dictionnaire soninké.docx; segments=52";valide_par_referent
+SNK-LEX-0192;baata;favori(e), préféré(e);adjectif;"Dictionnaire soninké.docx; segments=55";valide_par_referent
+SNK-LEX-0193;baaxa;"ceinture de gris-gris ; margouillat";nom;"Dictionnaire soninké.docx; segments=60,61; variantes=balaxa";valide_par_referent
+SNK-LEX-0194;baaye;"tante ; orphelin ; planer";nom;"Dictionnaire soninké.docx; segments=65,66,67";valide_par_referent
+SNK-LEX-0195;badaane;variole;nom;"Dictionnaire soninké.docx; segments=70";valide_par_referent
+SNK-LEX-0196;badage;"hadage ; buisson";nom;"Dictionnaire soninké.docx; segments=71,72; variantes=bedege";valide_par_referent
+SNK-LEX-0197;badarawulle;variété de lynx à robe fauve, caracal;nom;"Dictionnaire soninké.docx; segments=73";valide_par_referent
+SNK-LEX-0198;bado;"variété de longue herbe utilisée à fabriquer les seccos ; robe multicolore à dominante rouge (ex: chèvre, cheval) ; femme aux grossesses très rapprochées";nom;"Dictionnaire soninké.docx; segments=75,76,77; variantes=bajo";valide_par_referent
+SNK-LEX-0199;bafe;antichambre, vestibule;nom;"Dictionnaire soninké.docx; segments=80; variantes=bahe";valide_par_referent
+SNK-LEX-0200;bafido;tapis de selle;nom;"Dictionnaire soninké.docx; segments=82; variantes=bahido";valide_par_referent
+SNK-LEX-0201;bagandaare;rançon;nom;"Dictionnaire soninké.docx; segments=85";valide_par_referent
+SNK-LEX-0202;bage;variété d'acacia épineux;nom;"Dictionnaire soninké.docx; segments=91";valide_par_referent
+SNK-LEX-0203;bagi;variété de tissu européen, percale;nom;"Dictionnaire soninké.docx; segments=92";valide_par_referent
+SNK-LEX-0204;bajo;"couverture en laine ; fils unique";nom;"Dictionnaire soninké.docx; segments=100,101; variantes=bajjo";valide_par_referent
+SNK-LEX-0205;bajungu;mil ou maïs bouilli;nom;"Dictionnaire soninké.docx; segments=103";valide_par_referent
+SNK-LEX-0206;bakkata;"colombe, variété de tourterelle ; variété de poisson";nom;"Dictionnaire soninké.docx; segments=107,108";valide_par_referent
+SNK-LEX-0207;bakke;sortie;nom;"Dictionnaire soninké.docx; segments=109";valide_par_referent
+SNK-LEX-0208;bakkubakku;crapaud;nom;"Dictionnaire soninké.docx; segments=110";valide_par_referent
+SNK-LEX-0209;balafata;string, cache-sexe (féminin);nom;"Dictionnaire soninké.docx; segments=117; variantes=belifata";valide_par_referent
+SNK-LEX-0210;ballaade;"poutre, traverse ; clavicule";nom;"Dictionnaire soninké.docx; segments=127,128";valide_par_referent
+SNK-LEX-0211;banŋe;"chez, vers ; côté, parti";nom;"Dictionnaire soninké.docx; segments=170,171";valide_par_referent
+SNK-LEX-0212;bape;"piège ; terre soulevée par les plantes en germination";nom;"Dictionnaire soninké.docx; segments=179,180";valide_par_referent
+SNK-LEX-0213;baraji;"bénir, récompenser ; récompense divine, grâce divine, bénédiction, offrande";nom;"Dictionnaire soninké.docx; segments=211,212";valide_par_referent
+SNK-LEX-0214;barake;"bénédiction, prospérité, protection ; force";nom;"Dictionnaire soninké.docx; segments=215,216; variantes=bariki";valide_par_referent
+SNK-LEX-0215;baraxatoye;"grosseur ; fierté, hautain";nom;"Dictionnaire soninké.docx; segments=231,232";valide_par_referent
+SNK-LEX-0216;bisi;"pêcher le fretin (petits poissons) ; filet à fretin";nom;"Dictionnaire soninké.docx; segments=441,442";valide_par_referent
+SNK-LEX-0217;biyaade;"fer à marquer, moule en métal pour l'impression du cuir ou pour marquer les vaches ; grillage à griller";nom;"Dictionnaire soninké.docx; segments=461,462,467; variantes=buyaade";valide_par_referent
+SNK-LEX-0218;bologaaɲe;"plage au bord du fleuve, lieu de baignade ; lieu de réunion pour régler des affaires (sens figuré)";nom;"Dictionnaire soninké.docx; segments=494,495; variantes=bologaaɲi";valide_par_referent
+SNK-LEX-0219;bolonŋe;"bulunŋe ; vestibule";nom;"Dictionnaire soninké.docx; segments=497,498; variantes=bolontonŋe";valide_par_referent
+SNK-LEX-0220;bonne;"décès ; le fait d'être gâté, d'être tombé en panne";nom;"Dictionnaire soninké.docx; segments=510,511";valide_par_referent
+SNK-LEX-0221;bononte;"gâté (être) ; un malade mental";nom;"Dictionnaire soninké.docx; segments=516,517,521,522";valide_par_referent
+SNK-LEX-0222;bookine;"variété d'oiseau ; biche, cochon";nom;"Dictionnaire soninké.docx; segments=535,536";valide_par_referent
+SNK-LEX-0223;bulle;"tas de banco ; fétiche enterré lors d'une construction";nom;"Dictionnaire soninké.docx; segments=629,630";valide_par_referent
+SNK-LEX-0224;buusi;"uriner ; urine";verbe;"Dictionnaire soninké.docx; segments=725,726";valide_par_referent
