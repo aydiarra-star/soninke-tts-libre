@@ -29,7 +29,11 @@ permissions:
 
 jobs:
   generate-private-batch:
-    if: ${{ inputs.voice_identity_approved == true }}
+    if: ${{ inputs.voice_identity_approved == true && (inputs.batch_size == '25' || inputs.batch_size == '50' || (inputs.batch_size == '10' && matrix.shard < 2) || (inputs.batch_size == '5' && matrix.shard == 0)) }}
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4]
     runs-on: ubuntu-latest
     timeout-minutes: 360
     steps:
@@ -58,27 +62,60 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install omnivoice soundfile
 
-      - name: Generate a limited reference-conditioned batch
+      - name: Generate a parallel shard of the reference-conditioned batch
         env:
           WOLOF_REFERENCE_AUDIO_B64: ${{ secrets.WOLOF_REFERENCE_AUDIO_B64 }}
           WOLOF_REFERENCE_TRANSCRIPT: ${{ secrets.WOLOF_REFERENCE_TRANSCRIPT }}
           START_INDEX_INPUT: ${{ inputs.start_index }}
+          BATCH_SIZE_INPUT: ${{ inputs.batch_size }}
+          SHARD_INDEX: ${{ matrix.shard }}
         run: |
-          # GitHub's numeric input may arrive as "0.0"; argparse expects an integer.
           if [[ "$START_INDEX_INPUT" =~ ^[0-9]+([.]0+)?$ ]]; then
-            START_INDEX="${START_INDEX_INPUT%%.*}"
+            BASE_INDEX="${START_INDEX_INPUT%%.*}"
           else
             echo "::error::start_index must be a non-negative integer."
             exit 1
           fi
+
+          # Split the requested batch into five independent workers.
+          case "$BATCH_SIZE_INPUT" in
+            5)  SHARD_SIZE=1 ;;
+            10) SHARD_SIZE=2 ;;
+            25) SHARD_SIZE=5 ;;
+            50) SHARD_SIZE=10 ;;
+            *) echo "::error::Unsupported batch size."; exit 1 ;;
+          esac
+          START_INDEX=$((BASE_INDEX + SHARD_INDEX * SHARD_SIZE))
+          echo "Worker $SHARD_INDEX: entries $START_INDEX through $((START_INDEX + SHARD_SIZE - 1))"
+
           python wolof_tts/generate_reference_voice_batch.py \
             --batch \
             --start-index "$START_INDEX" \
-            --batch-size "${{ inputs.batch_size }}" \
+            --batch-size "$SHARD_SIZE" \
             --voice-identity-approved \
-            --output-dir wolof_reference_voice_outputs
+            --output-dir "wolof_reference_voice_outputs"
 
-      - name: Upload private batch for review (no repository commit)
+      - name: Upload shard privately for assembly
+        uses: actions/upload-artifact@v4
+        with:
+          name: wolof-reference-shard-${{ matrix.shard }}-start-${{ inputs.start_index }}
+          path: wolof_reference_voice_outputs/
+          if-no-files-found: error
+          retention-days: 1
+
+  assemble-private-batch:
+    if: ${{ inputs.voice_identity_approved == true }}
+    needs: generate-private-batch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download and merge all successful shards
+        uses: actions/download-artifact@v4
+        with:
+          pattern: wolof-reference-shard-*-start-${{ inputs.start_index }}
+          path: wolof_reference_voice_outputs
+          merge-multiple: true
+
+      - name: Upload one combined batch for review
         uses: actions/upload-artifact@v4
         with:
           name: wolof-reference-batch-start-${{ inputs.start_index }}
