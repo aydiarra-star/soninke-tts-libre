@@ -217,7 +217,7 @@ SNK-LEX-0184;baabo;"mousse, écume ; gardien des circoncis";nom;"Dictionnaire so
 SNK-LEX-0185;baade;"lieu où l'on reçoit les condoléances ; tombeau, deuil";nom;"Dictionnaire soninké.docx; segments=11,12";valide_par_referent
 SNK-LEX-0186;baafe;battant de porte;nom;"Dictionnaire soninké.docx; segments=13";valide_par_referent
 SNK-LEX-0187;baalixu;pubère, qui a atteint l'âge de la puberté;nom;"Dictionnaire soninké.docx; segments=19";valide_par_referent
-SNK-LEX-0188;baana;"Tabaski, le douzième mois lunaire ; ressembler, être uni, être un";verbe;"Dictionnaire soninké.docx; segments=22,23";valide_par_referent
+SNK-LEX-0188;baana;"Tabaski, le douzième mois lunaire ; ressembler, être uni, être un";nom/verbe;"Dictionnaire soninké.docx; segments=22,23";valide_par_referent
 SNK-LEX-0189;baara;variété de paille pour faire les toits;nom;"Dictionnaire soninké.docx; segments=42";valide_par_referent
 SNK-LEX-0190;baase;repas d'accueil, plat offert à un hôte;nom;"Dictionnaire soninké.docx; segments=47";valide_par_referent
 SNK-LEX-0191;baasunde;action d'offrir un plat à un hôte;nom;"Dictionnaire soninké.docx; segments=52";valide_par_referent
@@ -253,4 +253,4 @@ SNK-LEX-0220;bonne;"décès ; le fait d'être gâté, d'être tombé en panne";n
 SNK-LEX-0221;bononte;"gâté (être) ; un malade mental";nom;"Dictionnaire soninké.docx; segments=516,517,521,522";valide_par_referent
 SNK-LEX-0222;bookine;"variété d'oiseau ; biche, cochon";nom;"Dictionnaire soninké.docx; segments=535,536";valide_par_referent
 SNK-LEX-0223;bulle;"tas de banco ; fétiche enterré lors d'une construction";nom;"Dictionnaire soninké.docx; segments=629,630";valide_par_referent
-SNK-LEX-0224;buusi;"uriner ; urine";verbe;"Dictionnaire soninké.docx; segments=725,726";valide_par_referent
+SNK-LEX-0224;buusi;"uriner ; urine";nom/verbe;"Dictionnaire soninké.docx; segments=725,726";valide_par_referent
