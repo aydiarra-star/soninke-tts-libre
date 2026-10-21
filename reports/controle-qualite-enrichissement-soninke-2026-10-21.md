@@ -7,8 +7,8 @@ Contrôle réalisé à partir de `reports/revue-enrichissement-dictionnaire-soni
 - Segments dans la revue source : **787**.
 - Entrées de la base de production : **305**.
 - Segments identifiés comme renvois vers une entrée principale : **236**.
-- Lemm es distincts parmi ces renvois après normalisation simple (casse/espaces) : **192**.
-- Lemm es de renvoi présents plusieurs fois dans la source : **44**.
+- Lemmes distincts parmi ces renvois après normalisation simple (casse/espaces) : **192**.
+- Lemmes de renvoi présents plusieurs fois dans la source : **44**.
 - Groupes de graphies différentes fusionnés par l’ancienne règle qui supprime les chiffres finaux : **38**.
 
 ## Constatations et décisions
