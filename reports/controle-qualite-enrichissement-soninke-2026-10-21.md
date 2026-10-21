@@ -39,6 +39,8 @@ La normalisation qui retire les chiffres finaux crée **38 groupes** de formes d
 
 Ces chiffres peuvent distinguer des homonymes ou des entrées lexicales différentes. Ils ne doivent pas être retirés de la graphie stockée ni servir, seuls, à fusionner des entrées. Pour le contrôle des doublons, garder deux clés séparées : une normalisation orthographique conservatrice et une clé de recherche indicative, sans fusion automatique.
 
+**Cas concret à revoir :** dans le lot 09, `curi1` et `curi2` ont été regroupés par la règle qui retire les chiffres finaux, alors que les segments source donnent des informations différentes (dont le sens « hut » pour `curi2`). Les conserver comme deux formes distinctes dans le contrôle et demander au référent s’il s’agit d’entrées séparées, d’homonymes ou d’une relation à documenter. Ne pas les fusionner automatiquement.
+
 ### 3. Lots de validation et base de production
 
 - Le lot 02 contient 120 segments marqués comme validés/importés dans son fichier de suivi.
