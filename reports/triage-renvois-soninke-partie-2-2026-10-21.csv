@@ -1,0 +1,119 @@
+lemme_source;glose_extraite;paragraphe_source;cible_renvoi_complete;composants_cible_extraits;composants_exactement_dans_base;composants_non_retrouves_exactement;cible_contient_chiffres_finaux;cible_contient_marqueur_morphologique;nombre_composants;categorie_triage_automatique;decision_humaine_requise
+bireye;;462;biraye;biraye;;biraye;NON;NON;1;CIBLE NON TROUVÉE EXACTEMENT — VARIANTE/GRAPHIE À EXAMINER;OUI — ne pas rattacher/importer automatiquement
+bitandi;obscure (rendre);476;bita1, -ndi3;bita1 | -ndi3;;bita1 | -ndi3;OUI;OUI;2;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+bitante;obscur;477;bita1, -nta2;bita1 | -nta2;;bita1 | -nta2;OUI;OUI;2;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+bitandi;obscure (rendre);483;bita1, -ndi3;bita1 | -ndi3;;bita1 | -ndi3;OUI;OUI;2;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+bitte;être serré;488;bitta, -i4;bitta | -i4;bitta;-i4;OUI;OUI;2;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+bitte;être serré;489;bitta, -i4;bitta | -i4;bitta;-i4;OUI;OUI;2;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+biya;;490;baya;baya;;baya;NON;NON;1;CIBLE NON TROUVÉE EXACTEMENT — VARIANTE/GRAPHIE À EXAMINER;OUI — ne pas rattacher/importer automatiquement
+biyaade;moule en métal, fer à marquer grillage à griller;491;biyi, biyi;biyi | biyi;biyi | biyi;;NON;NON;2;CIBLE À PLUSIEURS COMPOSANTS;OUI — ne pas rattacher/importer automatiquement
+biyaade;moule en métal, fer à marquer grillage à griller;497;biyi, biyi;biyi | biyi;biyi | biyi;;NON;NON;2;CIBLE À PLUSIEURS COMPOSANTS;OUI — ne pas rattacher/importer automatiquement
+biyinde;brûlure;501;biyi, -nde;biyi | -nde;biyi;-nde;NON;OUI;2;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+biyinde;brûlure;502;biyi, -nde;biyi | -nde;biyi;-nde;NON;OUI;2;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+boco;;505;bosi;bosi;bosi;;NON;NON;1;TOUS LES COMPOSANTS EXACTS DANS LA BASE;OUI — ne pas rattacher/importer automatiquement
+bagandi;enlever, sorti, faire;512;bogu, -ndi3;bogu | -ndi3;bogu;-ndi3;OUI;OUI;2;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+bagandindi;faire sortir qqch;514;bogu, -ndi1, -ndi3;bogu | -ndi1 | -ndi3;bogu;-ndi1 | -ndi3;OUI;OUI;3;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+bogunte;renommé;515;bogu, -nta2;bogu | -nta2;bogu;-nta2;OUI;OUI;2;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+bugantaaxu;vantardise;516;bogunte, bogunte;bogunte | bogunte;;bogunte | bogunte;NON;NON;2;CIBLE À PLUSIEURS COMPOSANTS;OUI — ne pas rattacher/importer automatiquement
+bogura;sortie;518;bogu, bogu;bogu | bogu;bogu | bogu;;NON;NON;2;CIBLE À PLUSIEURS COMPOSANTS;OUI — ne pas rattacher/importer automatiquement
+bugante;vantard;520;bogu, -nta2;bogu | -nta2;bogu;-nta2;OUI;OUI;2;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+bogura;sortie;524;bogu, bogu;bogu | bogu;bogu | bogu;;NON;NON;2;CIBLE À PLUSIEURS COMPOSANTS;OUI — ne pas rattacher/importer automatiquement
+bojon;;525;bojoone;bojoone;;bojoone;NON;NON;1;CIBLE NON TROUVÉE EXACTEMENT — VARIANTE/GRAPHIE À EXAMINER;OUI — ne pas rattacher/importer automatiquement
+bologaaɲi;;535;bologaaɲe;bologaaɲe;bologaaɲe;;NON;NON;1;TOUS LES COMPOSANTS EXACTS DANS LA BASE;OUI — ne pas rattacher/importer automatiquement
+bolontonŋe;;538;bolonŋe;bolonŋe;bolonŋe;;NON;NON;1;TOUS LES COMPOSANTS EXACTS DANS LA BASE;OUI — ne pas rattacher/importer automatiquement
+bonaana;défunt;543;bono, bono;bono | bono;bono | bono;;NON;NON;2;CIBLE À PLUSIEURS COMPOSANTS;OUI — ne pas rattacher/importer automatiquement
+bonno;;551;bono;bono;bono;;NON;NON;1;TOUS LES COMPOSANTS EXACTS DANS LA BASE;OUI — ne pas rattacher/importer automatiquement
+bonondinde;destruction, gâchis, dégât;556;bono, -ndi1, -ndi3;bono | -ndi1 | -ndi3;bono;-ndi1 | -ndi3;OUI;OUI;3;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+bononte;gâté (être);557;bono, -nta2;bono | -nta2;bono;-nta2;OUI;OUI;2;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+bonoye;dépravation;559;bono, -yi2;bono | -yi2;bono;-yi2;OUI;OUI;2;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+bonondinde;destruction, gâchis, dégât;561;bono, -ndi1, -ndi3;bono | -ndi1 | -ndi3;bono;-ndi1 | -ndi3;OUI;OUI;3;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+bononte;gâté (être);562;bono, -nta2;bono | -nta2;bono;-nta2;OUI;OUI;2;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+bonoye;dépravation;564;bono, -yi2;bono | -yi2;bono;-yi2;OUI;OUI;2;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+bonta;;566;bonte;bonte;bonte;;NON;NON;1;TOUS LES COMPOSANTS EXACTS DANS LA BASE;OUI — ne pas rattacher/importer automatiquement
+bontaana;sauteur;567;bonte, bonte;bonte | bonte;bonte | bonte;;NON;NON;2;CIBLE À PLUSIEURS COMPOSANTS;OUI — ne pas rattacher/importer automatiquement
+bontaana;sauteur;571;bonte, bonte;bonte | bonte;bonte | bonte;;NON;NON;2;CIBLE À PLUSIEURS COMPOSANTS;OUI — ne pas rattacher/importer automatiquement
+boori;fétiche;589;boolu1;boolu1;;boolu1;OUI;NON;1;CIBLE NUMÉROTÉE NON TROUVÉE EXACTEMENT;OUI — ne pas rattacher/importer automatiquement
+booru;;590;boolu1;boolu1;;boolu1;OUI;NON;1;CIBLE NUMÉROTÉE NON TROUVÉE EXACTEMENT;OUI — ne pas rattacher/importer automatiquement
+booxe;se déchirer;594;booxo, -i4;booxo | -i4;booxo;-i4;OUI;OUI;2;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+booxe;se déchirer;597;booxo, -i4;booxo | -i4;booxo;-i4;OUI;OUI;2;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+bora2;;600;bara3;bara3;;bara3;OUI;NON;1;CIBLE NUMÉROTÉE NON TROUVÉE EXACTEMENT;OUI — ne pas rattacher/importer automatiquement
+borinŋe;;601;bolonŋe;bolonŋe;bolonŋe;;NON;NON;1;TOUS LES COMPOSANTS EXACTS DANS LA BASE;OUI — ne pas rattacher/importer automatiquement
+boro;;602;bera;bera;;bera;NON;NON;1;CIBLE NON TROUVÉE EXACTEMENT — VARIANTE/GRAPHIE À EXAMINER;OUI — ne pas rattacher/importer automatiquement
+boroge;;603;boroke;boroke;;boroke;NON;NON;1;CIBLE NON TROUVÉE EXACTEMENT — VARIANTE/GRAPHIE À EXAMINER;OUI — ne pas rattacher/importer automatiquement
+borokaaxu;stérilité;604;boroke, boroke;boroke | boroke;;boroke | boroke;NON;NON;2;CIBLE À PLUSIEURS COMPOSANTS;OUI — ne pas rattacher/importer automatiquement
+borokaaxu;stérilité;606;boroke, boroke;boroke | boroke;;boroke | boroke;NON;NON;2;CIBLE À PLUSIEURS COMPOSANTS;OUI — ne pas rattacher/importer automatiquement
+boronŋe;;610;bolonŋe;bolonŋe;bolonŋe;;NON;NON;1;TOUS LES COMPOSANTS EXACTS DANS LA BASE;OUI — ne pas rattacher/importer automatiquement
+boroto;;612;buruta;buruta;buruta;;NON;NON;1;TOUS LES COMPOSANTS EXACTS DANS LA BASE;OUI — ne pas rattacher/importer automatiquement
+borotoye1;;613;burutaye;burutaye;;burutaye;NON;NON;1;CIBLE NON TROUVÉE EXACTEMENT — VARIANTE/GRAPHIE À EXAMINER;OUI — ne pas rattacher/importer automatiquement
+boroxonjilinka;fourmilière;616;boroxonjile, kaa, n4;boroxonjile | kaa | n4;;boroxonjile | kaa | n4;OUI;NON;3;CIBLE À PLUSIEURS COMPOSANTS;OUI — ne pas rattacher/importer automatiquement
+boroxonjilinka;fourmilière;617;boroxonjile, kaa, n4;boroxonjile | kaa | n4;;boroxonjile | kaa | n4;OUI;NON;3;CIBLE À PLUSIEURS COMPOSANTS;OUI — ne pas rattacher/importer automatiquement
+bote2;être percé;623;boto, -i4;boto | -i4;;boto | -i4;OUI;OUI;2;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+botonte;percé;626;boto, -nta2;boto | -nta2;;boto | -nta2;OUI;OUI;2;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+botoburu;saboter;627;;;;;NON;NON;0;CIBLE NON EXTRAITE — REVUE MANUELLE;OUI — ne pas rattacher/importer automatiquement
+botu;;632;batu2;batu2;;batu2;OUI;NON;1;CIBLE NUMÉROTÉE NON TROUVÉE EXACTEMENT;OUI — ne pas rattacher/importer automatiquement
+boxotindaana;quelqu'un qui enlève;636;-aana, boxoti, -ndi1;-aana | boxoti | -ndi1;boxoti;-aana | -ndi1;OUI;OUI;3;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+boxotiye;arrachage, déracinement;637;boxoti, -yi2;boxoti | -yi2;boxoti;-yi2;OUI;OUI;2;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+boxotindaana;quelqu'un qui enlève;638;-aana, boxoti, -ndi1;-aana | boxoti | -ndi1;boxoti;-aana | -ndi1;OUI;OUI;3;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+boxotiye;arrachage, déracinement;640;boxoti, -yi2;boxoti | -yi2;boxoti;-yi2;OUI;OUI;2;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+boyaade;drap, couvre-lit;642;boyi1, boyi1;boyi1 | boyi1;;boyi1 | boyi1;OUI;NON;2;CIBLE À PLUSIEURS COMPOSANTS;OUI — ne pas rattacher/importer automatiquement
+boyaade;drap, couvre-lit;644;boyi1, boyi1;boyi1 | boyi1;;boyi1 | boyi1;OUI;NON;2;CIBLE À PLUSIEURS COMPOSANTS;OUI — ne pas rattacher/importer automatiquement
+boyinde;étalement;645;boyi1, -nde;boyi1 | -nde;;boyi1 | -nde;OUI;OUI;2;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+boyiye;étalement;646;boyi1, -yi2;boyi1 | -yi2;;boyi1 | -yi2;OUI;OUI;2;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+boyinde;étalement;649;boyi1, -nde;boyi1 | -nde;;boyi1 | -nde;OUI;OUI;2;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+boyiye;étalement;650;boyi1, -yi2;boyi1 | -yi2;;boyi1 | -yi2;OUI;OUI;2;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+budeye;trouble;658;buda, -yi2;buda | -yi2;buda;-yi2;OUI;OUI;2;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+bugandi;;661;bagandi;bagandi;;bagandi;NON;NON;1;CIBLE NON TROUVÉE EXACTEMENT — VARIANTE/GRAPHIE À EXAMINER;OUI — ne pas rattacher/importer automatiquement
+bugantaaxu;vantardise;662;bogunte, bogunte;bogunte | bogunte;;bogunte | bogunte;NON;NON;2;CIBLE À PLUSIEURS COMPOSANTS;OUI — ne pas rattacher/importer automatiquement
+bugu;;664;bogu;bogu;bogu;;NON;NON;1;TOUS LES COMPOSANTS EXACTS DANS LA BASE;OUI — ne pas rattacher/importer automatiquement
+bugunde;;666;bagande;bagande;bagande;;NON;NON;1;TOUS LES COMPOSANTS EXACTS DANS LA BASE;OUI — ne pas rattacher/importer automatiquement
+bugundi;;667;bagandi;bagandi;;bagandi;NON;NON;1;CIBLE NON TROUVÉE EXACTEMENT — VARIANTE/GRAPHIE À EXAMINER;OUI — ne pas rattacher/importer automatiquement
+bukku;;668;bogu;bogu;bogu;;NON;NON;1;TOUS LES COMPOSANTS EXACTS DANS LA BASE;OUI — ne pas rattacher/importer automatiquement
+bulanma;bleu;671;bula1, -ma5, n4;bula1 | -ma5 | n4;;bula1 | -ma5 | n4;OUI;OUI;3;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+buli;enterré (être);674;bulu, -i4;bulu | -i4;;bulu | -i4;OUI;OUI;2;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+bulla2;avant que;676;billa;billa;billa;;NON;NON;1;TOUS LES COMPOSANTS EXACTS DANS LA BASE;OUI — ne pas rattacher/importer automatiquement
+bulubondaana;travailleur saisonnier;681;;;;;NON;NON;0;CIBLE NON EXTRAITE — REVUE MANUELLE;OUI — ne pas rattacher/importer automatiquement
+bulubondi;travail saisonnier (faire);683;;;;;NON;NON;0;CIBLE NON EXTRAITE — REVUE MANUELLE;OUI — ne pas rattacher/importer automatiquement
+bulunŋe;;684;bolonŋe;bolonŋe;bolonŋe;;NON;NON;1;TOUS LES COMPOSANTS EXACTS DANS LA BASE;OUI — ne pas rattacher/importer automatiquement
+bunanbuna;;687;bununbuna;bununbuna;bununbuna;;NON;NON;1;TOUS LES COMPOSANTS EXACTS DANS LA BASE;OUI — ne pas rattacher/importer automatiquement
+bundanwuttaana;guerrier, soldat;691;-aana, bundanŋe, wutu;-aana | bundanŋe | wutu;wutu;-aana | bundanŋe;NON;OUI;3;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+bundanwuttaana;guerrier, soldat;692;-aana, bundanŋe, wutu;-aana | bundanŋe | wutu;wutu;-aana | bundanŋe;NON;OUI;3;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+buqunbagandi;;701;bogu, buqe, n4, -ndi3;bogu | buqe | n4 | -ndi3;bogu;buqe | n4 | -ndi3;OUI;OUI;4;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+nuxudunbure;désagréable, hypocrite, mauvais;709;bure, -dun, -dun, nuxu;bure | -dun | -dun | nuxu;bure;-dun | -dun | nuxu;NON;OUI;4;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+buri;;710;buli;buli;;buli;NON;NON;1;CIBLE NON TROUVÉE EXACTEMENT — VARIANTE/GRAPHIE À EXAMINER;OUI — ne pas rattacher/importer automatiquement
+buroye;méchanceté;714;;;;;NON;NON;0;CIBLE NON EXTRAITE — REVUE MANUELLE;OUI — ne pas rattacher/importer automatiquement
+buru;;717;bulu;bulu;;bulu;NON;NON;1;CIBLE NON TROUVÉE EXACTEMENT — VARIANTE/GRAPHIE À EXAMINER;OUI — ne pas rattacher/importer automatiquement
+burubule;;718;buyinbuye;buyinbuye;;buyinbuye;NON;NON;1;CIBLE NON TROUVÉE EXACTEMENT — VARIANTE/GRAPHIE À EXAMINER;OUI — ne pas rattacher/importer automatiquement
+burubutu;passer à la flamme;719;;;;;NON;NON;0;CIBLE NON EXTRAITE — REVUE MANUELLE;OUI — ne pas rattacher/importer automatiquement
+burugutu;;724;burubutu;burubutu;;burubutu;NON;NON;1;CIBLE NON TROUVÉE EXACTEMENT — VARIANTE/GRAPHIE À EXAMINER;OUI — ne pas rattacher/importer automatiquement
+burunqu;;726;buruxa;buruxa;buruxa;;NON;NON;1;TOUS LES COMPOSANTS EXACTS DANS LA BASE;OUI — ne pas rattacher/importer automatiquement
+burutaye;rembourser dans le commerce (action);733;;;;;NON;NON;0;CIBLE NON EXTRAITE — REVUE MANUELLE;OUI — ne pas rattacher/importer automatiquement
+buruxu;;740;buruxa;buruxa;buruxa;;NON;NON;1;TOUS LES COMPOSANTS EXACTS DANS LA BASE;OUI — ne pas rattacher/importer automatiquement
+buttu;;751;butu1;butu1;;butu1;OUI;NON;1;CIBLE NUMÉROTÉE NON TROUVÉE EXACTEMENT;OUI — ne pas rattacher/importer automatiquement
+buttumureye;vengeance satisfaction;752;butu1;butu1;;butu1;OUI;NON;1;CIBLE NUMÉROTÉE NON TROUVÉE EXACTEMENT;OUI — ne pas rattacher/importer automatiquement
+buttunbuyi;colère;754;;;;;NON;NON;0;CIBLE NON EXTRAITE — REVUE MANUELLE;OUI — ne pas rattacher/importer automatiquement
+buttunxaasa;colère;755;;;;;NON;NON;0;CIBLE NON EXTRAITE — REVUE MANUELLE;OUI — ne pas rattacher/importer automatiquement
+buttumureye;vengeance satisfaction;757;butu1;butu1;;butu1;OUI;NON;1;CIBLE NUMÉROTÉE NON TROUVÉE EXACTEMENT;OUI — ne pas rattacher/importer automatiquement
+buude;fondu;764;buuda, -i4;buuda | -i4;buuda;-i4;OUI;OUI;2;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+buude;fondu;765;buuda, -i4;buuda | -i4;buuda;-i4;OUI;OUI;2;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+buudinlenme;pièce d'argent;767;buudi, n4, renme, n4;buudi | n4 | renme | n4;;buudi | n4 | renme | n4;OUI;NON;4;CIBLE À PLUSIEURS COMPOSANTS;OUI — ne pas rattacher/importer automatiquement
+buudinlenme;pièce d'argent;768;buudi, n4, renme, n4;buudi | n4 | renme | n4;;buudi | n4 | renme | n4;OUI;NON;4;CIBLE À PLUSIEURS COMPOSANTS;OUI — ne pas rattacher/importer automatiquement
+buugu;;770;buuku;buuku;;buuku;NON;NON;1;CIBLE NON TROUVÉE EXACTEMENT — VARIANTE/GRAPHIE À EXAMINER;OUI — ne pas rattacher/importer automatiquement
+buxuti;;784;boxoti;boxoti;boxoti;;NON;NON;1;TOUS LES COMPOSANTS EXACTS DANS LA BASE;OUI — ne pas rattacher/importer automatiquement
+buxutindaana;;785;;;;;NON;NON;0;CIBLE NON EXTRAITE — REVUE MANUELLE;OUI — ne pas rattacher/importer automatiquement
+buxutinde;;786;;;;;NON;NON;0;CIBLE NON EXTRAITE — REVUE MANUELLE;OUI — ne pas rattacher/importer automatiquement
+buya;;787;biyi;biyi;biyi;;NON;NON;1;TOUS LES COMPOSANTS EXACTS DANS LA BASE;OUI — ne pas rattacher/importer automatiquement
+buyaade;;788;biyaade;biyaade;biyaade;;NON;NON;1;TOUS LES COMPOSANTS EXACTS DANS LA BASE;OUI — ne pas rattacher/importer automatiquement
+buyi;;790;biyi;biyi;biyi;;NON;NON;1;TOUS LES COMPOSANTS EXACTS DANS LA BASE;OUI — ne pas rattacher/importer automatiquement
+cawucawunte;écervelé;803;;;;;NON;NON;0;CIBLE NON EXTRAITE — REVUE MANUELLE;OUI — ne pas rattacher/importer automatiquement
+ciga;;811;tiga;tiga;;tiga;NON;NON;1;CIBLE NON TROUVÉE EXACTEMENT — VARIANTE/GRAPHIE À EXAMINER;OUI — ne pas rattacher/importer automatiquement
+cigakorome;;812;tigakorome;tigakorome;;tigakorome;NON;NON;1;CIBLE NON TROUVÉE EXACTEMENT — VARIANTE/GRAPHIE À EXAMINER;OUI — ne pas rattacher/importer automatiquement
+cigamaxafo;;813;tigamaxafo;tigamaxafo;;tigamaxafo;NON;NON;1;CIBLE NON TROUVÉE EXACTEMENT — VARIANTE/GRAPHIE À EXAMINER;OUI — ne pas rattacher/importer automatiquement
+cigate;;814;tigate;tigate;;tigate;NON;NON;1;CIBLE NON TROUVÉE EXACTEMENT — VARIANTE/GRAPHIE À EXAMINER;OUI — ne pas rattacher/importer automatiquement
+ciye;;823;tiye;tiye;;tiye;NON;NON;1;CIBLE NON TROUVÉE EXACTEMENT — VARIANTE/GRAPHIE À EXAMINER;OUI — ne pas rattacher/importer automatiquement
+coggale;;824;coggali;coggali;;coggali;NON;NON;1;CIBLE NON TROUVÉE EXACTEMENT — VARIANTE/GRAPHIE À EXAMINER;OUI — ne pas rattacher/importer automatiquement
+consolinde;;826;sonsolondi;sonsolondi;;sonsolondi;NON;NON;1;CIBLE NON TROUVÉE EXACTEMENT — VARIANTE/GRAPHIE À EXAMINER;OUI — ne pas rattacher/importer automatiquement
+consolindi;;827;sonsolondi;sonsolondi;;sonsolondi;NON;NON;1;CIBLE NON TROUVÉE EXACTEMENT — VARIANTE/GRAPHIE À EXAMINER;OUI — ne pas rattacher/importer automatiquement
+consonlindaana;sondeur, espion;829;-aana, -ndi1, sonsolo;-aana | -ndi1 | sonsolo;;-aana | -ndi1 | sonsolo;OUI;OUI;3;CIBLE COMPOSÉE AVEC MARQUEUR MORPHOLOGIQUE;OUI — ne pas rattacher/importer automatiquement
+cuballe;;832;suballe;suballe;;suballe;NON;NON;1;CIBLE NON TROUVÉE EXACTEMENT — VARIANTE/GRAPHIE À EXAMINER;OUI — ne pas rattacher/importer automatiquement
+cunsu;;835;sunsu;sunsu;;sunsu;NON;NON;1;CIBLE NON TROUVÉE EXACTEMENT — VARIANTE/GRAPHIE À EXAMINER;OUI — ne pas rattacher/importer automatiquement
+cuuba;;838;juuba;juuba;;juuba;NON;NON;1;CIBLE NON TROUVÉE EXACTEMENT — VARIANTE/GRAPHIE À EXAMINER;OUI — ne pas rattacher/importer automatiquement
