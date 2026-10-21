@@ -6,6 +6,7 @@ on:
       - "data/lexique-soninke-fr-base.csv"
       - "scripts/validate_lexique.py"
       - "tests/test_validate_lexique.py"
+      - "tests/__init__.py"
       - ".github/workflows/validate-lexique.yml"
   push:
     branches:
@@ -30,6 +31,6 @@ jobs:
         with:
           python-version: "3.x"
       - name: Test duplicate-headword protection
-        run: python -m unittest tests/test_validate_lexique.py
+        run: python -m unittest tests.test_validate_lexique
       - name: Validate lexical CSV
         run: python scripts/validate_lexique.py data/lexique-soninke-fr-base.csv
