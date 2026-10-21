@@ -12,11 +12,14 @@ Trois tableaux CSV détaillent les cibles de renvoi et, lorsque la cible corresp
 
 ## Résultats
 - 236 segments de renvoi source ont été comparés.
-- Le tableau détaillé produit 195 lignes de travail, car certaines cibles ont plusieurs composants et une cible peut correspondre à plusieurs fiches source.
-- 167 lignes associent une cible à une fiche candidate de la revue source (149 lignes dont le statut doit être relu et 18 autres correspondances exactes).
-- 28 lignes correspondent à des cibles sans candidat exact retrouvé dans la revue source; elles sont conservées pour recherche manuelle.
+- Le tableau détaillé contient 195 lignes de travail.
+- 167 lignes associent un composant cible à une fiche de la revue source par correspondance exacte du lemme.
+- 28 lignes correspondent à des composants pour lesquels aucun candidat exact n'a été retrouvé dans la revue disponible.
 
-Ces nombres décrivent des lignes du tableau de travail, et non 167 lemmes uniques ni 28 décisions linguistiques définitives. Les doublons et les renvois répétés sont conservés.
+Ces nombres décrivent des lignes de travail, et non des lemmes uniques ou des décisions linguistiques définitives. Certains renvois comportent plusieurs composants, et les répétitions de la source peuvent subsister.
+
+## Correction de qualité
+Lors d'une vérification ultérieure, j'ai repéré que le libellé de statut généré dans certaines lignes pouvait laisser entendre qu'une cible était déjà validée. Les trois CSV ont été corrigés : les correspondances exactes avec la revue portent maintenant le libellé **« CIBLE EXACTE DANS REVUE SOURCE — NON VALIDÉE »**. Cette mention décrit uniquement la correspondance textuelle; elle ne change pas le statut d'origine de la fiche candidate et ne constitue pas une validation linguistique.
 
 ## Comment utiliser les fiches
 1. Vérifier le texte complet du renvoi et celui de la fiche candidate.
@@ -26,4 +29,4 @@ Ces nombres décrivent des lignes du tableau de travail, et non 167 lemmes uniqu
 5. Soumettre les cas ambigus à la validation linguistique.
 
 ## État de la base
-La base de production n'a pas été modifiée et reste à 305 entrées. Tous les statuts des fiches candidates restent ceux du fichier de revue source.
+La base de production n'a pas été modifiée et reste à 305 entrées. Les statuts d'origine du fichier de revue source sont conservés.
